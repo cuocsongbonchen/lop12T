@@ -1793,6 +1793,61 @@
       #hero { padding-bottom: 60px; }
       .wm-list { gap: 32px; }
     }
+
+    /* ===== Lời chúc của thầy cô ===== */
+    .wish { margin: 3vh auto 0; max-width: 680px; min-height: 96px; cursor: pointer; }
+    .wish-q {
+      font: italic 500 clamp(17px, 2vw, 24px)/1.45 var(--f1);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: opacity .5s;
+    }
+    .wish-n {
+      margin-top: 10px;
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: #e0c48c;
+      transition: opacity .5s;
+    }
+    .wish.out .wish-q, .wish.out .wish-n { opacity: 0; }
+    .ftx .wish-btn { display: inline-block; margin-top: 2.5vh; color: var(--cream); }
+    #wmodal {
+      position: fixed; inset: 0; z-index: 300;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+      background: rgba(5, 10, 24, .82);
+      backdrop-filter: blur(6px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    #wmodal.on { display: flex; }
+    .wbox {
+      width: min(520px, 100%);
+      background: var(--deep);
+      color: var(--cream);
+      border: 1px solid var(--gold);
+      padding: 30px 28px;
+    }
+    .wbox h3 { font-size: 28px; margin: 12px 0 20px; }
+    .wbox label { display: block; margin: 14px 0 6px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a7b0c4; }
+    .wbox input, .wbox textarea {
+      width: 100%;
+      font: 400 15px/1.5 var(--f2);
+      color: var(--cream);
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(239, 230, 211, .25);
+      padding: 11px 13px;
+      outline: none;
+    }
+    .wbox input:focus, .wbox textarea:focus { border-color: var(--gold); }
+    .wbox textarea { min-height: 130px; resize: vertical; }
+    .wrow { display: flex; gap: 12px; margin-top: 22px; align-items: center; flex-wrap: wrap; }
+    #wmsg { font-size: 13px; color: #e0c48c; margin-top: 14px; min-height: 20px; }
+    .wbox .btn { color: var(--cream); }
+    .wbox .btn[disabled] { opacity: .5; pointer-events: none; }
   </style>
 </head>
 
@@ -1967,6 +2022,11 @@
           Cảm ơn thầy cô vì đã là một phần <em>thanh xuân</em> của chúng em.
         </h2>
         <p class="fl fstat">12T mãi nhớ Galileo</p>
+        <div class="fl wish" id="wish" title="Bấm để xem lời chúc tiếp theo">
+          <p class="wish-q" id="wq">Đang tải lời chúc…</p>
+          <p class="wish-n" id="wn"></p>
+        </div>
+        <button class="fl btn wish-btn" id="wopen" type="button">Viết lời chúc</button>
         <p class="fl fbadge">Chúc mừng ngày Nhà giáo Việt Nam 20/11</p>
         <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
       </div>
@@ -2249,8 +2309,8 @@
 
     // Người làm web: sửa tên / vai trò / đường dẫn ảnh tại đây
     const WEBMAKERS = [
-      { name: "Đặng Quang Minh", role: "Thiết kế & lập trình", photo: "img/nhasangtao1.jpg" },
-      { name: "Hồng Gia Huy", role: "Thiết kế & lập trình", photo: "img/webmaker2.jpg" },
+      { name: "Tên người làm web 1", role: "Thiết kế & lập trình", photo: "img/webmaker1.jpg" },
+      { name: "Tên người làm web 2", role: "Nội dung & hình ảnh", photo: "img/webmaker2.jpg" },
     ];
     $("#wml").innerHTML = WEBMAKERS.map(
       (m) => `<div class="wm-it"><div class="wm-av">${ph(m.name, m.photo)}</div><div class="wm-tx"><b>${m.name}</b><span>${m.role}</span></div></div>`,
@@ -2831,6 +2891,114 @@
       );
     });
 
+  </script>
+
+  <div id="wmodal" role="dialog" aria-modal="true" aria-labelledby="wt">
+    <div class="wbox">
+      <p class="eb">Nhà giáo Việt Nam 20/11</p>
+      <h3 id="wt">Gửi lời chúc</h3>
+      <label for="wname">Tên thầy / cô</label>
+      <input id="wname" maxlength="60" autocomplete="off" />
+      <label for="wtext">Lời chúc</label>
+      <textarea id="wtext" maxlength="600"></textarea>
+      <label for="wcode">Mật khẩu của thầy cô</label>
+      <input id="wcode" type="password" autocomplete="off" />
+      <p id="wmsg"></p>
+      <div class="wrow">
+        <button class="btn" id="wsend" type="button">Gửi</button>
+        <button class="btn" id="wclose" type="button">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // ===== CẤU HÌNH =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyDMwrIAcbnC6sS_37UiyO0F2JB07NcVbD0", // <-- DÁN apiKey của bạn vào đây
+      authDomain: "nhagiaovietnam.firebaseapp.com",
+      projectId: "nhagiaovietnam",
+      storageBucket: "nhagiaovietnam.firebasestorage.app",
+      messagingSenderId: "466461173165",
+      appId: "1:466461173165:web:e1f257caca31b74bb4ad24",
+    };
+    const TEACHER_CODE = "galileo12t"; // mật khẩu chung cho thầy cô, đổi tại đây
+
+    const g = (id) => document.getElementById(id);
+    const wq = g("wq"), wn = g("wn"), wish = g("wish");
+    let list = [], idx = 0, timer;
+
+    function show(i) {
+      if (!list.length) return;
+      idx = i % list.length;
+      wish.classList.add("out");
+      setTimeout(() => {
+        wq.textContent = "“" + list[idx].text + "”";
+        wn.textContent = "— " + list[idx].name;
+        wish.classList.remove("out");
+      }, 450);
+    }
+    function loop() {
+      clearInterval(timer);
+      if (list.length > 1) timer = setInterval(() => show(idx + 1), 7000);
+    }
+    wish.onclick = () => { show(idx + 1); loop(); };
+
+    let db = null;
+    if (!firebaseConfig.apiKey) {
+      wq.textContent = "Chưa cấu hình apiKey Firebase.";
+    } else {
+      try {
+        db = getFirestore(initializeApp(firebaseConfig));
+        onSnapshot(
+          query(collection(db, "wishes"), orderBy("createdAt", "desc"), limit(100)),
+          (snap) => {
+            list = snap.docs.map((d) => d.data());
+            if (!list.length) {
+              wq.textContent = "Hãy là người đầu tiên gửi lời chúc cho lớp 12T.";
+              wn.textContent = "";
+              return;
+            }
+            idx = 0;
+            wq.textContent = "“" + list[0].text + "”";
+            wn.textContent = "— " + list[0].name;
+            loop();
+          },
+          () => { wq.textContent = "Không tải được lời chúc. Kiểm tra lại quy tắc Firestore."; },
+        );
+      } catch (e) {
+        wq.textContent = "Không kết nối được Firebase.";
+      }
+    }
+
+    // ===== Form gửi =====
+    const modal = g("wmodal"), msg = g("wmsg"), send = g("wsend");
+    g("wopen").onclick = () => { msg.textContent = ""; modal.classList.add("on"); g("wname").focus(); };
+    const close = () => modal.classList.remove("on");
+    g("wclose").onclick = close;
+    modal.addEventListener("pointerdown", (e) => { if (e.target === modal) close(); });
+    addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+
+    send.onclick = async () => {
+      const name = g("wname").value.trim(), text = g("wtext").value.trim();
+      if (!db) { msg.textContent = "Chưa kết nối được Firebase."; return; }
+      if (g("wcode").value !== TEACHER_CODE) { msg.textContent = "Mật khẩu chưa đúng."; return; }
+      if (!name || text.length < 5) { msg.textContent = "Vui lòng nhập tên và lời chúc."; return; }
+      send.disabled = true;
+      msg.textContent = "Đang gửi…";
+      try {
+        await addDoc(collection(db, "wishes"), { name, text, createdAt: serverTimestamp() });
+        g("wname").value = g("wtext").value = g("wcode").value = "";
+        msg.textContent = "Đã gửi. Cảm ơn thầy cô!";
+        setTimeout(close, 1200);
+      } catch (e) {
+        msg.textContent = "Gửi không được. Kiểm tra quy tắc Firestore.";
+      }
+      send.disabled = false;
+    };
   </script>
 </body>
 
