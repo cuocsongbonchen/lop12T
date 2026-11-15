@@ -151,7 +151,6 @@
       font-style: normal;
     }
 
-    /* nav + cursor */
     .nav {
       position: fixed;
       top: 0;
@@ -208,7 +207,6 @@
       }
     }
 
-    /* intro */
     #intro {
       position: fixed;
       inset: 0;
@@ -285,7 +283,6 @@
       color: var(--deep);
     }
 
-    /* hero */
     #hero {
       position: relative;
       min-height: 130vh;
@@ -395,7 +392,6 @@
       }
     }
 
-    /* chapters */
     .chap {
       padding: 14vh 5vw;
     }
@@ -507,7 +503,6 @@
       }
     }
 
-    /* events */
     #ev {
       position: relative;
       background: var(--deep);
@@ -572,7 +567,6 @@
       }
     }
 
-    /* teachers */
     #tl {
       list-style: none;
     }
@@ -643,7 +637,6 @@
       }
     }
 
-    /* music */
     #mu {
       background: var(--deep);
       color: var(--cream);
@@ -760,7 +753,6 @@
       margin-top: 10px;
     }
 
-    /* final */
     #final {
       position: relative;
       height: 100vh;
@@ -814,7 +806,6 @@
       color: var(--gold);
     }
 
-    /* detail view */
     #view {
       position: fixed;
       inset: 0;
@@ -1002,10 +993,9 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      /* Giữ nguyên vẹn ảnh ngang/dọc không bị cắt */
+
     }
 
-    /* Khung slider bộ sưu tập ảnh bên dưới */
     .sl {
       position: relative;
       overflow: hidden;
@@ -1015,7 +1005,7 @@
       touch-action: pan-y;
       user-select: none;
       background: #080f1d;
-      /* Khớp màu nền tối với khung lớn */
+
       border: 1px solid var(--ln);
       border-radius: 8px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -1025,7 +1015,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      /* Đảm bảo ảnh hiển thị trọn vẹn trong khung slider */
+
     }
 
     html,
@@ -1037,14 +1027,6 @@
       max-width: 100%;
     }
 
-    /* Ghi đè quy tắc dòng 380-383 để không bật scrollbar ngang trên Windows /
-@media (prefers-reduced-motion: reduce) {
-  #ev {
-    overflow-x: hidden !important;
-  }
-}
-
-/ Ẩn thanh cuộn ngang nếu có phần tử con nào tự sinh scrollbar */
     #ev::-webkit-scrollbar,
     .trk::-webkit-scrollbar {
       display: none;
@@ -1060,9 +1042,6 @@
       width: 100px;
     }
 
-    /* =========================================================
-       GIAO DIỆN ĐIỆN THOẠI (<= 800px)
-       ========================================================= */
     html {
       -webkit-text-size-adjust: 100%;
     }
@@ -1075,7 +1054,6 @@
       touch-action: manipulation;
     }
 
-    /* chỉ hiệu ứng hover trên thiết bị có chuột */
     @media (hover: none) {
       .btn:hover {
         background: none;
@@ -1100,7 +1078,6 @@
         font-weight: 400;
       }
 
-      /* ---- thanh trên: logo + thanh tab nổi ở dưới ---- */
       .nav {
         mix-blend-mode: normal;
         padding: calc(10px + env(safe-area-inset-top, 0px)) 5vw 10px;
@@ -1108,7 +1085,6 @@
         color: var(--ink);
       }
 
-      /* lớp nền mờ đặt ở pseudo-element để thanh tab fixed bên trong không bị lệch vị trí */
       .nav::before {
         content: "";
         position: absolute;
@@ -1166,7 +1142,6 @@
         padding-bottom: 84px;
       }
 
-      /* ---- intro ---- */
       .fr {
         width: 22vw;
         min-width: 0;
@@ -1193,7 +1168,6 @@
         color: var(--deep);
       }
 
-      /* ---- hero: xếp dọc, chữ lớn đè lên ảnh ---- */
       #hero {
         min-height: 100svh;
         padding: calc(88px + env(safe-area-inset-top, 0px)) 6vw 60px;
@@ -1251,7 +1225,6 @@
         display: none;
       }
 
-      /* ---- tiêu đề chương ---- */
       .chap {
         padding: 9vh 6vw;
       }
@@ -1284,7 +1257,6 @@
         border-color: var(--gold);
       }
 
-      /* ---- lưới thành viên: 2 cột đều ---- */
       #mgrid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -1323,7 +1295,6 @@
         transition: transform .15s;
       }
 
-      /* ---- sự kiện: cuộn ngang ---- */
       body #ev {
         height: 100vh;
         height: 100svh;
@@ -1366,7 +1337,6 @@
         font-size: 24px;
       }
 
-      /* ---- thầy cô ---- */
       #tl a {
         padding: 18px 0;
         gap: 14px;
@@ -1401,7 +1371,6 @@
         color: var(--red);
       }
 
-      /* ---- âm nhạc ---- */
       #stv {
         height: 100px;
       }
@@ -1463,7 +1432,6 @@
         text-align: right;
       }
 
-      /* ---- phần kết ---- */
       #final {
         height: 100vh;
         height: 100svh;
@@ -1483,7 +1451,6 @@
         font-size: 11px;
       }
 
-      /* ---- trang chi tiết ---- */
       #view {
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
@@ -1582,9 +1549,6 @@
       }
     }
 
-    /* =========================================================
-       PHẦN KẾT: ảnh phủ kín, khung vàng, chữ rõ ràng
-       ========================================================= */
     #final canvas {
       z-index: 2;
     }
@@ -1733,9 +1697,6 @@
       }
     }
 
-    /* =========================================================
-       CHỈNH THEO YÊU CẦU: chữ "11" nổi bật + tiêu đề chương I một hàng
-       ========================================================= */
     .hbig {
       text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 75%, transparent);
     }
@@ -1793,6 +1754,44 @@
         font-size: 7.9vw;
         letter-spacing: -0.02em;
       }
+    }
+
+    /* ===== Người làm web (cuối trang) ===== */
+    #hero { padding-bottom: 10vh; }
+    .wm {
+      position: relative;
+      z-index: 3;
+      background: var(--deep);
+      color: var(--cream);
+      text-align: center;
+      padding: 9vh 5vw calc(9vh + env(safe-area-inset-bottom, 0px));
+    }
+    .wm .eb { display: block; margin-bottom: 28px; color: #e0c48c; }
+    .wm-list { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+    .wm-it { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .wm-av {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--deep);
+      outline: 1px solid var(--gold);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    }
+    .wm-av .ph { padding: 0; font-size: 9px; }
+    .wm-av .ph small { display: none; }
+    .wm-tx b { display: block; font: 500 22px/1.15 var(--f1); }
+    .wm-tx span {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #a7b0c4;
+    }
+    @media (max-width: 700px) {
+      #hero { padding-bottom: 60px; }
+      .wm-list { gap: 32px; }
     }
   </style>
 </head>
@@ -1954,7 +1953,7 @@
         </div>
         <div>
           <div id="pls"></div>
-          <!-- Đã xóa nút thêm file nhạc tại đây -->
+
         </div>
       </div>
     </section>
@@ -1972,6 +1971,10 @@
         <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
       </div>
     </section>
+    <footer class="wm" id="wm">
+      <span class="eb">Thực hiện website</span>
+      <div class="wm-list" id="wml"></div>
+    </footer>
   </main>
   <div id="view" data-lenis-prevent></div>
 
@@ -1980,21 +1983,18 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    /* ========= DỮ LIỆU: chỉnh tại đây =========
- Ảnh: điền đường dẫn vào photo/cover/gallery, ví dụ "img/members/m05.jpg".
- Gợi ý thư mục: img/class/  img/members/  img/events/  img/teachers/  audio/  */
-    const CLASS_PHOTO = "img/anh lop 1.jpg"; // ảnh tập thể lớp (hero + final): "img/class/group.jpg"
-    const CLASS_PHOTO_2 = "img/anh lop 2.jpg"; // ảnh lớp phụ cho hero
-    // Ảnh bay ở màn hình mở đầu "THÁNG NĂM RỰC RỠ" (tối đa 7 ảnh, theo thứ tự khung 1 → 7).
-    // Ví dụ: ["img/intro/01.jpg", "img/intro/02.jpg", ...]. Để "" nếu muốn giữ khung trống.
+
+    const CLASS_PHOTO = "img/anh lop 1.jpg";
+    const CLASS_PHOTO_2 = "img/anh lop 2.jpg";
+
     const INTRO_PHOTOS = [
-      "img/kiniem1.jpg", // khung 1 (góc trên trái)
-      "img/kiniem2.jpg", // khung 2 (góc trên phải)
-      "img/kiniem3.jpg", // khung 3 (trái, giữa)
-      "img/kiniem4.jpg", // khung 4 (phải, giữa)
-      "img/kiniem5.jpg", // khung 5 (dưới, giữa)
-      "img/kiniem6.jpg", // khung 6 (trên, bên phải chữ)
-      "img/kiniem7.jpg", // khung 7 (trên, bên trái chữ)
+      "img/kiniem1.jpg",
+      "img/kiniem2.jpg",
+      "img/kiniem3.jpg",
+      "img/kiniem4.jpg",
+      "img/kiniem5.jpg",
+      "img/kiniem6.jpg",
+      "img/kiniem7.jpg",
     ];
     const MEMBERS = [
       {
@@ -2020,7 +2020,7 @@
           "img/IMG_2870.JPG",
         ],
       },
-      // Tự động tạo thêm 29 ô trống (Member 03 -> Member 31) cho đủ 31 người
+
       ...Array.from({ length: 29 }, () => ({
         name: "",
         nick: "",
@@ -2036,7 +2036,7 @@
       desc: "",
       cover: "",
       photos: [],
-    })); // thêm/bớt sự kiện tại đây
+    }));
     const T_NAMES = [
       "Cô Phạm Thu Trang",
       "Cô Lê Thị Trang",
@@ -2048,7 +2048,7 @@
       "Cô Trần Thị Then",
       "Cô Tạ Như Quỳnh",
     ];
-    // ===== THÔNG TIN TỪNG THẦY CÔ: chỉ cần điền vào đúng tên, chỗ nào chưa có để trống =====
+
     const T_INFO = {
       "Cô Phạm Thu Trang": {
         subject: "Toán",
@@ -2059,68 +2059,68 @@
         gallery: ["img/PhamThuTrang2.JPG" ,"img/PhamThuTrang3.png"]
       },
       "Cô Lê Thị Trang": {
-        subject: "Văn", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Văn lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/LeThuTrang1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/LeThuTrang2.jpg" , "img/LeThuTrang3.jpg" ,"img/LeThuTrang4.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Văn",
+        intro: "Giáo Viên Dạy Văn lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/LeThuTrang1.jpg",
+        gallery: ["img/LeThuTrang2.jpg" , "img/LeThuTrang3.jpg" ,"img/LeThuTrang4.jpg"],
       },
       "Cô Phạm Thị Quyên": {
-        subject: "Tiếng Anh", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Tiếng Anh lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/PhamThiQuyen1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/PhamThiQuyen2.jpg" , "img/PhamThiQuyen3.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Tiếng Anh",
+        intro: "Giáo Viên Dạy Tiếng Anh lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/PhamThiQuyen1.jpg",
+        gallery: ["img/PhamThiQuyen2.jpg" , "img/PhamThiQuyen3.jpg"],
       },
       "Thầy Nguyễn Hoàng Long": {
-        subject: "Tin Học", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Tin Học lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến thầy những lời chúc tốt đẹp và chân thành nhất. Chúc thầy luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn thầy vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương thầy đã dành cho mình. Cảm ơn thầy vì đã là một phần thật đẹp trong thanh xuân của 12T.", // lời tri ân của 12T
-        photo: "img/NguyenHoangLong1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/NguyenHoangLong2.JPG" , "img/NguyenHoangLong3.JPG" ], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Tin Học",
+        intro: "Giáo Viên Dạy Tin Học lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến thầy những lời chúc tốt đẹp và chân thành nhất. Chúc thầy luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn thầy vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương thầy đã dành cho mình. Cảm ơn thầy vì đã là một phần thật đẹp trong thanh xuân của 12T.",
+        photo: "img/NguyenHoangLong1.JPG",
+        gallery: ["img/NguyenHoangLong2.JPG" , "img/NguyenHoangLong3.JPG" ],
       },
       "Cô Nguyễn Quỳnh Hương": {
-        subject: "Địa Lí", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Địa Lí lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/NguyenQuynhHuong1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/NguyenQuynhHuong2.JPG" , "img/NguyenQuynhHuong3.JPG" , "img/NguyenQuynhHuong4.JPG"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Địa Lí",
+        intro: "Giáo Viên Dạy Địa Lí lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/NguyenQuynhHuong1.JPG",
+        gallery: ["img/NguyenQuynhHuong2.JPG" , "img/NguyenQuynhHuong3.JPG" , "img/NguyenQuynhHuong4.JPG"],
       },
       "Cô Trương Thị Thu": {
-        subject: "Lịch Sử", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Lịch Sử lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: [], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Lịch Sử",
+        intro: "Giáo Viên Dạy Lịch Sử lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "",
+        gallery: [],
       },
       "Cô Nguyễn Thị Phương Thúy": {
-        subject: "Vật Lý", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Vật Lý lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/NguyenThiPhuongThuy1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/NguyenThiPhuongThuy2.JPG" , "img/NguyenThiPhuongThuy3.JPG" , "img/NguyenThiPhuongThuy4.JPG"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Vật Lý",
+        intro: "Giáo Viên Dạy Vật Lý lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/NguyenThiPhuongThuy1.JPG",
+        gallery: ["img/NguyenThiPhuongThuy2.JPG" , "img/NguyenThiPhuongThuy3.JPG" , "img/NguyenThiPhuongThuy4.JPG"],
       },
       "Cô Trần Thị Then": {
-        subject: "Hóa Học", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Hóa Học lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/TranThiThen1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/TranThiThen2.jpg" , "img/TranThiThen3.jpg" , "img/TranThiThen4.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Hóa Học",
+        intro: "Giáo Viên Dạy Hóa Học lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/TranThiThen1.jpg",
+        gallery: ["img/TranThiThen2.jpg" , "img/TranThiThen3.jpg" , "img/TranThiThen4.jpg"],
       },
       "Cô Tạ Như Quỳnh": {
-        subject: "Thể Dục", // môn dạy, ví dụ "Toán"
-        intro: "Giáo Viên Dạy Thể Dục lớp 12T", // lời giới thiệu
-        memories: "", // kỷ niệm với lớp
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
-        photo: "img/TaNhuQuynh1.JPEG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
-        gallery: ["img/TaNhuQuynh2.jpeg" , "img/TaNhuQuynh1.JPG" ], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+        subject: "Thể Dục",
+        intro: "Giáo Viên Dạy Thể Dục lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        photo: "img/TaNhuQuynh1.JPEG",
+        gallery: ["img/TaNhuQuynh2.jpeg" , "img/TaNhuQuynh1.JPG" ],
       },
     };
     const TEACHERS = T_NAMES.map((n) => ({
@@ -2134,7 +2134,7 @@
       ...(T_INFO[n] || {}),
     }));
     const TRACKS = [
-      /* {title:"Tên bài", artist:"Ca sĩ", src:"audio/ten-file.mp3"} */
+
       {
         title: "Mình Cùng Nhau Đóng Băng",
         artist: "Thùy Chi",
@@ -2146,7 +2146,6 @@
         src: "audio/NguoiGieoMamXanh.mp3",
       },
     ];
-    /* ========================================== */
 
     const RM = false;
     const $ = (s, r = document) => r.querySelector(s),
@@ -2244,12 +2243,19 @@
       })();
     }
 
-    /* ---- ảnh lớp ---- */
     $("#hp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
     $("#hp2").innerHTML = ph("Ảnh lớp (phụ)", CLASS_PHOTO_2);
     $("#fp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
 
-    /* ---- intro frames ---- */
+    // Người làm web: sửa tên / vai trò / đường dẫn ảnh tại đây
+    const WEBMAKERS = [
+      { name: "Đặng Quang Minh", role: "Thiết kế & lập trình", photo: "img/nhasangtao1.jpg" },
+      { name: "Hồng Gia Huy", role: "Thiết kế & lập trình", photo: "img/webmaker2.jpg" },
+    ];
+    $("#wml").innerHTML = WEBMAKERS.map(
+      (m) => `<div class="wm-it"><div class="wm-av">${ph(m.name, m.photo)}</div><div class="wm-tx"><b>${m.name}</b><span>${m.role}</span></div></div>`,
+    ).join("");
+
     const FZ = [-120, -420, -260, -640, -180, -520, -340];
     [
       [6, 12],
@@ -2272,7 +2278,6 @@
     dust($("#d1"), 70);
     dust($("#d2"), 50);
 
-    /* ---- Chapter I ---- */
     const W = [30, 22, 26, 19, 28, 23],
       MT = [0, 70, -20, 100, 30, 0];
     const grid = $("#mgrid");
@@ -2318,7 +2323,6 @@
       ScrollTrigger.refresh();
     };
 
-    /* ---- Chapter II ---- */
     EVENTS.forEach((e, i) => {
       const b = document.createElement("button");
       b.className = "ec";
@@ -2327,7 +2331,6 @@
       $("#trk").appendChild(b);
     });
 
-    /* ---- Chapter III ---- */
     $("#tc").textContent = TEACHERS.length;
     TEACHERS.forEach((t, i) => {
       const li = document.createElement("li");
@@ -2335,7 +2338,6 @@
       $("#tl").appendChild(li);
     });
 
-    /* ---- slider ---- */
     function slider(items, label) {
       const arr = items.length ? items : ["", "", ""];
       return `<div class="sl"><div class="st">${arr.map((s, i) => `<div class="sd">${ph(label + " · ảnh " + (i + 1), s)}</div>`).join("")}</div><button class="pv2" aria-label="Ảnh trước">‹</button><button class="nx" aria-label="Ảnh sau">›</button><div class="ct"></div></div>`;
@@ -2368,7 +2370,6 @@
       };
     }
 
-    /* ---- detail view / router ---- */
     const view = $("#view");
     let open = false;
     function show(html) {
@@ -2485,7 +2486,6 @@
     }
     addEventListener("hashchange", route);
 
-    /* ---- Chapter IV: music ---- */
     const A = new Audio();
     A.preload = "metadata";
     let cur = -1,
@@ -2505,7 +2505,7 @@
         (b) => (b.onclick = () => load(+b.dataset.i)),
       );
     }
-    // THÊM HÀM LOAD NÀY VÀO NGAY DƯỚI HÀM LIST():
+
     function load(i) {
       const t = TRACKS[i];
       if (!t) return;
@@ -2568,7 +2568,7 @@
     $("#vo").oninput = (e) => (A.volume = e.target.value / 100);
     A.volume = 0.8;
     list();
-    /* staff + notes + visualizer */
+
     const svg = $("#stv");
     let sv = "";
     [40, 60, 80, 100, 120].forEach(
@@ -2616,7 +2616,6 @@
       if (!RM || pl) requestAnimationFrame(loop);
     })();
 
-    /* ---- cursor ---- */
     const cur_ = $("#cur");
     if (matchMedia("(hover:hover)").matches && !RM) {
       const mx = gsap.quickTo(cur_, "x", { duration: 0.3 }),
@@ -2634,7 +2633,6 @@
       );
     }
 
-    /* ---- intro timeline ---- */
     const ic = split($("#i2"));
     const i1 = split($("#i1"));
     let ready = false,
@@ -2730,7 +2728,6 @@
       route();
     }
 
-    /* ---- scroll choreography ---- */
     const mm = gsap.matchMedia();
     mm.add("all", () => {
       $$("#hero [data-d]").forEach((el) => {
@@ -2833,9 +2830,7 @@
         { duration: 1 },
       );
     });
-    // mm.add("(prefers-reduced-motion: reduce)", () => {
-    //   $("#fb").style.opacity = 0;
-    // });
+
   </script>
 </body>
 
