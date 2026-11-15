@@ -1055,25 +1055,50 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    .logo{
+
+    .logo {
       width: 100px;
     }
 
     /* =========================================================
        GIAO DIỆN ĐIỆN THOẠI (<= 800px)
        ========================================================= */
-    html { -webkit-text-size-adjust: 100%; }
-    button, a, .m, .ec { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    button,
+    a,
+    .m,
+    .ec {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
 
     /* chỉ hiệu ứng hover trên thiết bị có chuột */
     @media (hover: none) {
-      .btn:hover { background: none; color: inherit; }
-      #tl a:hover { color: inherit; padding-left: 0; }
+      .btn:hover {
+        background: none;
+        color: inherit;
+      }
+
+      #tl a:hover {
+        color: inherit;
+        padding-left: 0;
+      }
     }
 
     @media (max-width: 800px) {
-      body { font-size: 15px; line-height: 1.65; }
-      .chh p, .ec p, .dt p { font-weight: 400; }
+      body {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .chh p,
+      .ec p,
+      .dt p {
+        font-weight: 400;
+      }
 
       /* ---- thanh trên: logo + thanh tab nổi ở dưới ---- */
       .nav {
@@ -1082,6 +1107,7 @@
         border-bottom: 1px solid var(--ln);
         color: var(--ink);
       }
+
       /* lớp nền mờ đặt ở pseudo-element để thanh tab fixed bên trong không bị lệch vị trí */
       .nav::before {
         content: "";
@@ -1092,8 +1118,17 @@
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
       }
-      .logo { width: 44px; display: block; }
-      .logo img { height: 44px; object-fit: contain; }
+
+      .logo {
+        width: 44px;
+        display: block;
+      }
+
+      .logo img {
+        height: 44px;
+        object-fit: contain;
+      }
+
       .nav div {
         position: fixed;
         left: 50%;
@@ -1110,6 +1145,7 @@
         border: 1px solid rgba(224, 196, 140, 0.25);
         max-width: calc(100vw - 24px);
       }
+
       .nav div button {
         padding: 10px 13px;
         border-radius: 999px;
@@ -1120,12 +1156,30 @@
         color: #f3ece0;
         font-weight: 600;
       }
-      .nav div button:active { background: var(--gold); color: var(--deep); }
-      main { padding-bottom: 84px; }
+
+      .nav div button:active {
+        background: var(--gold);
+        color: var(--deep);
+      }
+
+      main {
+        padding-bottom: 84px;
+      }
 
       /* ---- intro ---- */
-      .fr { width: 22vw; min-width: 0; border-width: 4px; box-shadow: 0 16px 30px rgba(0,0,0,.5); }
-      .itx h1 { font-size: clamp(38px, 12.5vw, 80px); margin: 16px 0 30px; line-height: 1.08; }
+      .fr {
+        width: 22vw;
+        min-width: 0;
+        border-width: 4px;
+        box-shadow: 0 16px 30px rgba(0, 0, 0, .5);
+      }
+
+      .itx h1 {
+        font-size: clamp(38px, 12.5vw, 80px);
+        margin: 16px 0 30px;
+        line-height: 1.08;
+      }
+
       .btn {
         padding: 16px 44px;
         background: rgba(184, 149, 90, 0.16);
@@ -1133,7 +1187,11 @@
         color: #f3ece0;
         letter-spacing: 0.24em;
       }
-      .btn:active { background: var(--gold); color: var(--deep); }
+
+      .btn:active {
+        background: var(--gold);
+        color: var(--deep);
+      }
 
       /* ---- hero: xếp dọc, chữ lớn đè lên ảnh ---- */
       #hero {
@@ -1142,16 +1200,26 @@
         display: flex;
         flex-direction: column;
       }
-      .hbig { font-size: clamp(54px, 18vw, 120px); line-height: 0.98; }
+
+      .hbig {
+        font-size: clamp(54px, 18vw, 120px);
+        line-height: 0.98;
+      }
+
       .hph {
         position: relative;
-        right: auto; top: auto;
+        right: auto;
+        top: auto;
         width: 86%;
         margin: -9vw 0 0 auto;
         order: 2;
         box-shadow: 0 26px 50px rgba(13, 27, 52, 0.28);
       }
-      .hph2 { display: none; }
+
+      .hph2 {
+        display: none;
+      }
+
       .hq {
         order: 3;
         margin: 28px 0 0;
@@ -1160,16 +1228,49 @@
         padding-left: 14px;
         border-left: 2px solid var(--gold);
       }
-      .hbig { order: 1; }
-      #hero > .eb { order: 0; margin-bottom: 14px; line-height: 1.6; letter-spacing: 0.22em; font-size: 10px; }
-      .sc { position: static; order: 4; margin-top: 28px; }
-      .htag { display: none; }
+
+      .hbig {
+        order: 1;
+      }
+
+      #hero>.eb {
+        order: 0;
+        margin-bottom: 14px;
+        line-height: 1.6;
+        letter-spacing: 0.22em;
+        font-size: 10px;
+      }
+
+      .sc {
+        position: static;
+        order: 4;
+        margin-top: 28px;
+      }
+
+      .htag {
+        display: none;
+      }
 
       /* ---- tiêu đề chương ---- */
-      .chap { padding: 9vh 6vw; }
-      .chh { margin-bottom: 4vh; padding-bottom: 20px; gap: 18px; }
-      .chh h2 { font-size: clamp(30px, 9vw, 48px); line-height: 1.1; }
-      .chh > div:last-child:has(#q) { width: 100%; }
+      .chap {
+        padding: 9vh 6vw;
+      }
+
+      .chh {
+        margin-bottom: 4vh;
+        padding-bottom: 20px;
+        gap: 18px;
+      }
+
+      .chh h2 {
+        font-size: clamp(30px, 9vw, 48px);
+        line-height: 1.1;
+      }
+
+      .chh>div:last-child:has(#q) {
+        width: 100%;
+      }
+
       #q {
         width: 100%;
         padding: 13px 20px;
@@ -1178,62 +1279,217 @@
         border-radius: 999px;
         background: color-mix(in srgb, var(--ink) 5%, transparent);
       }
-      #q:focus { border-color: var(--gold); }
+
+      #q:focus {
+        border-color: var(--gold);
+      }
 
       /* ---- lưới thành viên: 2 cột đều ---- */
-      #mgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 14px; }
-      .m { width: 100% !important; margin-top: 0 !important; text-align: left; }
-      .m:nth-child(even) { transform: translateY(0); }
-      .m .pf { box-shadow: 0 10px 24px rgba(13, 27, 52, 0.16); }
-      .m b { font-size: 16px; line-height: 1.25; margin-top: 10px; }
-      .m small { font-size: 10px; letter-spacing: 0.12em; display: block; margin-top: 2px; }
-      .m:active .pf { transform: scale(0.98); transition: transform .15s; }
+      #mgrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 26px 14px;
+      }
+
+      .m {
+        width: 100% !important;
+        margin-top: 0 !important;
+        text-align: left;
+      }
+
+      .m:nth-child(even) {
+        transform: translateY(0);
+      }
+
+      .m .pf {
+        box-shadow: 0 10px 24px rgba(13, 27, 52, 0.16);
+      }
+
+      .m b {
+        font-size: 16px;
+        line-height: 1.25;
+        margin-top: 10px;
+      }
+
+      .m small {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        display: block;
+        margin-top: 2px;
+      }
+
+      .m:active .pf {
+        transform: scale(0.98);
+        transition: transform .15s;
+      }
 
       /* ---- sự kiện: cuộn ngang ---- */
-      body #ev { height: 100vh; height: 100svh; }
-      body #ev .chh { padding: calc(74px + env(safe-area-inset-top, 0px)) 6vw 10px; margin: 0; gap: 10px; }
-      body #ev .chh h2 { font-size: clamp(26px, 8vw, 38px); }
-      body #ev .chh p { font-size: 13px; max-width: 100%; }
-      body #ev .trk { gap: 5vw; padding: 0 6vw 84px; }
-      body #ev .ec { width: 78vw; max-width: 340px; }
+      body #ev {
+        height: 100vh;
+        height: 100svh;
+      }
+
+      body #ev .chh {
+        padding: calc(74px + env(safe-area-inset-top, 0px)) 6vw 10px;
+        margin: 0;
+        gap: 10px;
+      }
+
+      body #ev .chh h2 {
+        font-size: clamp(26px, 8vw, 38px);
+      }
+
+      body #ev .chh p {
+        font-size: 13px;
+        max-width: 100%;
+      }
+
+      body #ev .trk {
+        gap: 5vw;
+        padding: 0 6vw 84px;
+      }
+
+      body #ev .ec {
+        width: 78vw;
+        max-width: 340px;
+      }
+
       body #ev .ec .pf,
-      body #ev .ec:nth-child(n) .pf { width: 100%; aspect-ratio: 4/3; max-height: 34svh; border-radius: 4px; }
-      body #ev .ec h3 { font-size: 24px; }
+      body #ev .ec:nth-child(n) .pf {
+        width: 100%;
+        aspect-ratio: 4/3;
+        max-height: 34svh;
+        border-radius: 4px;
+      }
+
+      body #ev .ec h3 {
+        font-size: 24px;
+      }
 
       /* ---- thầy cô ---- */
-      #tl a { padding: 18px 0; gap: 14px; align-items: center; }
-      #tl li a, #tl li:nth-child(n) a { padding-left: 0; }
-      #tl h3 { font-size: clamp(20px, 5.8vw, 28px); line-height: 1.2; flex: 1; }
-      #tl .n { width: 24px; flex: none; }
-      #tl a::after { content: "›"; font-size: 26px; line-height: 1; color: var(--gold); flex: none; }
-      #tl a:active { color: var(--red); }
+      #tl a {
+        padding: 18px 0;
+        gap: 14px;
+        align-items: center;
+      }
+
+      #tl li a,
+      #tl li:nth-child(n) a {
+        padding-left: 0;
+      }
+
+      #tl h3 {
+        font-size: clamp(20px, 5.8vw, 28px);
+        line-height: 1.2;
+        flex: 1;
+      }
+
+      #tl .n {
+        width: 24px;
+        flex: none;
+      }
+
+      #tl a::after {
+        content: "›";
+        font-size: 26px;
+        line-height: 1;
+        color: var(--gold);
+        flex: none;
+      }
+
+      #tl a:active {
+        color: var(--red);
+      }
 
       /* ---- âm nhạc ---- */
-      #stv { height: 100px; }
-      .pl { gap: 28px; }
+      #stv {
+        height: 100px;
+      }
+
+      .pl {
+        gap: 28px;
+      }
+
       .np {
         padding: 22px 18px;
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(224, 196, 140, 0.22);
       }
-      .np h3 { font-size: 26px; }
-      .ctl { flex-wrap: nowrap; gap: 12px; }
-      .tm { min-width: 0; font-size: 11px; white-space: nowrap; }
-      #pp { width: 54px; height: 54px; flex: none; background: var(--gold); color: var(--deep); border: 0; }
-      input[type="range"] { min-width: 0; height: 28px; }
-      .ctl.vol { display: none; }
-      #pls button { padding: 16px 4px; gap: 12px; font-size: 14px; align-items: baseline; }
-      #pls button span:last-child { font-size: 11px; opacity: .7; text-align: right; }
+
+      .np h3 {
+        font-size: 26px;
+      }
+
+      .ctl {
+        flex-wrap: nowrap;
+        gap: 12px;
+      }
+
+      .tm {
+        min-width: 0;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      #pp {
+        width: 54px;
+        height: 54px;
+        flex: none;
+        background: var(--gold);
+        color: var(--deep);
+        border: 0;
+      }
+
+      input[type="range"] {
+        min-width: 0;
+        height: 28px;
+      }
+
+      .ctl.vol {
+        display: none;
+      }
+
+      #pls button {
+        padding: 16px 4px;
+        gap: 12px;
+        font-size: 14px;
+        align-items: baseline;
+      }
+
+      #pls button span:last-child {
+        font-size: 11px;
+        opacity: .7;
+        text-align: right;
+      }
 
       /* ---- phần kết ---- */
-      #final { height: 100vh; height: 100svh; }
-      .fph { width: 88vw; }
-      .ftx h2 { font-size: clamp(26px, 7.4vw, 42px); line-height: 1.18; }
-      .ftx .wl { letter-spacing: 0.24em; font-size: 11px; }
+      #final {
+        height: 100vh;
+        height: 100svh;
+      }
+
+      .fph {
+        width: 88vw;
+      }
+
+      .ftx h2 {
+        font-size: clamp(26px, 7.4vw, 42px);
+        line-height: 1.18;
+      }
+
+      .ftx .wl {
+        letter-spacing: 0.24em;
+        font-size: 11px;
+      }
 
       /* ---- trang chi tiết ---- */
-      #view { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0px); }
+      #view {
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
       .x {
         top: calc(12px + env(safe-area-inset-top, 0px));
         right: 12px;
@@ -1246,38 +1502,108 @@
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
       }
-      .dt { min-height: 0; padding: calc(72px + env(safe-area-inset-top, 0px)) 6vw 5vh; gap: 28px; }
-      .dt .big { max-height: 68svh; border-radius: 4px; }
-      .dt h2 { font-size: clamp(32px, 10vw, 46px); }
-      .gl { padding: 0 6vw 7vh; }
-      .sl { border-radius: 8px; }
-      .sl button { width: 42px; height: 42px; margin-top: -21px; font-size: 20px; }
-      .qr { padding: 16px; gap: 16px; border-radius: 10px; }
-      .qr .qb { width: 132px; height: 132px; }
-      .qr .bs { flex: 1; min-width: 150px; }
-      .qr .bs button { padding: 12px 14px; border-radius: 8px; }
-      .tn { padding: 0 6vw calc(10vh + env(safe-area-inset-bottom, 0px)); gap: 16px; font-size: 12px; letter-spacing: 0.06em; }
-      .tn a { flex: 1; line-height: 1.4; }
-      .tn a:last-child { text-align: right; }
+
+      .dt {
+        min-height: 0;
+        padding: calc(72px + env(safe-area-inset-top, 0px)) 6vw 5vh;
+        gap: 28px;
+      }
+
+      .dt .big {
+        max-height: 68svh;
+        border-radius: 4px;
+      }
+
+      .dt h2 {
+        font-size: clamp(32px, 10vw, 46px);
+      }
+
+      .gl {
+        padding: 0 6vw 7vh;
+      }
+
+      .sl {
+        border-radius: 8px;
+      }
+
+      .sl button {
+        width: 42px;
+        height: 42px;
+        margin-top: -21px;
+        font-size: 20px;
+      }
+
+      .qr {
+        padding: 16px;
+        gap: 16px;
+        border-radius: 10px;
+      }
+
+      .qr .qb {
+        width: 132px;
+        height: 132px;
+      }
+
+      .qr .bs {
+        flex: 1;
+        min-width: 150px;
+      }
+
+      .qr .bs button {
+        padding: 12px 14px;
+        border-radius: 8px;
+      }
+
+      .tn {
+        padding: 0 6vw calc(10vh + env(safe-area-inset-bottom, 0px));
+        gap: 16px;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
+      .tn a {
+        flex: 1;
+        line-height: 1.4;
+      }
+
+      .tn a:last-child {
+        text-align: right;
+      }
     }
 
     @media (max-width: 380px) {
-      .nav div button { padding: 10px 10px; font-size: 10.5px; }
-      #mgrid { gap: 22px 10px; }
+      .nav div button {
+        padding: 10px 10px;
+        font-size: 10.5px;
+      }
+
+      #mgrid {
+        gap: 22px 10px;
+      }
     }
 
     /* =========================================================
        PHẦN KẾT: ảnh phủ kín, khung vàng, chữ rõ ràng
        ========================================================= */
-    #final canvas { z-index: 2; }
+    #final canvas {
+      z-index: 2;
+    }
+
     .fph {
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       aspect-ratio: auto;
       transform: none;
       opacity: 0.9;
     }
-    .fph img, .fph .ph { object-position: 50% 58%; }
+
+    .fph img,
+    .fph .ph {
+      object-position: 50% 58%;
+    }
+
     #final::after {
       content: "";
       position: absolute;
@@ -1288,6 +1614,7 @@
         radial-gradient(ellipse at center, rgba(5, 10, 24, 0.55) 0%, rgba(5, 10, 24, 0.35) 45%, rgba(5, 10, 24, 0.85) 100%),
         linear-gradient(to bottom, rgba(5, 10, 24, 0.6), transparent 25%, transparent 70%, rgba(5, 10, 24, 0.7));
     }
+
     #final::before {
       content: "";
       position: absolute;
@@ -1296,6 +1623,7 @@
       pointer-events: none;
       border: 1px solid rgba(224, 196, 140, 0.38);
     }
+
     .ftx {
       width: 100%;
       max-width: 1080px;
@@ -1304,6 +1632,7 @@
       align-items: center;
       gap: clamp(18px, 3.2vh, 30px);
     }
+
     .ftx h2 {
       font-size: clamp(30px, 4.6vw, 68px);
       line-height: 1.14;
@@ -1313,7 +1642,12 @@
       text-wrap: balance;
       text-shadow: 0 4px 30px rgba(0, 0, 0, 0.75);
     }
-    .ftx h2 em { font-style: italic; color: #e0c48c; }
+
+    .ftx h2 em {
+      font-style: italic;
+      color: #e0c48c;
+    }
+
     .ftx .fstat {
       margin: 0;
       display: flex;
@@ -1325,13 +1659,16 @@
       letter-spacing: 0.06em;
       color: #efe6d3;
     }
-    .ftx .fstat::before, .ftx .fstat::after {
+
+    .ftx .fstat::before,
+    .ftx .fstat::after {
       content: "";
       flex: none;
       width: clamp(24px, 6vw, 70px);
       height: 1px;
       background: var(--gold);
     }
+
     .ftx .fbadge {
       margin: 0;
       padding: 12px 28px;
@@ -1346,38 +1683,76 @@
       color: #f3ece0;
       text-shadow: none;
     }
+
     .ftx .wl {
       margin: 0;
       font-size: 11px;
       letter-spacing: 0.4em;
       color: #e0c48c;
     }
+
     @media (max-width: 800px) {
-      #final::before { inset: 10px; }
-      .ftx { padding: 0 8vw; gap: 20px; }
-      .ftx h2 { font-size: clamp(28px, 8.2vw, 40px); }
-      .ftx .fstat { font-size: 13px; gap: 10px; line-height: 1.5; }
-      .ftx .fstat::before, .ftx .fstat::after { width: 18px; }
-      .ftx .fbadge { padding: 10px 18px; font-size: 12px; letter-spacing: 0.06em; }
-      .ftx .wl { font-size: 10px; letter-spacing: 0.26em; }
-      .fph img, .fph .ph { object-position: 50% 50%; }
+      #final::before {
+        inset: 10px;
+      }
+
+      .ftx {
+        padding: 0 8vw;
+        gap: 20px;
+      }
+
+      .ftx h2 {
+        font-size: clamp(28px, 8.2vw, 40px);
+      }
+
+      .ftx .fstat {
+        font-size: 13px;
+        gap: 10px;
+        line-height: 1.5;
+      }
+
+      .ftx .fstat::before,
+      .ftx .fstat::after {
+        width: 18px;
+      }
+
+      .ftx .fbadge {
+        padding: 10px 18px;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
+      .ftx .wl {
+        font-size: 10px;
+        letter-spacing: 0.26em;
+      }
+
+      .fph img,
+      .fph .ph {
+        object-position: 50% 50%;
+      }
     }
 
     /* =========================================================
        CHỈNH THEO YÊU CẦU: chữ "11" nổi bật + tiêu đề chương I một hàng
        ========================================================= */
-    .hbig { text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 75%, transparent); }
+    .hbig {
+      text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 75%, transparent);
+    }
+
     .hbig em {
       color: #c8102e;
       font-weight: 800;
       text-shadow: 0 2px 24px rgba(200, 16, 46, 0.28);
     }
+
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) .hbig em {
         color: #f0cf8a;
         text-shadow: 0 0 34px rgba(240, 207, 138, 0.45);
       }
     }
+
     :root[data-theme="dark"] .hbig em {
       color: #f0cf8a;
       text-shadow: 0 0 34px rgba(240, 207, 138, 0.45);
@@ -1390,15 +1765,34 @@
       font-weight: 600;
       color: #20407f;
     }
-    #c1 .chh h2 em { color: #c8102e; }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) #c1 .chh h2 { color: #f6edd8; }
-      :root:not([data-theme="light"]) #c1 .chh h2 em { color: #f0cf8a; }
+
+    #c1 .chh h2 em {
+      color: #c8102e;
     }
-    :root[data-theme="dark"] #c1 .chh h2 { color: #f6edd8; }
-    :root[data-theme="dark"] #c1 .chh h2 em { color: #f0cf8a; }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) #c1 .chh h2 {
+        color: #f6edd8;
+      }
+
+      :root:not([data-theme="light"]) #c1 .chh h2 em {
+        color: #f0cf8a;
+      }
+    }
+
+    :root[data-theme="dark"] #c1 .chh h2 {
+      color: #f6edd8;
+    }
+
+    :root[data-theme="dark"] #c1 .chh h2 em {
+      color: #f0cf8a;
+    }
+
     @media (max-width: 800px) {
-      #c1 .chh h2 { font-size: 7.9vw; letter-spacing: -0.02em; }
+      #c1 .chh h2 {
+        font-size: 7.9vw;
+        letter-spacing: -0.02em;
+      }
     }
   </style>
 </head>
@@ -1527,7 +1921,7 @@
           <h2>Những người lái đò <em>thầm lặng</em></h2>
         </div>
         <p>
-          11 thầy cô, mỗi người một trang riêng, một liên kết và một mã QR
+          <span id="tc">11</span> thầy cô, mỗi người một trang riêng, một liên kết và một mã QR
           riêng.
         </p>
       </div>
@@ -1653,9 +2047,82 @@
       "Cô Nguyễn Thị Phương Thúy",
       "Cô Trần Thị Then",
       "Cô Tạ Như Quỳnh",
-      "Cô Tăng Thúy Quỳnh",
-      "Cô Phạm Tâm Anh",
     ];
+    // ===== THÔNG TIN TỪNG THẦY CÔ: chỉ cần điền vào đúng tên, chỗ nào chưa có để trống =====
+    const T_INFO = {
+      "Cô Phạm Thu Trang": {
+        subject: "Toán",
+        intro: "Giáo Viên chủ nhiệm lớp 12T",
+        memories: "",
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T ",
+        photo: "img/PhamThuTrang.JPG",
+        gallery: ["img/PhamThuTrang2.JPG" ,"img/PhamThuTrang3.png"]
+      },
+      "Cô Lê Thị Trang": {
+        subject: "Văn", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Văn lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/LeThuTrang1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/LeThuTrang2.jpg" , "img/LeThuTrang3.jpg" ,"img/LeThuTrang4.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Phạm Thị Quyên": {
+        subject: "Tiếng Anh", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Tiếng Anh lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/PhamThiQuyen1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/PhamThiQuyen2.jpg" , "img/PhamThiQuyen3.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Thầy Nguyễn Hoàng Long": {
+        subject: "Tin Học", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Tin Học lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến thầy những lời chúc tốt đẹp và chân thành nhất. Chúc thầy luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn thầy vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương thầy đã dành cho mình. Cảm ơn thầy vì đã là một phần thật đẹp trong thanh xuân của 12T.", // lời tri ân của 12T
+        photo: "img/NguyenHoangLong1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/NguyenHoangLong2.JPG" , "img/NguyenHoangLong3.JPG" ], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Nguyễn Quỳnh Hương": {
+        subject: "Địa Lí", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Địa Lí lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/NguyenQuynhHuong1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/NguyenQuynhHuong2.JPG" , "img/NguyenQuynhHuong3.JPG" , "img/NguyenQuynhHuong4.JPG"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Trương Thị Thu": {
+        subject: "Lịch Sử", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Lịch Sử lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: [], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Nguyễn Thị Phương Thúy": {
+        subject: "Vật Lý", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Vật Lý lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/NguyenThiPhuongThuy1.JPG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/NguyenThiPhuongThuy2.JPG" , "img/NguyenThiPhuongThuy3.JPG" , "img/NguyenThiPhuongThuy4.JPG"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Trần Thị Then": {
+        subject: "Hóa Học", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Hóa Học lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/TranThiThen1.jpg", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/TranThiThen2.jpg" , "img/TranThiThen3.jpg" , "img/TranThiThen4.jpg"], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+      "Cô Tạ Như Quỳnh": {
+        subject: "Thể Dục", // môn dạy, ví dụ "Toán"
+        intro: "Giáo Viên Dạy Thể Dục lớp 12T", // lời giới thiệu
+        memories: "", // kỷ niệm với lớp
+        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T", // lời tri ân của 12T
+        photo: "img/TaNhuQuynh1.JPEG", // ảnh chính, ví dụ "img/teachers/trang.jpg"
+        gallery: ["img/TaNhuQuynh2.jpeg" , "img/TaNhuQuynh1.JPG" ], // bộ ảnh, ví dụ ["img/teachers/trang-1.jpg", "img/teachers/trang-2.jpg"]
+      },
+    };
     const TEACHERS = T_NAMES.map((n) => ({
       name: n,
       subject: "",
@@ -1664,18 +2131,19 @@
       thanks: "",
       photo: "",
       gallery: [],
+      ...(T_INFO[n] || {}),
     }));
     const TRACKS = [
       /* {title:"Tên bài", artist:"Ca sĩ", src:"audio/ten-file.mp3"} */
       {
         title: "Mình Cùng Nhau Đóng Băng",
-        artist: "Minh Dang",
+        artist: "Thùy Chi",
         src: "audio/minhcambangdongnhau.mp3",
       },
       {
-        title: "Bài hát 2 (chưa có file)",
-        artist: "Thêm file vào audio/",
-        src: "",
+        title: "Người Gieo Mầm Xanh ",
+        artist: "Hoàng Dũng",
+        src: "audio/NguoiGieoMamXanh.mp3",
       },
     ];
     /* ========================================== */
@@ -1860,6 +2328,7 @@
     });
 
     /* ---- Chapter III ---- */
+    $("#tc").textContent = TEACHERS.length;
     TEACHERS.forEach((t, i) => {
       const li = document.createElement("li");
       li.innerHTML = `<a href="#${slug(t.name)}"><span class="n">${pad(i + 1)}</span><h3>${t.name}</h3><span class="pv">${ph("Ảnh", t.photo)}</span></a>`;
@@ -1976,9 +2445,9 @@
       const ti = TEACHERS.findIndex((t) => slug(t.name) === h);
       if (ti < 0) return hide();
       const t = TEACHERS[ti],
-        pv = TEACHERS[(ti + 10) % 11],
-        nx = TEACHERS[(ti + 1) % 11];
-      show(`<div class="dt"><div class="big">${ph(t.name, t.photo)}</div><div class="rt"><p class="eb">Người lái đò ${pad(ti + 1)} / 11${t.subject ? " · " + t.subject : ""}</p><h2>${t.name}</h2>
+        pv = TEACHERS[(ti + TEACHERS.length - 1) % TEACHERS.length],
+        nx = TEACHERS[(ti + 1) % TEACHERS.length];
+      show(`<div class="dt"><div class="big">${ph(t.name, t.photo)}</div><div class="rt"><p class="eb">Người lái đò ${pad(ti + 1)} / ${TEACHERS.length}${t.subject ? " · " + t.subject : ""}</p><h2>${t.name}</h2>
     <h4>Lời giới thiệu</h4><p>${t.intro || "Nội dung mẫu: thêm lời giới thiệu về thầy cô trong dữ liệu TEACHERS."}</p>
     <h4>Những kỷ niệm</h4><p>${t.memories || "Nội dung mẫu: kỷ niệm của lớp với thầy cô sẽ hiển thị ở đây."}</p>
     <h4>Lời tri ân của tập thể 12T</h4><p>${t.thanks || "Nội dung mẫu: lời tri ân của tập thể lớp 12T gửi đến thầy cô."}</p>
@@ -2037,24 +2506,24 @@
       );
     }
     // THÊM HÀM LOAD NÀY VÀO NGAY DƯỚI HÀM LIST():
-      function load(i) {
-        const t = TRACKS[i];
-        if (!t) return;
-        cur = i;
-        $("#tt").textContent = t.title;
-        $("#ta").textContent = t.artist;
-        list();
-        if (!t.src) {
-          A.pause();
-          A.removeAttribute("src");
-          $("#msg").textContent = "Bài hát này chưa có file âm thanh.";
-          return;
-        }
-        $("#msg").textContent = "";
-        A.src = t.src;
-        A.load();
-        play();
+    function load(i) {
+      const t = TRACKS[i];
+      if (!t) return;
+      cur = i;
+      $("#tt").textContent = t.title;
+      $("#ta").textContent = t.artist;
+      list();
+      if (!t.src) {
+        A.pause();
+        A.removeAttribute("src");
+        $("#msg").textContent = "Bài hát này chưa có file âm thanh.";
+        return;
       }
+      $("#msg").textContent = "";
+      A.src = t.src;
+      A.load();
+      play();
+    }
     function play() {
       if (!ac && /^(blob:|[^h]|h(?!ttp))/i.test(A.src)) {
         try {
