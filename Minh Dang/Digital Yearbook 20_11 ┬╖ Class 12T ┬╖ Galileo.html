@@ -1,0 +1,2018 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>12T</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="icon" href="img/anh lop 1.jpg">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,800;1,500&family=Be+Vietnam+Pro:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3ece0;
+      --ink: #0d1b34;
+      --mut: #5b6478;
+      --gold: #b8955a;
+      --red: #7a1f2b;
+      --deep: #0b1630;
+      --cream: #f3ece0;
+      --ln: rgba(13, 27, 52, 0.18);
+      --ph: #e4d9c4;
+      --f1: "Playfair Display", Georgia, serif;
+      --f2: "Be Vietnam Pro", system-ui, sans-serif;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0e1729;
+        --ink: #efe6d3;
+        --mut: #a7b0c4;
+        --ln: rgba(239, 230, 211, 0.2);
+        --ph: #1a2540;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0e1729;
+      --ink: #efe6d3;
+      --mut: #a7b0c4;
+      --ln: rgba(239, 230, 211, 0.2);
+      --ph: #1a2540;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font: 300 16px/1.7 var(--f2);
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--f1);
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    .ph {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      background:
+        repeating-linear-gradient(45deg,
+          rgba(184, 149, 90, 0.16) 0 10px,
+          rgba(184, 149, 90, 0.05) 10px 20px),
+        var(--ph);
+      color: var(--mut);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .ph small {
+      opacity: 0.7;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .eb {
+      font: 600 11px/1 var(--f2);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .w {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    .c {
+      display: inline-block;
+    }
+
+    .ln {
+      display: block;
+      overflow: hidden;
+    }
+
+    .ln>i {
+      display: block;
+      font-style: normal;
+    }
+
+    /* nav + cursor */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(14px + env(safe-area-inset-top, 0px)) 5vw 14px;
+      mix-blend-mode: difference;
+      color: #f3ece0;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .nav div {
+      display: flex;
+      gap: 2vw;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    #cur {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 34px;
+      height: 34px;
+      margin: -17px 0 0 -17px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0;
+      transition:
+        width 0.3s,
+        height 0.3s,
+        margin 0.3s,
+        background 0.3s;
+    }
+
+    #cur.on {
+      width: 70px;
+      height: 70px;
+      margin: -35px 0 0 -35px;
+      background: rgba(184, 149, 90, 0.22);
+    }
+
+    @media (hover: none) {
+      #cur {
+        display: none;
+      }
+    }
+
+    /* intro */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--deep);
+      color: var(--cream);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #intro canvas,
+    #final canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sw {
+      position: absolute;
+      inset: 0;
+      perspective: 900px;
+    }
+
+    #scene {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .fr {
+      position: absolute;
+      width: min(17vw, 190px);
+      min-width: 96px;
+      aspect-ratio: 3/4;
+      border: 6px solid #f3ece0;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      color: #555;
+    }
+
+    .itx {
+      position: relative;
+      z-index: 2;
+      padding: 0 5vw;
+    }
+
+    .itx h1 {
+      font-size: clamp(40px, 11vw, 168px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 18px 0 34px;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      padding: 14px 34px;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition:
+        background 0.3s,
+        color 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--deep);
+    }
+
+    /* hero */
+    #hero {
+      position: relative;
+      min-height: 130vh;
+      padding: 18vh 5vw 10vh;
+      overflow: hidden;
+    }
+
+    .hbig {
+      font-size: clamp(54px, 15vw, 230px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hbig em {
+      font-style: italic;
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .hph {
+      position: absolute;
+      right: 8vw;
+      top: 20vh;
+      width: min(46vw, 560px);
+      aspect-ratio: 4/5;
+      z-index: 1;
+      box-shadow: 0 40px 80px rgba(13, 27, 52, 0.3);
+    }
+
+    .hph2 {
+      position: absolute;
+      left: 6vw;
+      bottom: 14vh;
+      width: min(22vw, 220px);
+      aspect-ratio: 3/4;
+      z-index: 2;
+      border: 6px solid var(--bg);
+      box-shadow: 0 20px 50px rgba(13, 27, 52, 0.25);
+    }
+
+    .hq {
+      position: relative;
+      z-index: 3;
+      max-width: 420px;
+      margin: 6vh 0 0 4vw;
+      font: italic 500 clamp(20px, 2.4vw, 30px)/1.35 var(--f1);
+    }
+
+    .htag {
+      position: absolute;
+      right: 5vw;
+      bottom: 6vh;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    .sc {
+      position: absolute;
+      left: 5vw;
+      bottom: 5vh;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .sc b {
+      display: block;
+      width: 1px;
+      height: 46px;
+      background: var(--gold);
+      transform-origin: top;
+      animation: sl 2.2s ease-in-out infinite;
+    }
+
+    @keyframes sl {
+
+      0%,
+      100% {
+        transform: scaleY(0.2);
+      }
+
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hph {
+        width: 70vw;
+        top: 30vh;
+      }
+
+      .hph2 {
+        display: none;
+      }
+
+      .hq {
+        margin-left: 0;
+        margin-top: 50vh;
+      }
+    }
+
+    /* chapters */
+    .chap {
+      padding: 14vh 5vw;
+    }
+
+    .chh {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-end;
+      margin-bottom: 8vh;
+      border-bottom: 1px solid var(--ln);
+      padding-bottom: 28px;
+    }
+
+    .chh h2 {
+      font-size: clamp(34px, 6.2vw, 92px);
+      max-width: 11em;
+    }
+
+    .chh h2 em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .chh p {
+      max-width: 300px;
+      color: var(--mut);
+      font-size: 14px;
+    }
+
+    #q {
+      border: 0;
+      border-bottom: 1px solid var(--ink);
+      background: none;
+      color: inherit;
+      padding: 10px 0;
+      font: inherit;
+      width: 260px;
+      outline: 0;
+    }
+
+    #mgrid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 5vh 2%;
+      align-items: flex-start;
+    }
+
+    .m {
+      width: var(--w);
+      margin-top: var(--mt);
+      text-align: left;
+      perspective: 700px;
+    }
+
+    .m .pf {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 0 18px 40px rgba(13, 27, 52, 0.18);
+    }
+
+    .m .pf::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%),
+          rgba(255, 236, 190, 0.35),
+          transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .m:hover .pf::after {
+      opacity: 1;
+    }
+
+    .m .pf>* {
+      transition: transform 0.8s;
+    }
+
+    .m:hover .pf>* {
+      transform: scale(1.08);
+    }
+
+    .m b {
+      display: block;
+      margin-top: 10px;
+      font: 500 18px var(--f1);
+    }
+
+    .m small {
+      color: var(--mut);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+    }
+
+    @media (max-width: 800px) {
+      .m {
+        width: 48% !important;
+        margin-top: 0 !important;
+      }
+
+      #q {
+        width: 100%;
+      }
+    }
+
+    /* events */
+    #ev {
+      position: relative;
+      background: var(--deep);
+      color: var(--cream);
+      overflow: hidden;
+    }
+
+    #ev .chh {
+      margin: 0;
+      border: 0;
+      padding: 14vh 5vw 4vh;
+    }
+
+    #ev .chh p {
+      color: #aab;
+    }
+
+    .trk {
+      display: flex;
+      gap: 6vw;
+      padding: 2vh 5vw 14vh;
+      width: max-content;
+      align-items: center;
+    }
+
+    .ec {
+      width: min(70vw, 640px);
+      flex: none;
+      text-align: left;
+    }
+
+    .ec .pf {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .ec:nth-child(even) .pf {
+      aspect-ratio: 4/5;
+      width: 70%;
+    }
+
+    .ec h3 {
+      font-size: clamp(26px, 3.4vw, 46px);
+    }
+
+    .ec small {
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      font-size: 11px;
+    }
+
+    .ec p {
+      max-width: 420px;
+      color: #c9cfdc;
+      font-size: 14px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #ev {
+        overflow-x: auto;
+      }
+    }
+
+    /* teachers */
+    #tl {
+      list-style: none;
+    }
+
+    #tl a {
+      display: flex;
+      align-items: baseline;
+      gap: 3vw;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--ln);
+      position: relative;
+      transition:
+        padding 0.5s,
+        color 0.3s;
+    }
+
+    #tl li:nth-child(even) a {
+      padding-left: 8vw;
+    }
+
+    #tl li:nth-child(3n) a {
+      padding-left: 16vw;
+    }
+
+    #tl a:hover {
+      color: var(--red);
+      padding-left: 6vw;
+    }
+
+    #tl .n {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      width: 30px;
+    }
+
+    #tl h3 {
+      font-size: clamp(26px, 4.6vw, 66px);
+    }
+
+    #tl .pv {
+      position: absolute;
+      right: 4vw;
+      top: 50%;
+      width: 90px;
+      aspect-ratio: 3/4;
+      transform: translateY(-50%) scale(0.6);
+      opacity: 0;
+      transition: 0.5s;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    #tl a:hover .pv {
+      opacity: 1;
+      transform: translateY(-50%) scale(1) rotate(3deg);
+    }
+
+    @media (max-width: 700px) {
+
+      #tl li a,
+      #tl li:nth-child(n) a {
+        padding-left: 0;
+      }
+
+      #tl .pv {
+        display: none;
+      }
+    }
+
+    /* music */
+    #mu {
+      background: var(--deep);
+      color: var(--cream);
+    }
+
+    #mu .chh {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #mu .chh p {
+      color: #aab;
+    }
+
+    #stv {
+      width: 100%;
+      height: 160px;
+      display: block;
+    }
+
+    #stv line {
+      stroke: rgba(243, 236, 224, 0.35);
+    }
+
+    #stv .nt {
+      fill: var(--gold);
+      stroke: var(--gold);
+    }
+
+    .pl {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5vw;
+      margin-top: 4vh;
+    }
+
+    @media (max-width: 800px) {
+      .pl {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .np h3 {
+      font-size: clamp(28px, 4vw, 52px);
+    }
+
+    .np p {
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    #vz {
+      width: 100%;
+      height: 90px;
+      display: block;
+      margin: 14px 0;
+    }
+
+    .ctl {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    #pp {
+      width: 58px;
+      height: 58px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    input[type="range"] {
+      accent-color: var(--gold);
+      flex: 1;
+      min-width: 90px;
+    }
+
+    .tm {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      min-width: 92px;
+    }
+
+    #pls button {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: left;
+    }
+
+    #pls button.on {
+      color: var(--gold);
+    }
+
+    .add {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      border: 1px dashed var(--gold);
+      padding: 12px 20px;
+      cursor: pointer;
+    }
+
+    #msg {
+      font-size: 12px;
+      color: #d9b;
+      min-height: 20px;
+      margin-top: 10px;
+    }
+
+    /* final */
+    #final {
+      position: relative;
+      height: 100vh;
+      background: #050a18;
+      color: var(--cream);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .fph {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(60vw, 520px);
+      aspect-ratio: 4/3;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      color: #555;
+    }
+
+    .fb {
+      position: absolute;
+      inset: 0;
+      background: #050a18;
+      opacity: 1;
+    }
+
+    .ftx {
+      position: relative;
+      z-index: 3;
+      padding: 0 6vw;
+      text-shadow: 0 6px 30px #000;
+    }
+
+    .ftx h2 {
+      font-size: clamp(30px, 6vw, 88px);
+      margin-bottom: 3vh;
+    }
+
+    .ftx p {
+      font-size: clamp(14px, 1.8vw, 22px);
+    }
+
+    .ftx .wl {
+      margin-top: 5vh;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+    }
+
+    /* detail view */
+    #view {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: var(--bg);
+      overflow-y: auto;
+      display: none;
+      clip-path: inset(100% 0 0 0);
+    }
+
+    .x {
+      position: fixed;
+      top: calc(16px + env(safe-area-inset-top, 0px));
+      right: 5vw;
+      z-index: 5;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      background: var(--bg);
+      padding: 10px 16px;
+      border: 1px solid var(--ln);
+    }
+
+    .dt {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      padding: 12vh 5vw 8vh;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 850px) {
+      .dt {
+        grid-template-columns: 1fr;
+        padding-top: 14vh;
+      }
+    }
+
+    .dt .big {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      max-height: 86vh;
+    }
+
+    .dt h2 {
+      font-size: clamp(34px, 5vw, 72px);
+      margin: 12px 0 18px;
+    }
+
+    .dt h4 {
+      font: 600 11px var(--f2);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 26px 0 8px;
+    }
+
+    .dt p {
+      color: var(--mut);
+      max-width: 520px;
+    }
+
+    .gl {
+      padding: 0 5vw 10vh;
+    }
+
+    .sl {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      max-width: 1000px;
+      margin: 0 auto;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .st {
+      display: flex;
+      height: 100%;
+    }
+
+    .sd {
+      flex: 0 0 100%;
+      height: 100%;
+    }
+
+    .sl button {
+      position: absolute;
+      top: 50%;
+      width: 48px;
+      height: 48px;
+      margin-top: -24px;
+      background: rgba(11, 22, 48, 0.7);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 22px;
+      z-index: 3;
+    }
+
+    .pv2 {
+      left: 12px;
+    }
+
+    .nx {
+      right: 12px;
+    }
+
+    .ct {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 12px;
+      background: rgba(11, 22, 48, 0.7);
+      padding: 3px 12px;
+      z-index: 3;
+    }
+
+    .qr {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid var(--ln);
+    }
+
+    .qr .qb {
+      background: #fff;
+      padding: 10px;
+      width: 150px;
+      height: 150px;
+    }
+
+    .qr .qb canvas,
+    .qr .qb img {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .qr .bs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .qr .bs button {
+      border: 1px solid var(--ink);
+      padding: 8px 14px;
+      letter-spacing: 0.15em;
+      text-align: left;
+    }
+
+    .tn {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5vw 8vh;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+    }
+
+    @media print {
+      body.pr>*:not(#view) {
+        display: none !important;
+      }
+
+      body.pr #view {
+        position: static;
+        clip-path: none !important;
+      }
+
+      body.pr .dt>*:not(.rt),
+      body.pr .gl,
+      body.pr .tn,
+      body.pr .x,
+      body.pr .rt>*:not(.qr) {
+        display: none !important;
+      }
+    }
+
+    .dt .big img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Giữ nguyên vẹn ảnh ngang/dọc không bị cắt */
+    }
+
+    /* Khung slider bộ sưu tập ảnh bên dưới */
+    .sl {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      max-width: 1000px;
+      margin: 0 auto;
+      touch-action: pan-y;
+      user-select: none;
+      background: #080f1d;
+      /* Khớp màu nền tối với khung lớn */
+      border: 1px solid var(--ln);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .sl img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Đảm bảo ảnh hiển thị trọn vẹn trong khung slider */
+    }
+
+    html,
+    body,
+    main,
+    #ev,
+    .pin-spacer {
+      overflow-x: hidden !important;
+      max-width: 100%;
+    }
+
+    /* Ghi đè quy tắc dòng 380-383 để không bật scrollbar ngang trên Windows /
+@media (prefers-reduced-motion: reduce) {
+  #ev {
+    overflow-x: hidden !important;
+  }
+}
+
+/ Ẩn thanh cuộn ngang nếu có phần tử con nào tự sinh scrollbar */
+    #ev::-webkit-scrollbar,
+    .trk::-webkit-scrollbar {
+      display: none;
+    }
+
+    #ev,
+    .trk {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .logo{
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cur"></div>
+  <nav class="nav">
+    <span class="logo"><img src="img/logo.png" alt="loi ko hien thi "></span>
+    <div>
+      <button data-go="#c1">Thành viên</button><button data-go="#ev">Khoảnh khắc</button><button data-go="#c3">Thầy
+        cô</button><button data-go="#mu">Âm nhạc</button>
+    </div>
+  </nav>
+
+  <section id="intro">
+    <div class="sw">
+      <div id="scene"></div>
+    </div>
+    <canvas id="d1"></canvas>
+    <div class="itx">
+      <p class="eb" id="i1" style="color: #e0c48c">GALILEO CLASS 12T</p>
+      <h1 id="i2">THÁNG NĂM RỰC RỠ</h1>
+      <button class="btn" id="enter">Khám phá</button>
+    </div>
+  </section>
+
+  <main>
+    <section id="hero">
+      <div class="hph" data-d="30" id="hp"></div>
+      <div class="hph2" data-d="-40" id="hp2"></div>
+      <p class="eb ln"><i>12T – Galileo | Generation of memories</i></p>
+      <h1 class="hbig" data-d="-10">
+        <span class="ln"><i>20 THÁNG</i></span><span class="ln"><i><em>11</em></i></span>
+      </h1>
+      <p class="hq ln">
+        <i>Tri ân những người đã viết nên thanh xuân của chúng em.</i>
+      </p>
+      <p class="sc"><b></b>Scroll to explore</p>
+      <p class="htag">12T – Galileo | Generation of memories</p>
+    </section>
+
+    <section class="chap" id="c1">
+      <div class="chh">
+        <div>
+          <p class="eb">Chapter I</p>
+          <h2>31 mảnh ghép <em>thanh xuân</em></h2>
+        </div>
+        <div>
+          <input id="q" type="search" placeholder="Tìm thành viên: tên, biệt danh, số…" aria-label="Tìm thành viên" />
+        </div>
+      </div>
+      <div id="mgrid"></div>
+    </section>
+
+    <section id="ev">
+      <style>
+        #ev {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        #ev .chh {
+          padding: 9vh 5vw 2vh;
+          flex-shrink: 0;
+        }
+
+        #ev .chh h2 {
+          font-size: clamp(28px, 4.5vw, 64px);
+        }
+
+        #ev .trk {
+          padding: 0 5vw 6vh;
+          align-items: flex-start;
+          flex: 1;
+          min-height: 0;
+        }
+
+        #ev .ec {
+          width: min(65vw, 520px);
+          max-height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        #ev .ec .pf,
+        #ev .ec:nth-child(even) .pf {
+          max-height: 40vh;
+          margin-bottom: 14px;
+          flex-shrink: 0;
+        }
+
+        #ev .ec h3 {
+          font-size: clamp(22px, 2.6vw, 36px);
+          margin: 4px 0 6px;
+        }
+
+        #ev .ec p {
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      </style>
+      <div class="chh">
+        <div>
+          <p class="eb" style="color: #e0c48c">Chapter II</p>
+          <h2>
+            Những khoảnh khắc <em style="color: #e0c48c">không quên</em>
+          </h2>
+        </div>
+        <p>
+          Cuộn ngang để đi qua các sự kiện. Nhấn vào từng sự kiện để xem trọn
+          bộ ảnh.
+        </p>
+      </div>
+      <div class="trk" id="trk"></div>
+    </section>
+
+    <section class="chap" id="c3">
+      <div class="chh">
+        <div>
+          <p class="eb">Chapter III</p>
+          <h2>Những người lái đò <em>thầm lặng</em></h2>
+        </div>
+        <p>
+          11 thầy cô, mỗi người một trang riêng, một liên kết và một mã QR
+          riêng.
+        </p>
+      </div>
+      <ul id="tl"></ul>
+    </section>
+
+    <section class="chap" id="mu">
+      <div class="chh">
+        <div>
+          <p class="eb" style="color: #e0c48c">Chapter IV</p>
+          <h2>Giai điệu <em style="color: #e0c48c">thanh xuân</em></h2>
+        </div>
+        <p>Music of Memories · Những giai điệu lưu giữ kỷ niệm của tập thể 12T.</p>
+      </div>
+      <svg id="stv" viewBox="0 0 1600 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="pl">
+        <div class="np">
+          <h3 id="tt">Chưa chọn bài</h3>
+          <p id="ta">—</p>
+          <canvas id="vz" width="800" height="90"></canvas>
+          <div class="ctl">
+            <button id="pp" aria-label="Phát / Tạm dừng">▶</button><input id="pg" type="range" min="0" max="1000"
+              value="0" aria-label="Tiến trình" /><span class="tm" id="tm">0:00 / 0:00</span>
+          </div>
+          <div class="ctl" style="margin-top: 12px">
+            <span class="eb" style="color: #aab">Âm lượng</span><input id="vo" type="range" min="0" max="100" value="80"
+              aria-label="Âm lượng" />
+          </div>
+          <p id="msg"></p>
+        </div>
+        <div>
+          <div id="pls"></div>
+          <!-- Đã xóa nút thêm file nhạc tại đây -->
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <canvas id="d2"></canvas>
+      <div class="fph" id="fp"></div>
+      <div class="fb" id="fb"></div>
+      <div class="ftx">
+        <h2 class="fl">
+          Cảm ơn thầy cô vì đã là một phần thanh xuân của chúng em.
+        </h2>
+        <p class="fl">31 thành viên – Một tập thể – Vô vàn kỷ niệm.</p>
+        <p class="fl" style="margin-top: 1em">
+          Chúc mừng ngày Nhà giáo Việt Nam 20/11.
+        </p>
+        <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
+      </div>
+    </section>
+  </main>
+  <div id="view" data-lenis-prevent></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    /* ========= DỮ LIỆU: chỉnh tại đây =========
+ Ảnh: điền đường dẫn vào photo/cover/gallery, ví dụ "img/members/m05.jpg".
+ Gợi ý thư mục: img/class/  img/members/  img/events/  img/teachers/  audio/  */
+    const CLASS_PHOTO = "img/anh lop 1.jpg"; // ảnh tập thể lớp (hero + final): "img/class/group.jpg"
+    const CLASS_PHOTO_2 = "img/anh lop 2.jpg"; // ảnh lớp phụ cho hero
+    const MEMBERS = [
+      {
+        name: "Phạm Khánh Chi",
+        nick: "Phạm Chi ",
+        bio: "okokokokokok",
+        photo: "img/chi 01.jpg",
+        gallery: [
+          "img/chi 02.jpg",
+          "img/chi 03.jpg",
+          "img/chi 04.jpg",
+        ],
+      },
+      {
+        name: "Đặng Quang Minh 2",
+        nick: "Minh ngu 2",
+        bio: "okok 2",
+        photo: "img/IMG_0411.JPG",
+        gallery: [
+          "img/IMG_0411.JPG",
+          "img/IMG_2510.JPG",
+          "img/IMG_2547 2.JPG",
+          "img/IMG_2870.JPG",
+        ],
+      },
+      // Tự động tạo thêm 29 ô trống (Member 03 -> Member 31) cho đủ 31 người
+      ...Array.from({ length: 29 }, () => ({
+        name: "",
+        nick: "",
+        bio: "",
+        photo: "",
+        gallery: [],
+      })),
+    ];
+
+    const EVENTS = [1, 2, 3, 4].map((i) => ({
+      title: "",
+      date: "",
+      desc: "",
+      cover: "",
+      photos: [],
+    })); // thêm/bớt sự kiện tại đây
+    const T_NAMES = [
+      "Cô Phạm Thu Trang",
+      "Cô Lê Thị Trang",
+      "Cô Phạm Thị Quyên",
+      "Thầy Nguyễn Hoàng Long",
+      "Cô Nguyễn Quỳnh Hương",
+      "Cô Trương Thị Thu",
+      "Cô Nguyễn Thị Phương Thúy",
+      "Cô Trần Thị Then",
+      "Cô Tạ Như Quỳnh",
+      "Cô Tăng Thúy Quỳnh",
+      "Cô Phạm Tâm Anh",
+    ];
+    const TEACHERS = T_NAMES.map((n) => ({
+      name: n,
+      subject: "",
+      intro: "",
+      memories: "",
+      thanks: "",
+      photo: "",
+      gallery: [],
+    }));
+    const TRACKS = [
+      /* {title:"Tên bài", artist:"Ca sĩ", src:"audio/ten-file.mp3"} */
+      {
+        title: "Mình Cùng Nhau Đóng Băng",
+        artist: "Minh Dang",
+        src: "audio/minhcambangdongnhau.mp3",
+      },
+      {
+        title: "Bài hát 2 (chưa có file)",
+        artist: "Thêm file vào audio/",
+        src: "",
+      },
+    ];
+    /* ========================================== */
+
+    const RM = false;
+    const $ = (s, r = document) => r.querySelector(s),
+      $$ = (s, r = document) => [...r.querySelectorAll(s)];
+    const pad = (n) => String(n).padStart(2, "0");
+    const ph = (label, src) =>
+      src
+        ? `<img src="${src}" alt="${label}" loading="lazy">`
+        : `<div class="ph"><span>${label}</span><small>Chưa có ảnh · thêm trong dữ liệu</small></div>`;
+    const slug = (s) =>
+      s
+        .toLowerCase()
+        .replace(/đ/g, "d")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    const mName = (m, i) => m.name || `Member ${pad(i + 1)}`;
+    const placeholder = (PLACEHOLDER_TEXT) => "";
+
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = !RM && window.Lenis ? new Lenis({ lerp: 0.1 }) : null;
+    if (lenis) {
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    }
+    const lock = (b) =>
+      lenis
+        ? b
+          ? lenis.stop()
+          : lenis.start()
+        : (document.documentElement.style.overflow = b ? "hidden" : "");
+    const goTo = (sel) =>
+      lenis
+        ? lenis.scrollTo(sel)
+        : $(sel).scrollIntoView({ behavior: "smooth" });
+    $$("[data-go]").forEach((b) => (b.onclick = () => goTo(b.dataset.go)));
+
+    function split(el) {
+      const t = el.textContent;
+      el.textContent = "";
+      el.setAttribute("aria-label", t);
+      t.split(" ").forEach((w, i, a) => {
+        const s = document.createElement("span");
+        s.className = "w";
+        s.setAttribute("aria-hidden", "true");
+        [...w].forEach((ch) => {
+          const c = document.createElement("span");
+          c.className = "c";
+          c.textContent = ch;
+          s.appendChild(c);
+        });
+        el.appendChild(s);
+        if (i < a.length - 1) el.appendChild(document.createTextNode(" "));
+      });
+      return $$(".c", el);
+    }
+    function dust(cv, n) {
+      const x = cv.getContext("2d");
+      let w, h;
+      const p = [];
+      const rs = () => {
+        w = cv.width = cv.offsetWidth;
+        h = cv.height = cv.offsetHeight;
+      };
+      rs();
+      addEventListener("resize", rs);
+      for (let i = 0; i < n; i++)
+        p.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.8 + 0.4,
+          v: Math.random() * 0.35 + 0.05,
+          a: Math.random() * 0.5 + 0.2,
+        });
+      (function f() {
+        x.clearRect(0, 0, w, h);
+        p.forEach((q) => {
+          if (!RM) {
+            q.y -= q.v;
+            q.x += Math.sin(q.y / 60) * 0.2;
+            if (q.y < 0) {
+              q.y = h;
+              q.x = Math.random() * w;
+            }
+          }
+          x.fillStyle = `rgba(224,196,140,${q.a})`;
+          x.beginPath();
+          x.arc(q.x, q.y, q.r, 0, 7);
+          x.fill();
+        });
+        if (!RM) requestAnimationFrame(f);
+      })();
+    }
+
+    /* ---- ảnh lớp ---- */
+    $("#hp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
+    $("#hp2").innerHTML = ph("Ảnh lớp (phụ)", CLASS_PHOTO_2);
+    $("#fp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
+
+    /* ---- intro frames ---- */
+    const FZ = [-120, -420, -260, -640, -180, -520, -340];
+    [
+      [6, 12],
+      [72, 8],
+      [14, 58],
+      [78, 54],
+      [40, 70],
+      [58, 22],
+      [30, 18],
+    ].forEach((p, i) => {
+      const d = document.createElement("div");
+      d.className = "fr";
+      d.style.left = p[0] + "%";
+      d.style.top = p[1] + "%";
+      d.innerHTML = ph("Ảnh kỷ niệm " + (i + 1));
+      $("#scene").appendChild(d);
+    });
+    dust($("#d1"), 70);
+    dust($("#d2"), 50);
+
+    /* ---- Chapter I ---- */
+    const W = [30, 22, 26, 19, 28, 23],
+      MT = [0, 70, -20, 100, 30, 0];
+    const grid = $("#mgrid");
+    MEMBERS.forEach((m, i) => {
+      const b = document.createElement("button");
+      b.className = "m";
+      b.dataset.id = i;
+      b.style.setProperty("--w", W[i % 6] + "%");
+      b.style.setProperty("--mt", MT[i % 6] + "px");
+      b.dataset.s = (
+        mName(m, i) +
+        " " +
+        m.nick +
+        " " +
+        pad(i + 1)
+      ).toLowerCase();
+      b.innerHTML = `<div class="pf">${ph(`Member ${pad(i + 1)}`, m.photo)}</div><b>${mName(m, i)}</b><small>${m.nick || "Member " + pad(i + 1)}</small>`;
+      b.onclick = () => (location.hash = "member-" + pad(i + 1));
+      if (!RM && matchMedia("(hover:hover)").matches) {
+        const pf = $(".pf", b);
+        b.onpointermove = (e) => {
+          const r = b.getBoundingClientRect(),
+            x = (e.clientX - r.left) / r.width,
+            y = (e.clientY - r.top) / r.height;
+          gsap.to(pf, {
+            rotationY: (x - 0.5) * 18,
+            rotationX: -(y - 0.5) * 18,
+            duration: 0.5,
+          });
+          pf.style.setProperty("--gx", x * 100 + "%");
+          pf.style.setProperty("--gy", y * 100 + "%");
+        };
+        b.onpointerleave = () =>
+          gsap.to(pf, { rotationX: 0, rotationY: 0, duration: 0.7 });
+      }
+      grid.appendChild(b);
+    });
+    $("#q").oninput = (e) => {
+      const v = e.target.value.trim().toLowerCase();
+      $$(".m").forEach(
+        (m) => (m.style.display = m.dataset.s.includes(v) ? "" : "none"),
+      );
+      ScrollTrigger.refresh();
+    };
+
+    /* ---- Chapter II ---- */
+    EVENTS.forEach((e, i) => {
+      const b = document.createElement("button");
+      b.className = "ec";
+      b.innerHTML = `<div class="pf">${ph("Sự kiện " + pad(i + 1), e.cover)}</div><small>${e.date || "Thời gian (thêm trong dữ liệu)"}</small><h3>${e.title || "Sự kiện " + pad(i + 1)}</h3><p>${e.desc || "Mô tả ngắn về sự kiện sẽ hiển thị ở đây."}</p>`;
+      b.onclick = () => (location.hash = "su-kien-" + pad(i + 1));
+      $("#trk").appendChild(b);
+    });
+
+    /* ---- Chapter III ---- */
+    TEACHERS.forEach((t, i) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="#${slug(t.name)}"><span class="n">${pad(i + 1)}</span><h3>${t.name}</h3><span class="pv">${ph("Ảnh", t.photo)}</span></a>`;
+      $("#tl").appendChild(li);
+    });
+
+    /* ---- slider ---- */
+    function slider(items, label) {
+      const arr = items.length ? items : ["", "", ""];
+      return `<div class="sl"><div class="st">${arr.map((s, i) => `<div class="sd">${ph(label + " · ảnh " + (i + 1), s)}</div>`).join("")}</div><button class="pv2" aria-label="Ảnh trước">‹</button><button class="nx" aria-label="Ảnh sau">›</button><div class="ct"></div></div>`;
+    }
+    function initSlider(root) {
+      const el = $(".sl", root);
+      if (!el) return;
+      const st = $(".st", el),
+        n = $$(".sd", el).length,
+        ct = $(".ct", el);
+      let i = 0,
+        x0 = null;
+      const go = (k) => {
+        i = (k + n) % n;
+        gsap.to(st, {
+          xPercent: -100 * i,
+          duration: 0.7,
+          ease: "power3.out",
+        });
+        ct.textContent = `${i + 1} / ${n}`;
+      };
+      go(0);
+      $(".pv2", el).onclick = () => go(i - 1);
+      $(".nx", el).onclick = () => go(i + 1);
+      el.onpointerdown = (e) => (x0 = e.clientX);
+      el.onpointerup = (e) => {
+        if (x0 !== null && Math.abs(e.clientX - x0) > 40)
+          go(i + (e.clientX < x0 ? 1 : -1));
+        x0 = null;
+      };
+    }
+
+    /* ---- detail view / router ---- */
+    const view = $("#view");
+    let open = false;
+    function show(html) {
+      view.innerHTML = `<button class="x">Đóng ✕</button>` + html;
+      view.scrollTop = 0;
+      $(".x", view).onclick = close;
+      initSlider(view);
+      if (!open) {
+        open = true;
+        view.style.display = "block";
+        lock(true);
+        gsap.fromTo(
+          view,
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: RM ? 0.01 : 0.9,
+            ease: "power4.inOut",
+          },
+        );
+      }
+      gsap.fromTo(
+        $$(".dt>*,.dt .rt>*", view),
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.07,
+          duration: 0.8,
+          delay: RM ? 0 : 0.5,
+        },
+      );
+    }
+    function hide() {
+      if (!open) return;
+      open = false;
+      gsap.to(view, {
+        clipPath: "inset(100% 0% 0% 0%)",
+        duration: RM ? 0.01 : 0.7,
+        ease: "power4.inOut",
+        onComplete: () => {
+          view.style.display = "none";
+          view.innerHTML = "";
+          lock(false);
+        },
+      });
+    }
+    function close() {
+      location.hash ? history.back() : hide();
+    }
+    addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && open) close();
+    });
+    function route() {
+      const h = location.hash.slice(1);
+      let m;
+      if (!h) return hide();
+      if ((m = h.match(/^member-(\d+)$/))) {
+        const i = +m[1] - 1,
+          d = MEMBERS[i];
+        if (!d) return hide();
+        return show(
+          `<div class="dt"><div class="big">${ph("Member " + pad(i + 1), d.photo)}</div><div class="rt"><p class="eb">Member ${pad(i + 1)}</p><h2>${mName(d, i)}</h2><h4>Biệt danh</h4><p>${d.nick || "Chưa cập nhật"}</p><h4>Đôi nét giới thiệu</h4><p>${d.bio || "Nội dung mẫu: thêm lời giới thiệu thật của thành viên này trong dữ liệu MEMBERS."}</p></div></div><div class="gl"><h4 class="eb" style="margin-bottom:16px">Bộ sưu tập ảnh cá nhân</h4>${slider(d.gallery, "Member " + pad(i + 1))}</div>`,
+        );
+      }
+      if ((m = h.match(/^su-kien-(\d+)$/))) {
+        const i = +m[1] - 1,
+          d = EVENTS[i];
+        if (!d) return hide();
+        return show(
+          `<div class="dt"><div class="big">${ph("Sự kiện " + pad(i + 1), d.cover)}</div><div class="rt"><p class="eb">${d.date || "Thời gian (thêm trong dữ liệu)"}</p><h2>${d.title || "Sự kiện " + pad(i + 1)}</h2><p>${d.desc || "Nội dung mẫu: giới thiệu sự kiện sẽ hiển thị ở đây."}</p></div></div><div class="gl">${slider(d.photos, "Sự kiện " + pad(i + 1))}</div>`,
+        );
+      }
+      const ti = TEACHERS.findIndex((t) => slug(t.name) === h);
+      if (ti < 0) return hide();
+      const t = TEACHERS[ti],
+        pv = TEACHERS[(ti + 10) % 11],
+        nx = TEACHERS[(ti + 1) % 11];
+      show(`<div class="dt"><div class="big">${ph(t.name, t.photo)}</div><div class="rt"><p class="eb">Người lái đò ${pad(ti + 1)} / 11${t.subject ? " · " + t.subject : ""}</p><h2>${t.name}</h2>
+    <h4>Lời giới thiệu</h4><p>${t.intro || "Nội dung mẫu: thêm lời giới thiệu về thầy cô trong dữ liệu TEACHERS."}</p>
+    <h4>Những kỷ niệm</h4><p>${t.memories || "Nội dung mẫu: kỷ niệm của lớp với thầy cô sẽ hiển thị ở đây."}</p>
+    <h4>Lời tri ân của tập thể 12T</h4><p>${t.thanks || "Nội dung mẫu: lời tri ân của tập thể lớp 12T gửi đến thầy cô."}</p>
+    <div class="qr"><div class="qb" id="qb"></div><div class="bs"><b>QR riêng của trang này</b><button id="qc">Sao chép liên kết</button><button id="qd">Tải QR (PNG)</button><button id="qp">In QR</button><span id="qm"></span></div></div></div></div>
+    <div class="gl">${slider(t.gallery, t.name)}</div>
+    <div class="tn"><a href="#${slug(pv.name)}">← ${pv.name}</a><a href="#${slug(nx.name)}">${nx.name} →</a></div>`);
+      const url = location.origin + location.pathname + "#" + slug(t.name);
+      if (window.QRCode)
+        new QRCode($("#qb"), {
+          text: url,
+          width: 256,
+          height: 256,
+          correctLevel: QRCode.CorrectLevel.M,
+        });
+      const msg = (s) => ($("#qm").textContent = s);
+      $("#qc").onclick = () =>
+        navigator.clipboard?.writeText(url).then(
+          () => msg("Đã sao chép"),
+          () => msg(url),
+        );
+      $("#qd").onclick = () => {
+        const c = $("#qb canvas");
+        if (!c) return msg("QR chưa sẵn sàng");
+        const a = document.createElement("a");
+        a.href = c.toDataURL("image/png");
+        a.download = "qr-" + slug(t.name) + ".png";
+        a.click();
+        msg("Nếu không tự tải, hãy nhấn giữ ảnh QR để lưu");
+      };
+      $("#qp").onclick = () => {
+        document.body.classList.add("pr");
+        print();
+        setTimeout(() => document.body.classList.remove("pr"), 500);
+      };
+    }
+    addEventListener("hashchange", route);
+
+    /* ---- Chapter IV: music ---- */
+    const A = new Audio();
+    A.preload = "metadata";
+    let cur = -1,
+      an = null,
+      ac = null,
+      data = null;
+    const fmt = (s) =>
+      isFinite(s)
+        ? Math.floor(s / 60) + ":" + pad(Math.floor(s % 60))
+        : "0:00";
+    function list() {
+      $("#pls").innerHTML = TRACKS.map(
+        (t, i) =>
+          `<button data-i="${i}" class="${i === cur ? "on" : ""}"><span>${pad(i + 1)} · ${t.title}</span><span>${t.artist}</span></button>`,
+      ).join("");
+      $$("#pls button").forEach(
+        (b) => (b.onclick = () => load(+b.dataset.i)),
+      );
+    }
+    // THÊM HÀM LOAD NÀY VÀO NGAY DƯỚI HÀM LIST():
+      function load(i) {
+        const t = TRACKS[i];
+        if (!t) return;
+        cur = i;
+        $("#tt").textContent = t.title;
+        $("#ta").textContent = t.artist;
+        list();
+        if (!t.src) {
+          A.pause();
+          A.removeAttribute("src");
+          $("#msg").textContent = "Bài hát này chưa có file âm thanh.";
+          return;
+        }
+        $("#msg").textContent = "";
+        A.src = t.src;
+        A.load();
+        play();
+      }
+    function play() {
+      if (!ac && /^(blob:|[^h]|h(?!ttp))/i.test(A.src)) {
+        try {
+          ac = new (window.AudioContext || webkitAudioContext)();
+          const s = ac.createMediaElementSource(A);
+          an = ac.createAnalyser();
+          an.fftSize = 128;
+          s.connect(an);
+          an.connect(ac.destination);
+          data = new Uint8Array(an.frequencyBinCount);
+        } catch (e) {
+          an = null;
+        }
+      }
+      ac && ac.resume();
+      A.play().catch(() => { });
+    }
+    $("#pp").onclick = () => {
+      if (cur < 0) {
+        const i = TRACKS.findIndex((t) => t.src);
+        return i < 0
+          ? ($("#msg").textContent =
+            "Chưa có bài nào. Hãy thêm file nhạc để bắt đầu.")
+          : load(i);
+      }
+      A.paused ? play() : A.pause();
+    };
+    A.onplay = () => ($("#pp").textContent = "❚❚");
+    A.onpause = () => ($("#pp").textContent = "▶");
+    A.ontimeupdate = () => {
+      $("#pg").value = A.duration ? (A.currentTime / A.duration) * 1000 : 0;
+      $("#tm").textContent = fmt(A.currentTime) + " / " + fmt(A.duration);
+    };
+    A.onloadedmetadata = A.ontimeupdate;
+    A.onended = () => {
+      const n = TRACKS.findIndex((t, i) => i > cur && t.src);
+      n >= 0 ? load(n) : 0;
+    };
+    $("#pg").oninput = (e) => {
+      if (A.duration) A.currentTime = (e.target.value / 1000) * A.duration;
+    };
+    $("#vo").oninput = (e) => (A.volume = e.target.value / 100);
+    A.volume = 0.8;
+    list();
+    /* staff + notes + visualizer */
+    const svg = $("#stv");
+    let sv = "";
+    [40, 60, 80, 100, 120].forEach(
+      (y) => (sv += `<line x1="0" x2="1600" y1="${y}" y2="${y}"/>`),
+    );
+    const NY = [120, 100, 80, 60, 70, 90, 110, 50, 100, 80, 60, 90, 70, 110];
+    NY.forEach(
+      (y, i) =>
+        (sv += `<g class="nt" data-x="${i * 115}" data-y="${y}"><ellipse rx="10" ry="7" transform="rotate(-20)"/><line x1="9" y1="-2" x2="9" y2="-42" stroke-width="2"/></g>`),
+    );
+    svg.innerHTML = sv;
+    const notes = $$(".nt", svg),
+      vz = $("#vz"),
+      vx = vz.getContext("2d");
+    let off = 0,
+      tt = 0;
+    (function loop() {
+      tt += 0.03;
+      const pl = !A.paused && !A.ended;
+      let en = 0;
+      if (pl && an) {
+        an.getByteFrequencyData(data);
+      }
+      vx.clearRect(0, 0, 800, 90);
+      const N = 48;
+      for (let i = 0; i < N; i++) {
+        let v = pl
+          ? an
+            ? data[i % data.length] / 255
+            : 0.35 + 0.35 * Math.sin(tt * 3 + i * 0.5)
+          : 0.05;
+        en += v;
+        const h = Math.max(3, v * 80);
+        vx.fillStyle = "#c9a96a";
+        vx.fillRect(i * 16.6 + 2, 90 - h, 10, h);
+      }
+      if (pl) off += 1.4 + (en / N) * 3;
+      notes.forEach((n) => {
+        const x = ((((+n.dataset.x - off) % 1610) + 1610) % 1610) - 30;
+        n.setAttribute(
+          "transform",
+          `translate(${x},${+n.dataset.y + (pl ? Math.sin(tt * 4 + x / 90) * 6 : 0)})`,
+        );
+      });
+      if (!RM || pl) requestAnimationFrame(loop);
+    })();
+
+    /* ---- cursor ---- */
+    const cur_ = $("#cur");
+    if (matchMedia("(hover:hover)").matches && !RM) {
+      const mx = gsap.quickTo(cur_, "x", { duration: 0.3 }),
+        my = gsap.quickTo(cur_, "y", { duration: 0.3 });
+      addEventListener("pointermove", (e) => {
+        cur_.style.opacity = 1;
+        mx(e.clientX);
+        my(e.clientY);
+      });
+      document.addEventListener("pointerover", (e) =>
+        cur_.classList.toggle(
+          "on",
+          !!e.target.closest("button,a,input,.m,.ec"),
+        ),
+      );
+    }
+
+    /* ---- intro timeline ---- */
+    const ic = split($("#i2"));
+    const i1 = split($("#i1"));
+    let ready = false,
+      entered = false;
+    gsap.set([i1, ic], { yPercent: RM ? 0 : 120 });
+    const tl = gsap.timeline({ onComplete: () => (ready = true) });
+    tl.to(
+      i1,
+      { yPercent: 0, stagger: 0.03, duration: 0.8, ease: "power4.out" },
+      0.3,
+    )
+      .fromTo(
+        ".fr",
+        { z: -1800, opacity: 0 },
+        {
+          z: (i) => FZ[i],
+          opacity: 1,
+          duration: RM ? 0.01 : 2.4,
+          stagger: 0.15,
+          ease: "power3.out",
+        },
+        0.4,
+      )
+      .to(
+        ic,
+        { yPercent: 0, stagger: 0.04, duration: 0.9, ease: "power4.out" },
+        1.1,
+      )
+      .from("#enter", { opacity: 0, y: 20, duration: 0.8 }, 2.2);
+    if (!RM) {
+      gsap.to(".fr", {
+        y: "+=14",
+        yoyo: true,
+        repeat: -1,
+        duration: 3,
+        stagger: 0.3,
+        ease: "sine.inOut",
+      });
+      $("#intro").addEventListener("pointermove", (e) => {
+        const x = e.clientX / innerWidth - 0.5,
+          y = e.clientY / innerHeight - 0.5;
+        gsap.to("#scene", {
+          rotationY: x * 14,
+          rotationX: -y * 10,
+          duration: 1.2,
+        });
+      });
+    }
+    lock(true);
+    function enter() {
+      if (entered) return;
+      entered = true;
+      tl.progress(1);
+      gsap.to("#scene", { scale: 1.6, duration: 1.3, ease: "power3.in" });
+      gsap.to("#intro", {
+        clipPath: "inset(0% 0% 100% 0%)",
+        duration: RM ? 0.01 : 1.3,
+        ease: "power4.inOut",
+        delay: 0.1,
+        onComplete: () => {
+          $("#intro").style.display = "none";
+          if (!open) lock(false);
+          scrollTo(0, 0);
+          ScrollTrigger.refresh();
+        },
+      });
+      gsap.from("#hero .ln>i", {
+        yPercent: 110,
+        stagger: 0.12,
+        duration: 1.1,
+        ease: "power4.out",
+        delay: RM ? 0 : 0.9,
+      });
+    }
+    $("#enter").onclick = enter;
+    ["wheel", "touchmove"].forEach((ev) =>
+      addEventListener(
+        ev,
+        () => {
+          if (ready && !entered) enter();
+        },
+        { passive: true },
+      ),
+    );
+    addEventListener("keydown", (e) => {
+      if (ready && !entered && (e.key === "ArrowDown" || e.key === " "))
+        enter();
+    });
+    if (location.hash) {
+      entered = true;
+      $("#intro").style.display = "none";
+      lock(false);
+      route();
+    }
+
+    /* ---- scroll choreography ---- */
+    const mm = gsap.matchMedia();
+    mm.add("all", () => {
+      $$("#hero [data-d]").forEach((el) => {
+        const d = +el.dataset.d;
+        gsap.to(el, {
+          y: d * -4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+      $("#hero").addEventListener("pointermove", (e) => {
+        const x = e.clientX / innerWidth - 0.5,
+          y = e.clientY / innerHeight - 0.5;
+        $$("#hero [data-d]").forEach((el) =>
+          gsap.to(el, {
+            x: x * +el.dataset.d,
+            rotationY: x * 4,
+            duration: 1.2,
+            overwrite: "auto",
+          }),
+        );
+      });
+      gsap.from(".chh", {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: { trigger: ".chh", start: "top 85%" },
+      });
+      $$(".m").forEach((m) => gsap.set(m, { opacity: 0, y: 60 }));
+      ScrollTrigger.batch(".m", {
+        start: "top 92%",
+        once: true,
+        onEnter: (b) => {
+          gsap.to(b, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.07,
+            duration: 0.9,
+            ease: "power3.out",
+          });
+          b.forEach((m) =>
+            gsap.fromTo(
+              $(".pf", m),
+              { clipPath: "inset(0 0 100% 0)" },
+              {
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1.1,
+                ease: "power4.out",
+              },
+            ),
+          );
+        },
+      });
+      const trk = $("#trk");
+      gsap.to(trk, {
+        x: () => -(trk.scrollWidth - document.documentElement.clientWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#ev",
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: () => "+=" + (trk.scrollWidth - document.documentElement.clientWidth),
+          invalidateOnRefresh: true,
+        },
+      });
+      $$("#tl li").forEach((li) =>
+        gsap.from(li, {
+          opacity: 0,
+          x: -40,
+          duration: 0.9,
+          scrollTrigger: { trigger: li, start: "top 90%" },
+        }),
+      );
+      const f = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#final",
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: "+=220%",
+        },
+      });
+      gsap.set(".fl", { opacity: 0, y: 30 });
+      f.to("#fb", { opacity: 0, duration: 2 }).from(
+        "#fp",
+        { scale: 0.85, duration: 3 },
+        0,
+      );
+      $$(".fl").forEach((l, i) =>
+        f.to(l, { opacity: 1, y: 0, duration: 1 }, 1.2 + i * 1.1),
+      );
+      f.to("#fp", { opacity: 0.35, duration: 1.5 }, "-=1").to(
+        {},
+        { duration: 1 },
+      );
+    });
+    // mm.add("(prefers-reduced-motion: reduce)", () => {
+    //   $("#fb").style.opacity = 0;
+    // });
+  </script>
+</body>
+
+</html>
