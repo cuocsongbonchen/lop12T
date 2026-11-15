@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1630" />
   <title>12T</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" href="img/anh lop 1.jpg">
@@ -1057,6 +1058,348 @@
     .logo{
       width: 100px;
     }
+
+    /* =========================================================
+       GIAO DIỆN ĐIỆN THOẠI (<= 800px)
+       ========================================================= */
+    html { -webkit-text-size-adjust: 100%; }
+    button, a, .m, .ec { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+    /* chỉ hiệu ứng hover trên thiết bị có chuột */
+    @media (hover: none) {
+      .btn:hover { background: none; color: inherit; }
+      #tl a:hover { color: inherit; padding-left: 0; }
+    }
+
+    @media (max-width: 800px) {
+      body { font-size: 15px; line-height: 1.65; }
+      .chh p, .ec p, .dt p { font-weight: 400; }
+
+      /* ---- thanh trên: logo + thanh tab nổi ở dưới ---- */
+      .nav {
+        mix-blend-mode: normal;
+        padding: calc(10px + env(safe-area-inset-top, 0px)) 5vw 10px;
+        border-bottom: 1px solid var(--ln);
+        color: var(--ink);
+      }
+      /* lớp nền mờ đặt ở pseudo-element để thanh tab fixed bên trong không bị lệch vị trí */
+      .nav::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+      }
+      .logo { width: 44px; display: block; }
+      .logo img { height: 44px; object-fit: contain; }
+      .nav div {
+        position: fixed;
+        left: 50%;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        transform: translateX(-50%);
+        flex-wrap: nowrap;
+        gap: 2px;
+        padding: 6px;
+        border-radius: 999px;
+        background: rgba(11, 22, 48, 0.86);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(224, 196, 140, 0.25);
+        max-width: calc(100vw - 24px);
+      }
+      .nav div button {
+        padding: 10px 13px;
+        border-radius: 999px;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: none;
+        white-space: nowrap;
+        color: #f3ece0;
+        font-weight: 600;
+      }
+      .nav div button:active { background: var(--gold); color: var(--deep); }
+      main { padding-bottom: 84px; }
+
+      /* ---- intro ---- */
+      .fr { width: 22vw; min-width: 0; border-width: 4px; box-shadow: 0 16px 30px rgba(0,0,0,.5); }
+      .itx h1 { font-size: clamp(38px, 12.5vw, 80px); margin: 16px 0 30px; line-height: 1.08; }
+      .btn {
+        padding: 16px 44px;
+        background: rgba(184, 149, 90, 0.16);
+        border-radius: 999px;
+        color: #f3ece0;
+        letter-spacing: 0.24em;
+      }
+      .btn:active { background: var(--gold); color: var(--deep); }
+
+      /* ---- hero: xếp dọc, chữ lớn đè lên ảnh ---- */
+      #hero {
+        min-height: 100svh;
+        padding: calc(88px + env(safe-area-inset-top, 0px)) 6vw 60px;
+        display: flex;
+        flex-direction: column;
+      }
+      .hbig { font-size: clamp(54px, 18vw, 120px); line-height: 0.98; }
+      .hph {
+        position: relative;
+        right: auto; top: auto;
+        width: 86%;
+        margin: -9vw 0 0 auto;
+        order: 2;
+        box-shadow: 0 26px 50px rgba(13, 27, 52, 0.28);
+      }
+      .hph2 { display: none; }
+      .hq {
+        order: 3;
+        margin: 28px 0 0;
+        max-width: 100%;
+        font-size: clamp(20px, 5.6vw, 26px);
+        padding-left: 14px;
+        border-left: 2px solid var(--gold);
+      }
+      .hbig { order: 1; }
+      #hero > .eb { order: 0; margin-bottom: 14px; line-height: 1.6; letter-spacing: 0.22em; font-size: 10px; }
+      .sc { position: static; order: 4; margin-top: 28px; }
+      .htag { display: none; }
+
+      /* ---- tiêu đề chương ---- */
+      .chap { padding: 9vh 6vw; }
+      .chh { margin-bottom: 4vh; padding-bottom: 20px; gap: 18px; }
+      .chh h2 { font-size: clamp(30px, 9vw, 48px); line-height: 1.1; }
+      .chh > div:last-child:has(#q) { width: 100%; }
+      #q {
+        width: 100%;
+        padding: 13px 20px;
+        font-size: 16px;
+        border: 1px solid var(--ln);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--ink) 5%, transparent);
+      }
+      #q:focus { border-color: var(--gold); }
+
+      /* ---- lưới thành viên: 2 cột đều ---- */
+      #mgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 14px; }
+      .m { width: 100% !important; margin-top: 0 !important; text-align: left; }
+      .m:nth-child(even) { transform: translateY(0); }
+      .m .pf { box-shadow: 0 10px 24px rgba(13, 27, 52, 0.16); }
+      .m b { font-size: 16px; line-height: 1.25; margin-top: 10px; }
+      .m small { font-size: 10px; letter-spacing: 0.12em; display: block; margin-top: 2px; }
+      .m:active .pf { transform: scale(0.98); transition: transform .15s; }
+
+      /* ---- sự kiện: cuộn ngang ---- */
+      body #ev { height: 100vh; height: 100svh; }
+      body #ev .chh { padding: calc(74px + env(safe-area-inset-top, 0px)) 6vw 10px; margin: 0; gap: 10px; }
+      body #ev .chh h2 { font-size: clamp(26px, 8vw, 38px); }
+      body #ev .chh p { font-size: 13px; max-width: 100%; }
+      body #ev .trk { gap: 5vw; padding: 0 6vw 84px; }
+      body #ev .ec { width: 78vw; max-width: 340px; }
+      body #ev .ec .pf,
+      body #ev .ec:nth-child(n) .pf { width: 100%; aspect-ratio: 4/3; max-height: 34svh; border-radius: 4px; }
+      body #ev .ec h3 { font-size: 24px; }
+
+      /* ---- thầy cô ---- */
+      #tl a { padding: 18px 0; gap: 14px; align-items: center; }
+      #tl li a, #tl li:nth-child(n) a { padding-left: 0; }
+      #tl h3 { font-size: clamp(20px, 5.8vw, 28px); line-height: 1.2; flex: 1; }
+      #tl .n { width: 24px; flex: none; }
+      #tl a::after { content: "›"; font-size: 26px; line-height: 1; color: var(--gold); flex: none; }
+      #tl a:active { color: var(--red); }
+
+      /* ---- âm nhạc ---- */
+      #stv { height: 100px; }
+      .pl { gap: 28px; }
+      .np {
+        padding: 22px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(224, 196, 140, 0.22);
+      }
+      .np h3 { font-size: 26px; }
+      .ctl { flex-wrap: nowrap; gap: 12px; }
+      .tm { min-width: 0; font-size: 11px; white-space: nowrap; }
+      #pp { width: 54px; height: 54px; flex: none; background: var(--gold); color: var(--deep); border: 0; }
+      input[type="range"] { min-width: 0; height: 28px; }
+      .ctl.vol { display: none; }
+      #pls button { padding: 16px 4px; gap: 12px; font-size: 14px; align-items: baseline; }
+      #pls button span:last-child { font-size: 11px; opacity: .7; text-align: right; }
+
+      /* ---- phần kết ---- */
+      #final { height: 100vh; height: 100svh; }
+      .fph { width: 88vw; }
+      .ftx h2 { font-size: clamp(26px, 7.4vw, 42px); line-height: 1.18; }
+      .ftx .wl { letter-spacing: 0.24em; font-size: 11px; }
+
+      /* ---- trang chi tiết ---- */
+      #view { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .x {
+        top: calc(12px + env(safe-area-inset-top, 0px));
+        right: 12px;
+        min-height: 44px;
+        border-radius: 999px;
+        padding: 0 18px;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+      .dt { min-height: 0; padding: calc(72px + env(safe-area-inset-top, 0px)) 6vw 5vh; gap: 28px; }
+      .dt .big { max-height: 68svh; border-radius: 4px; }
+      .dt h2 { font-size: clamp(32px, 10vw, 46px); }
+      .gl { padding: 0 6vw 7vh; }
+      .sl { border-radius: 8px; }
+      .sl button { width: 42px; height: 42px; margin-top: -21px; font-size: 20px; }
+      .qr { padding: 16px; gap: 16px; border-radius: 10px; }
+      .qr .qb { width: 132px; height: 132px; }
+      .qr .bs { flex: 1; min-width: 150px; }
+      .qr .bs button { padding: 12px 14px; border-radius: 8px; }
+      .tn { padding: 0 6vw calc(10vh + env(safe-area-inset-bottom, 0px)); gap: 16px; font-size: 12px; letter-spacing: 0.06em; }
+      .tn a { flex: 1; line-height: 1.4; }
+      .tn a:last-child { text-align: right; }
+    }
+
+    @media (max-width: 380px) {
+      .nav div button { padding: 10px 10px; font-size: 10.5px; }
+      #mgrid { gap: 22px 10px; }
+    }
+
+    /* =========================================================
+       PHẦN KẾT: ảnh phủ kín, khung vàng, chữ rõ ràng
+       ========================================================= */
+    #final canvas { z-index: 2; }
+    .fph {
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      aspect-ratio: auto;
+      transform: none;
+      opacity: 0.9;
+    }
+    .fph img, .fph .ph { object-position: 50% 58%; }
+    #final::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, rgba(5, 10, 24, 0.55) 0%, rgba(5, 10, 24, 0.35) 45%, rgba(5, 10, 24, 0.85) 100%),
+        linear-gradient(to bottom, rgba(5, 10, 24, 0.6), transparent 25%, transparent 70%, rgba(5, 10, 24, 0.7));
+    }
+    #final::before {
+      content: "";
+      position: absolute;
+      inset: clamp(12px, 2vw, 28px);
+      z-index: 2;
+      pointer-events: none;
+      border: 1px solid rgba(224, 196, 140, 0.38);
+    }
+    .ftx {
+      width: 100%;
+      max-width: 1080px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(18px, 3.2vh, 30px);
+    }
+    .ftx h2 {
+      font-size: clamp(30px, 4.6vw, 68px);
+      line-height: 1.14;
+      margin: 0;
+      font-weight: 500;
+      max-width: 16em;
+      text-wrap: balance;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.75);
+    }
+    .ftx h2 em { font-style: italic; color: #e0c48c; }
+    .ftx .fstat {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: clamp(14px, 1.5vw, 19px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: #efe6d3;
+    }
+    .ftx .fstat::before, .ftx .fstat::after {
+      content: "";
+      flex: none;
+      width: clamp(24px, 6vw, 70px);
+      height: 1px;
+      background: var(--gold);
+    }
+    .ftx .fbadge {
+      margin: 0;
+      padding: 12px 28px;
+      border: 1px solid rgba(224, 196, 140, 0.65);
+      border-radius: 999px;
+      background: rgba(5, 10, 24, 0.5);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      font-size: clamp(12px, 1.2vw, 15px);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #f3ece0;
+      text-shadow: none;
+    }
+    .ftx .wl {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: #e0c48c;
+    }
+    @media (max-width: 800px) {
+      #final::before { inset: 10px; }
+      .ftx { padding: 0 8vw; gap: 20px; }
+      .ftx h2 { font-size: clamp(28px, 8.2vw, 40px); }
+      .ftx .fstat { font-size: 13px; gap: 10px; line-height: 1.5; }
+      .ftx .fstat::before, .ftx .fstat::after { width: 18px; }
+      .ftx .fbadge { padding: 10px 18px; font-size: 12px; letter-spacing: 0.06em; }
+      .ftx .wl { font-size: 10px; letter-spacing: 0.26em; }
+      .fph img, .fph .ph { object-position: 50% 50%; }
+    }
+
+    /* =========================================================
+       CHỈNH THEO YÊU CẦU: chữ "11" nổi bật + tiêu đề chương I một hàng
+       ========================================================= */
+    .hbig { text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 75%, transparent); }
+    .hbig em {
+      color: #c8102e;
+      font-weight: 800;
+      text-shadow: 0 2px 24px rgba(200, 16, 46, 0.28);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .hbig em {
+        color: #f0cf8a;
+        text-shadow: 0 0 34px rgba(240, 207, 138, 0.45);
+      }
+    }
+    :root[data-theme="dark"] .hbig em {
+      color: #f0cf8a;
+      text-shadow: 0 0 34px rgba(240, 207, 138, 0.45);
+    }
+
+    #c1 .chh h2 {
+      max-width: none;
+      white-space: nowrap;
+      font-size: clamp(40px, 6vw, 100px);
+      font-weight: 600;
+      color: #20407f;
+    }
+    #c1 .chh h2 em { color: #c8102e; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) #c1 .chh h2 { color: #f6edd8; }
+      :root:not([data-theme="light"]) #c1 .chh h2 em { color: #f0cf8a; }
+    }
+    :root[data-theme="dark"] #c1 .chh h2 { color: #f6edd8; }
+    :root[data-theme="dark"] #c1 .chh h2 em { color: #f0cf8a; }
+    @media (max-width: 800px) {
+      #c1 .chh h2 { font-size: 7.9vw; letter-spacing: -0.02em; }
+    }
   </style>
 </head>
 
@@ -1209,7 +1552,7 @@
             <button id="pp" aria-label="Phát / Tạm dừng">▶</button><input id="pg" type="range" min="0" max="1000"
               value="0" aria-label="Tiến trình" /><span class="tm" id="tm">0:00 / 0:00</span>
           </div>
-          <div class="ctl" style="margin-top: 12px">
+          <div class="ctl vol" style="margin-top: 12px">
             <span class="eb" style="color: #aab">Âm lượng</span><input id="vo" type="range" min="0" max="100" value="80"
               aria-label="Âm lượng" />
           </div>
@@ -1228,12 +1571,10 @@
       <div class="fb" id="fb"></div>
       <div class="ftx">
         <h2 class="fl">
-          Cảm ơn thầy cô vì đã là một phần thanh xuân của chúng em.
+          Cảm ơn thầy cô vì đã là một phần <em>thanh xuân</em> của chúng em.
         </h2>
-        <p class="fl">31 thành viên – Một tập thể – Vô vàn kỷ niệm.</p>
-        <p class="fl" style="margin-top: 1em">
-          Chúc mừng ngày Nhà giáo Việt Nam 20/11.
-        </p>
+        <p class="fl fstat">12T mãi nhớ Galileo</p>
+        <p class="fl fbadge">Chúc mừng ngày Nhà giáo Việt Nam 20/11</p>
         <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
       </div>
     </section>
@@ -1250,6 +1591,17 @@
  Gợi ý thư mục: img/class/  img/members/  img/events/  img/teachers/  audio/  */
     const CLASS_PHOTO = "img/anh lop 1.jpg"; // ảnh tập thể lớp (hero + final): "img/class/group.jpg"
     const CLASS_PHOTO_2 = "img/anh lop 2.jpg"; // ảnh lớp phụ cho hero
+    // Ảnh bay ở màn hình mở đầu "THÁNG NĂM RỰC RỠ" (tối đa 7 ảnh, theo thứ tự khung 1 → 7).
+    // Ví dụ: ["img/intro/01.jpg", "img/intro/02.jpg", ...]. Để "" nếu muốn giữ khung trống.
+    const INTRO_PHOTOS = [
+      "img/kiniem1.jpg", // khung 1 (góc trên trái)
+      "img/kiniem2.jpg", // khung 2 (góc trên phải)
+      "img/kiniem3.jpg", // khung 3 (trái, giữa)
+      "img/kiniem4.jpg", // khung 4 (phải, giữa)
+      "img/kiniem5.jpg", // khung 5 (dưới, giữa)
+      "img/kiniem6.jpg", // khung 6 (trên, bên phải chữ)
+      "img/kiniem7.jpg", // khung 7 (trên, bên trái chữ)
+    ];
     const MEMBERS = [
       {
         name: "Phạm Khánh Chi",
@@ -1348,6 +1700,7 @@
     const placeholder = (PLACEHOLDER_TEXT) => "";
 
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const lenis = !RM && window.Lenis ? new Lenis({ lerp: 0.1 }) : null;
     if (lenis) {
       lenis.on("scroll", ScrollTrigger.update);
@@ -1443,7 +1796,9 @@
       d.className = "fr";
       d.style.left = p[0] + "%";
       d.style.top = p[1] + "%";
-      d.innerHTML = ph("Ảnh kỷ niệm " + (i + 1));
+      d.innerHTML = ph("Ảnh kỷ niệm " + (i + 1), INTRO_PHOTOS[i] || "");
+      const im = d.querySelector("img");
+      if (im) im.loading = "eager";
       $("#scene").appendChild(d);
     });
     dust($("#d1"), 70);
@@ -1998,13 +2353,13 @@
       gsap.set(".fl", { opacity: 0, y: 30 });
       f.to("#fb", { opacity: 0, duration: 2 }).from(
         "#fp",
-        { scale: 0.85, duration: 3 },
+        { scale: 1.12, duration: 3 },
         0,
       );
       $$(".fl").forEach((l, i) =>
         f.to(l, { opacity: 1, y: 0, duration: 1 }, 1.2 + i * 1.1),
       );
-      f.to("#fp", { opacity: 0.35, duration: 1.5 }, "-=1").to(
+      f.to("#fp", { opacity: 0.55, duration: 1.5 }, "-=1").to(
         {},
         { duration: 1 },
       );
