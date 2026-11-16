@@ -2788,6 +2788,28 @@
       display: none;
     }
 
+    .ftx .old-web {
+      color: var(--cream);
+      background: rgba(5, 10, 24, .5);
+    }
+
+    .sqr-final {
+      margin: 0;
+      width: min(86vw, 420px);
+      padding: 14px;
+      gap: 14px;
+      color: var(--cream);
+      background: rgba(5, 10, 24, .6);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      text-align: left;
+    }
+
+    .sqr-final .qb {
+      width: 112px;
+      height: 112px;
+    }
+
     @media print {
       body.pq {
         background: #fff !important;
@@ -3193,6 +3215,8 @@
         </div>
         <p class="fl fbadge">Chúc mừng ngày Nhà giáo Việt Nam 20/11</p>
         <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
+        <!-- ĐỔI LINK WEB CŨ TẠI href BÊN DƯỚI -->
+        <a class="btn fl old-web" id="old-web" href="https://honggiahuy-minhdang.vercel.app/" target="_blank" rel="noopener">Xem lại web cũ</a>
       </div>
     </section>
     <footer class="wm" id="wm">
@@ -3427,7 +3451,7 @@
       },
     ];
 
-    const SECS = { "thanh-vien": "#c1", "khoanh-khac": "#ev", "thay-co": "#c3", "am-nhac": "#mu" };
+    const SECS = { "thanh-vien": "#c1", "khoanh-khac": "#ev", "thay-co": "#c3", "am-nhac": "#mu", "loi-chuc": "#final" };
     let booted = false;
     const RM = false;
     const $ = (s, r = document) => r.querySelector(s),
@@ -3656,6 +3680,7 @@
     $("#trk").appendChild(secQR({ id: "khoanh-khac", name: "Khoảnh khắc", cls: "sqr-ev" }));
     $("#c3").appendChild(secQR({ id: "thay-co", name: "Thầy cô" }));
     $("#mu").appendChild(secQR({ id: "am-nhac", name: "Âm nhạc" }));
+    $(".ftx").insertBefore(secQR({ id: "loi-chuc", name: "Lời chúc", cls: "fl sqr-final" }), $("#old-web"));
 
     function slider(items, label) {
       const arr = items.length ? items : ["", "", ""];
