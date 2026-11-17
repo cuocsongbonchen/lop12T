@@ -234,6 +234,11 @@
       position: absolute;
       inset: 0;
       transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    #intro {
+      will-change: transform;
     }
 
     .fr {
@@ -245,6 +250,8 @@
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
       opacity: 0;
       color: #555;
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .itx {
@@ -2842,6 +2849,12 @@
       display: flex !important;
     }
       .tq{font-style:italic}
+
+    /* Điện thoại: bóng đổ nhẹ hơn cho các khung ảnh ở màn hình mở đầu (bóng blur 60px rất tốn GPU khi animate) */
+    @media (hover: none) {
+      .fr { box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45); }
+      .itx h1 { text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55); }
+    }
   </style>
 </head>
 
@@ -3527,6 +3540,7 @@
           c: `rgba(224,196,140,${a})`, // tạo chuỗi màu 1 lần thay vì mỗi khung hình
         });
       }
+      cv._stop = () => { on = false; };
       function f() {
         if (!on) return;
         requestAnimationFrame(f);
@@ -4086,21 +4100,40 @@
     function enter() {
       if (entered) return;
       entered = true;
+      const TOUCH = matchMedia("(hover: none)").matches;
+      $("#intro").dataset.out = "1"; // báo cho vòng lặp parallax tạm nghỉ trong lúc intro thoát
       tl.progress(1);
-      gsap.to("#scene", { scale: 1.6, duration: 1.3, ease: "power3.in" });
-      gsap.to("#intro", {
-        clipPath: "inset(0% 0% 100% 0%)",
-        duration: RM ? 0.01 : 1.3,
-        ease: "power4.inOut",
-        delay: 0.1,
-        onComplete: () => {
-          $("#intro").style.display = "none";
-          frFloat && frFloat.kill(); // intro đã ẩn: dừng tween lơ lửng vô hạn
-          if (!open) lock(false);
-          scrollTo(0, 0);
-          ScrollTrigger.refresh();
-        },
-      });
+      frFloat && frFloat.pause(); // dừng tween lơ lửng của khung ảnh khi đang chạy hiệu ứng thoát
+      const d1 = $("#d1"); d1 && d1._stop && d1._stop(); // dừng vẽ bụi sao
+      const done = () => {
+        $("#intro").style.display = "none";
+        frFloat && frFloat.kill(); // intro đã ẩn: dừng tween lơ lửng vô hạn
+        if (!open) lock(false);
+        scrollTo(0, 0);
+        // ScrollTrigger.refresh() nặng: dời sang khung hình sau để không gây khựng ở cuối hiệu ứng
+        requestAnimationFrame(() => setTimeout(() => ScrollTrigger.refresh(), 50));
+      };
+      if (TOUCH && !RM) {
+        // Điện thoại: trượt cả lớp intro lên bằng transform (chạy trên GPU) thay vì animate clip-path (buộc vẽ lại mỗi khung hình)
+        gsap.to("#scene", { scale: 1.25, duration: 1.0, ease: "power2.in" });
+        gsap.to("#intro", {
+          yPercent: -100,
+          duration: 1.0,
+          ease: "power3.inOut",
+          delay: 0.05,
+          force3D: true,
+          onComplete: done,
+        });
+      } else {
+        gsap.to("#scene", { scale: 1.6, duration: 1.3, ease: "power3.in" });
+        gsap.to("#intro", {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: RM ? 0.01 : 1.3,
+          ease: "power4.inOut",
+          delay: 0.1,
+          onComplete: done,
+        });
+      }
       gsap.from("#hero .ln>i", {
         yPercent: 110,
         stagger: 0.12,
@@ -4362,11 +4395,15 @@
           if (tr !== o.last) { o.last = tr; o.el.style.transform = tr; } // không ghi style nếu không đổi
         });
         if (!touch || rm) return;
+        if (intro && intro.style.display !== "none") {
+          // Intro còn phủ màn hình: chỉ nghiêng cảnh intro (và ngừng hẳn khi đang thoát), bỏ qua phần nghiêng 3D của nội dung phía sau
+          if (!intro.dataset.out && scene) gsap.set(scene, { rotationY: gx * 16, rotationX: -gy * 12 });
+          return;
+        }
         // Phần nghiêng 3D các thẻ nặng (getBoundingClientRect + nhiều style) -> chạy 1 khung / 2 để nhường main thread cho quả cầu
         if (++frame & 1) return;
 
         if (hpc && sy < H * 1.5) hpc.style.transform = `perspective(700px) rotateY(${(gx * 14).toFixed(2)}deg) rotateX(${(-gy * 10).toFixed(2)}deg) scale(1.03)`;
-        if (intro && intro.style.display !== "none" && scene) gsap.set(scene, { rotationY: gx * 16, rotationX: -gy * 12 });
 
         // Đọc toàn bộ rect trước, ghi style sau -> 1 lần layout/khung hình thay vì mỗi phần tử một lần
         const rects = [];
