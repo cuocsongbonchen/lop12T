@@ -141,6 +141,16 @@
       overflow: hidden;
     }
 
+    /* Mở rộng vùng chứa tiêu đề Hero để ánh sáng text-shadow tỏa tròn tự nhiên, không bị cắt vuông vức */
+    #hero .hbig .ln {
+      padding: 0.18em 0.25em;
+      margin: -0.18em -0.25em;
+    }
+
+    #hero .hbig.glow-free .ln {
+      overflow: visible;
+    }
+
     .ln>i {
       display: block;
       font-style: normal;
@@ -155,19 +165,77 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: calc(14px + env(safe-area-inset-top, 0px)) 5vw 14px;
-      mix-blend-mode: difference;
-      color: #f3ece0;
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 5vw 12px;
+      color: #f4ecda;
       font-size: 12px;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      background: linear-gradient(to bottom, rgba(7, 14, 32, 0.72), rgba(7, 14, 32, 0));
+      pointer-events: none;
+    }
+
+    .nav > * {
+      pointer-events: auto;
+    }
+
+    #mbtn {
+      display: none;
     }
 
     .nav div {
       display: flex;
-      gap: 2vw;
+      gap: 28px;
       flex-wrap: wrap;
       justify-content: flex-end;
+      align-items: center;
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .nav div button {
+      position: relative;
+      padding: 8px 2px;
+      border-radius: 0;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #fff6df;
+      background: none;
+      border: 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 18px rgba(240, 215, 154, 0.35);
+      transition: color 0.3s, text-shadow 0.3s, transform 0.25s;
+    }
+
+    .nav div button::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #ffd36b, transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav div button:hover {
+      background: none;
+      color: #ffd36b;
+      border-color: transparent;
+      box-shadow: none;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 22px rgba(255, 211, 107, 0.75);
+      transform: translateY(-1px);
+    }
+
+    .nav div button:hover::after {
+      transform: scaleX(1);
     }
 
     #cur {
@@ -1082,20 +1150,13 @@
       }
 
       .nav {
-        mix-blend-mode: normal;
         padding: calc(10px + env(safe-area-inset-top, 0px)) 5vw 10px;
-        border-bottom: 1px solid var(--ln);
-        color: var(--ink);
-      }
-
-      .nav::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        background: rgba(14, 23, 41, 0.82);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(240, 215, 154, 0.2);
+        color: var(--ink);
+        pointer-events: auto;
       }
 
       .logo {
@@ -1108,41 +1169,107 @@
         object-fit: contain;
       }
 
+      #mbtn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(240, 215, 154, 0.14);
+        border: 1px solid rgba(240, 215, 154, 0.45);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+        transition: background 0.25s, border-color 0.25s;
+      }
+
+      #mbtn span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        border-radius: 2px;
+        background: #f0d79a;
+        transition: transform 0.3s ease, opacity 0.25s ease;
+      }
+
+      .nav.open #mbtn {
+        background: #f0d79a;
+        border-color: #ffe8b3;
+      }
+
+      .nav.open #mbtn span {
+        background: #070e20;
+      }
+
+      .nav.open #mbtn span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .nav.open #mbtn span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav.open #mbtn span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
       .nav div {
         position: fixed;
-        left: 50%;
-        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-        transform: translateX(-50%);
-        flex-wrap: nowrap;
-        gap: 2px;
-        padding: 6px;
-        border-radius: 999px;
-        background: rgba(11, 22, 48, 0.86);
-        -webkit-backdrop-filter: blur(16px);
-        backdrop-filter: blur(16px);
-        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(224, 196, 140, 0.25);
-        max-width: calc(100vw - 24px);
+        top: calc(68px + env(safe-area-inset-top, 0px));
+        right: 5vw;
+        left: auto;
+        bottom: auto;
+        transform: translateY(-10px) scale(0.96);
+        transform-origin: top right;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px;
+        min-width: 210px;
+        border-radius: 18px;
+        background: rgba(11, 22, 48, 0.96);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(240, 215, 154, 0.42);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.28s;
+      }
+
+      .nav.open div {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
       }
 
       .nav div button {
-        padding: 10px 13px;
-        border-radius: 999px;
-        font-size: 11px;
-        letter-spacing: 0.04em;
-        text-transform: none;
+        padding: 13px 18px;
+        border-radius: 12px;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-align: left;
         white-space: nowrap;
-        color: #f3ece0;
-        font-weight: 600;
+        color: #f4ecda;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(240, 215, 154, 0.18);
+        font-weight: 700;
       }
 
-      .nav div button:active {
-        background: var(--gold);
-        color: var(--deep);
+      .nav div button:active,
+      .nav div button:hover {
+        background: linear-gradient(135deg, #f0d79a 0%, #c89d54 100%);
+        color: #070e20;
+        border-color: #ffe8b3;
+        transform: none;
       }
 
       main {
-        padding-bottom: 84px;
+        padding-bottom: 24px;
       }
 
       .fr {
@@ -1301,16 +1428,21 @@
       body #ev {
         height: 100vh;
         height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       body #ev .chh {
-        padding: calc(74px + env(safe-area-inset-top, 0px)) 6vw 10px;
+        padding: calc(74px + env(safe-area-inset-top, 0px)) 6vw 14px;
         margin: 0;
         gap: 10px;
+        flex: 0 0 auto;
       }
 
       body #ev .chh h2 {
-        font-size: clamp(26px, 8vw, 38px);
+        font-size: clamp(30px, 8.6vw, 44px);
+        line-height: 1.06;
       }
 
       body #ev .chh p {
@@ -1319,25 +1451,56 @@
       }
 
       body #ev .trk {
-        gap: 5vw;
-        padding: 0 6vw 84px;
+        flex: 1 1 auto;
+        min-height: 0;
+        gap: 6vw;
+        padding: 10px 6vw calc(44px + env(safe-area-inset-bottom, 0px));
+        align-items: center;
       }
 
       body #ev .ec {
-        width: 78vw;
-        max-width: 340px;
+        width: 84vw;
+        max-width: 400px;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: none;
       }
 
       body #ev .ec .pf,
       body #ev .ec:nth-child(n) .pf {
         width: 100%;
-        aspect-ratio: 4/3;
-        max-height: 34svh;
+        aspect-ratio: 3/2;
+        max-height: 36svh;
+        flex: 0 1 auto;
+        margin-bottom: 12px;
         border-radius: 4px;
       }
 
+      body #ev .ec .eth {
+        flex: 0 0 auto;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      body #ev .ec .eth span {
+        height: clamp(54px, 9svh, 78px);
+      }
+
       body #ev .ec h3 {
-        font-size: 24px;
+        flex: 0 0 auto;
+        font-size: clamp(24px, 6.8vw, 32px);
+        margin: 2px 0 6px;
+      }
+
+      body #ev .ec .eft {
+        flex: 0 0 auto;
+        margin-top: 8px;
+        padding-top: 10px;
       }
 
       #tl a {
@@ -2247,7 +2410,7 @@
       position: fixed;
       inset: 0;
       height: 100vh;
-      height: 100lvh; /* cao cố định theo viewport lớn nhất -> thanh địa chỉ hiện/ẩn không làm quả cầu nhảy */
+      height: 100lvh;
       z-index: -1;
       pointer-events: none;
       overflow: hidden;
@@ -2646,21 +2809,21 @@
       border-bottom-color: #f0d79a;
     }
 
-    /* tiêu đề: trắng sáng + nhấn vàng */
+    /* tiêu đề: trắng sáng + nhấn vàng (tối ưu text-shadow giảm gánh nặng rasterize) */
     .chh h2,
     #c1 .chh h2,
     .hbig,
     .dt h2,
     #tl h3 {
       color: #fff;
-      text-shadow: 0 0 34px rgba(255, 255, 255, .28), 0 4px 16px rgba(0, 0, 0, .7);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .65);
     }
 
     .chh h2 em,
     #c1 .chh h2 em,
     .hbig em {
       color: #ffd36b;
-      text-shadow: 0 0 34px rgba(255, 211, 107, .5), 0 4px 16px rgba(0, 0, 0, .7);
+      text-shadow: 0 2px 14px rgba(255, 211, 107, .4);
     }
 
     #tl a:hover h3 {
@@ -2690,13 +2853,31 @@
     }
 
     #final-rain .wc {
-      width: min(260px, 70vw);
+      width: min(255px, 46vw);
       pointer-events: none;
-      opacity: .85;
-      background: rgba(11, 22, 48, .74);
+      opacity: .88;
+      background: rgba(11, 22, 48, .78);
       color: #f4ecda;
       border-left-color: #f0d79a;
-      /* backdrop-filter: blur(4px) đã bỏ: nền đã 74% đục nên gần như không khác biệt, nhưng rất nặng khi có nhiều thẻ rơi cùng lúc */
+    }
+
+    @media (max-width: 700px) {
+      #final-rain .wc {
+        width: calc(50vw - 14px);
+        padding: 10px 12px;
+        border-radius: 9px;
+        border-left-width: 3px;
+      }
+      #final-rain .wc p {
+        font-size: 12.5px;
+        line-height: 1.4;
+        -webkit-line-clamp: 4;
+      }
+      #final-rain .wc b {
+        margin-top: 5px;
+        font-size: 9.5px;
+        letter-spacing: .1em;
+      }
     }
 
     #final-rain .wc b {
@@ -2848,12 +3029,61 @@
     body.show-qr .qr {
       display: flex !important;
     }
-      .tq{font-style:italic}
 
-    /* Điện thoại: bóng đổ nhẹ hơn cho các khung ảnh ở màn hình mở đầu (bóng blur 60px rất tốn GPU khi animate) */
+    .tq {
+      font-style: italic
+    }
+
+    /* Điện thoại: bóng đổ nhẹ hơn cho các khung ảnh ở màn hình mở đầu */
     @media (hover: none) {
-      .fr { box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45); }
-      .itx h1 { text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55); }
+      .fr {
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+      }
+
+      .itx h1 {
+        text-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+      }
+    }
+
+    /* ===== TỐI ƯU HIỆU NĂNG GPU & COMPOSITOR CHO 31 THẺ THÀNH VIÊN ===== */
+    #c1 {
+      contain: layout style;
+    }
+
+    .m {
+      contain: layout paint;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .m:hover {
+      translate: none;
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.42);
+    }
+
+    .m .pf {
+      transform-style: flat;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+      will-change: auto;
+    }
+
+    .m:hover .pf {
+      will-change: transform;
+    }
+
+    .m .pf>img {
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    @media (hover: none) {
+      .m .pf::after {
+        display: none;
+      }
+
+      .m .pf {
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.38);
+      }
     }
   </style>
 </head>
@@ -2875,9 +3105,10 @@
     <i class="sph" style="--s:46px;--c:#ffb38a" data-z="1.9" data-x=".6" data-y=".1"></i>
   </div>
 
-  <nav class="nav">
-    <span class="logo"><img src="img/logo.png" alt="loi ko hien thi "></span>
-    <div>
+  <nav class="nav" id="topnav">
+    <span class="logo"><img src="img/logo.png" alt="Logo 12T"></span>
+    <button type="button" id="mbtn" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="nlinks">
       <button data-go="#c1">Thành viên</button><button data-go="#ev">Khoảnh khắc</button><button data-go="#c3">Thầy
         cô</button><button data-go="#mu">Âm nhạc</button>
     </div>
@@ -3156,7 +3387,7 @@
           <h2>Những người lái đò <em>thầm lặng</em></h2>
         </div>
         <p>
-          <span ></span> 
+          <span></span>
         </p>
       </div>
       <ul id="tl"></ul>
@@ -3225,15 +3456,13 @@
   <script>
     // ===== CHẾ ĐỘ ADMIN HIỆN QR (Chỉ riêng bạn biết) =====
     (function () {
-      const SECRET_KEY = "12tadmin"; // Đổi mật khẩu bí mật tại đây nếu muốn
-      // localStorage có thể bị chặn (webview, chế độ riêng tư) -> không được làm hỏng cả trang
+      const SECRET_KEY = "12tadmin";
       const ls = {
         get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
         set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { } },
         del: (k) => { try { localStorage.removeItem(k); } catch (e) { } },
       };
 
-      // Cách 1: Truy cập link kèm ?qr=12tadmin
       const params = new URLSearchParams(location.search);
       if (params.get("qr") === SECRET_KEY) {
         ls.set("is_admin_qr", "1");
@@ -3243,7 +3472,6 @@
         document.body.classList.add("show-qr");
       }
 
-      // Cách 2: Chạm/click nhanh 5 lần vào Logo ở góc trên bên trái để bật/tắt
       let tapCount = 0, tapTimer;
       const logo = document.querySelector(".logo");
       if (logo) {
@@ -3280,60 +3508,55 @@
       "img/kiniem7.jpg",
     ];
     const MEMBERS = [
-      // ===== Member 03 → 31: điền name / nick / bio / photo / gallery vào từng dòng =====
-      { name: "Lương Khánh An", nick: "", bio: "", photo: "img/LuongKhanhAn1.jpg", gallery: ["img/LuongKhanhAn2.jpg"] }, // Member 03
-      { name: "Phạm Thái An", nick: "", bio: "", photo: "img/PhamThaiAn1.jpg", gallery: ["img/PhamThaiAn2.jpg"] }, // Member 04
-      { name: "Bùi Nguyễn Hải Anh", nick: "", bio: "", photo: "img/BuiNguyenHaiAnh.jpg", gallery: ["img/BuiNguyenHaiAnh.jpg"] }, // Member 05
-      { name: "Chu Lê Kiều Anh", nick: "", bio: "", photo: "img/ChuLeKieuAnh1.jpg", gallery: ["img/ChuLeKieuAnh2.jpg"] }, // Member 06
-      { name: "Đỗ Trần Việt Anh", nick: "", bio: "", photo: "img/DoTranVietAnh1.jpg", gallery: ["img/DoTranVietAnh2.jpg"] }, // Member 07
-      { name: "Phạm Quỳnh Anh", nick: "", bio: "", photo: "img/PhamQuynhAnh1.jpg", gallery: ["img/PhamQuynhAnh2.jpg"] }, // Member 08
-      { name: "Trịnh Ngọc Anh", nick: "", bio: "", photo: "img/TrinhNgocAnh1.jpg", gallery: ["img/TrinhNgocAnh2.jpg"] }, // Member 09
-      { name: "Nguyễn Gia Bảo", nick: "", bio: "", photo: "img/NguyenGiaBao1.jpg", gallery: ["img/NguyenGiaBao2.jpg"] }, // Member 10
-      { name: "Phạm Khánh Chi", nick: "", bio: "", photo: "img/PhamKhanhChi1.jpg", gallery: ["img/PhamKhanhChi2.jpg", "img/PhamKhanhChi3.jpg", "img/PhamKhanhChi4.jpg"] }, // Member 11
-      { name: "Nguyễn Đức Cường ", nick: "", bio: "", photo: "img/NguyenDucCuong1.jpg", gallery: ["img/NguyenDucCuong2.jpg"] }, // Member 12
-      { name: "Đinh Đức Duy", nick: "", bio: "", photo: "img/DinhDucDuy1.jpg", gallery: ["img/DinhDucDuy2.jpg"] }, // Member 13
-      { name: "Đỗ Công Nguyên Đạt", nick: "", bio: "", photo: "img/DoCongNguyenDat1.jpg", gallery: ["img/DoCongNguyenDat2.jpg"] }, // Member 14
-      { name: "Đỗ Tuấn Đạt", nick: "", bio: "", photo: "img/DoTuanDat1.jpg", gallery: ["img/DoTuanDat2.jpg"] }, // Member 15
-      { name: "Đặng Minh Hằng", nick: "", bio: "", photo: "img/DangMinhHang1.jpg", gallery: ["img/DangMinhHang2.jpg"] }, // Member 16
-      { name: "Bùi Gia Hưng", nick: "", bio: "", photo: "img/BuiGiaHung1.jpg", gallery: ["img/BuiGiaHung2.jpg"] }, // Member 17
-      { name: "Hồng Gia Huy", nick: "", bio: "", photo: "img/HongGiaHuy1.jpg", gallery: ["img/HongGiaHuy2.jpg"] }, // Member 18
-      { name: "Trần Gia Khánh", nick: "", bio: "", photo: "img/TranGiaKhanh1.jpg", gallery: ["img/TranGiaKhanh2.jpg"] }, // Member 19
-      { name: "Nguyễn Minh Khuê", nick: "", bio: "", photo: "img/NguyenMinhKhue1.jpg", gallery: ["img/NguyenMinhKhue2.jpg", "img/NguyenMinhKhue3.jpg", "img/NguyenMinhKhue4.jpg"] }, // Member 20
-      { name: "Đặng Quang Minh", nick: "", bio: "", photo: "img/DangQuangMinh1.jpg", gallery: ["img/DangQuangMinh2.jpg"] }, // Member 21
-      { name: "Nguyễn Nhật Minh", nick: "", bio: "", photo: "img/NguyenNhatMinh1.jpg", gallery: ["img/NguyenNhatMinh2.jpg",] }, // Member 22
-      { name: "Nguyễn Chí Khánh Nam", nick: "", bio: "", photo: "img/NguyenChiKhanhNam1.jpg", gallery: ["img/NguyenChiKhanhNam2.jpg"] }, // Member 23
-      { name: "Dương Hà Nguyên", nick: "", bio: "", photo: "img/DuongHaNguyen1.jpg", gallery: ["img/DuongHaNguyen2.jpg"] }, // Member 24
-      { name: "Lê Gia Cát Nguyệt", nick: "", bio: "", photo: "img/LeGiaCatNguyet1.jpg", gallery: ["img/LeGiaCatNguyet2.jpg"] }, // Member 25
-      { name: "Nguyễn Tâm Nhi", nick: "", bio: "", photo: "img/NguyenTamNhi1.jpg", gallery: ["img/NguyenTamNhi2.jpg"] }, // Member 26
-      { name: "Nguyễn Minh Sơn", nick: "", bio: "", photo: "img/NguyenMinhSon1.jpg", gallery: ["img/NguyenMinhSon2.jpg"] }, // Member 27
-      { name: "Nguyễn Đức Thành", nick: "", bio: "", photo: "img/NguyenDucThanh1.jpg", gallery: ["img/NguyenDucThanh2.jpg"] }, // Member 28
-      { name: "Vũ Phương Thảo", nick: "", bio: "", photo: "img/VuPhuongThao1.jpg", gallery: ["img/VuPhuongThao2.jpg", "img/VuPhuongThao3.jpg", "img/VuPhuongThao4.jpg"] }, // Member 29
-      { name: "Nguyễn Đắc Trường", nick: "", bio: "", photo: "img/NguyenDacTruong1.jpg", gallery: ["img/NguyenDacTruong2.jpg"] }, // Member 30
-      { name: "Hoàng Anh Tú", nick: "", bio: "", photo: "img/HoangAnhTu1.jpg", gallery: ["img/HoangAnhTu2.jpg"] }, // Member 31
-      { name: "Hoàng Anh Tuấn", nick: "", bio: "", photo: "img/HoangAnhTuan1.jpg", gallery: ["img/HoangAnhTuan2.jpg"] }, // Member 30
-      { name: "Trịnh Uy Vũ", nick: "", bio: "", photo: "img/TrinhUyVu1.jpg", gallery: ["img/TrinhUyVu2.jpg"] }, // Member 31
+      { name: "Lương Khánh An", nick: "", bio: "", photo: "img/LuongKhanhAn1.jpg", gallery: ["img/LuongKhanhAn2.jpg"] },
+      { name: "Phạm Thái An", nick: "", bio: "", photo: "img/PhamThaiAn1.jpg", gallery: ["img/PhamThaiAn2.jpg"] },
+      { name: "Bùi Nguyễn Hải Anh", nick: "", bio: "", photo: "img/BuiNguyenHaiAnh.jpg", gallery: ["img/BuiNguyenHaiAnh.jpg"] },
+      { name: "Chu Lê Kiều Anh", nick: "", bio: "", photo: "img/ChuLeKieuAnh1.jpg", gallery: ["img/ChuLeKieuAnh2.jpg"] },
+      { name: "Đỗ Trần Việt Anh", nick: "", bio: "", photo: "img/DoTranVietAnh1.jpg", gallery: ["img/DoTranVietAnh2.jpg"] },
+      { name: "Phạm Quỳnh Anh", nick: "", bio: "", photo: "img/PhamQuynhAnh1.jpg", gallery: ["img/PhamQuynhAnh2.jpg"] },
+      { name: "Trịnh Ngọc Anh", nick: "", bio: "", photo: "img/TrinhNgocAnh1.jpg", gallery: ["img/TrinhNgocAnh2.jpg"] },
+      { name: "Nguyễn Gia Bảo", nick: "", bio: "", photo: "img/NguyenGiaBao1.jpg", gallery: ["img/NguyenGiaBao2.jpg"] },
+      { name: "Phạm Khánh Chi", nick: "", bio: "", photo: "img/PhamKhanhChi1.jpg", gallery: ["img/PhamKhanhChi2.jpg", "img/PhamKhanhChi3.jpg", "img/PhamKhanhChi4.jpg"] },
+      { name: "Nguyễn Đức Cường ", nick: "", bio: "", photo: "img/NguyenDucCuong1.jpg", gallery: ["img/NguyenDucCuong2.jpg"] },
+      { name: "Đinh Đức Duy", nick: "", bio: "", photo: "img/DinhDucDuy1.jpg", gallery: ["img/DinhDucDuy2.jpg"] },
+      { name: "Đỗ Công Nguyên Đạt", nick: "", bio: "", photo: "img/DoCongNguyenDat1.jpg", gallery: ["img/DoCongNguyenDat2.jpg"] },
+      { name: "Đỗ Tuấn Đạt", nick: "", bio: "", photo: "img/DoTuanDat1.jpg", gallery: ["img/DoTuanDat2.jpg"] },
+      { name: "Đặng Minh Hằng", nick: "", bio: "", photo: "img/DangMinhHang1.jpg", gallery: ["img/DangMinhHang2.jpg"] },
+      { name: "Bùi Gia Hưng", nick: "", bio: "", photo: "img/BuiGiaHung1.jpg", gallery: ["img/BuiGiaHung2.jpg"] },
+      { name: "Hồng Gia Huy", nick: "", bio: "", photo: "img/HongGiaHuy1.jpg", gallery: ["img/HongGiaHuy2.jpg"] },
+      { name: "Trần Gia Khánh", nick: "", bio: "", photo: "img/TranGiaKhanh1.jpg", gallery: ["img/TranGiaKhanh2.jpg"] },
+      { name: "Nguyễn Minh Khuê", nick: "", bio: "", photo: "img/NguyenMinhKhue1.jpg", gallery: ["img/NguyenMinhKhue2.jpg", "img/NguyenMinhKhue3.jpg", "img/NguyenMinhKhue4.jpg"] },
+      { name: "Đặng Quang Minh", nick: "", bio: "", photo: "img/DangQuangMinh1.jpg", gallery: ["img/DangQuangMinh2.jpg"] },
+      { name: "Nguyễn Nhật Minh", nick: "", bio: "", photo: "img/NguyenNhatMinh1.jpg", gallery: ["img/NguyenNhatMinh2.jpg"] },
+      { name: "Nguyễn Chí Khánh Nam", nick: "", bio: "", photo: "img/NguyenChiKhanhNam1.jpg", gallery: ["img/NguyenChiKhanhNam2.jpg"] },
+      { name: "Dương Hà Nguyên", nick: "", bio: "", photo: "img/DuongHaNguyen1.jpg", gallery: ["img/DuongHaNguyen2.jpg"] },
+      { name: "Lê Gia Cát Nguyệt", nick: "", bio: "", photo: "img/LeGiaCatNguyet1.jpg", gallery: ["img/LeGiaCatNguyet2.jpg"] },
+      { name: "Nguyễn Tâm Nhi", nick: "", bio: "", photo: "img/NguyenTamNhi1.jpg", gallery: ["img/NguyenTamNhi2.jpg"] },
+      { name: "Nguyễn Minh Sơn", nick: "", bio: "", photo: "img/NguyenMinhSon1.jpg", gallery: ["img/NguyenMinhSon2.jpg"] },
+      { name: "Nguyễn Đức Thành", nick: "", bio: "", photo: "img/NguyenDucThanh1.jpg", gallery: ["img/NguyenDucThanh2.jpg"] },
+      { name: "Vũ Phương Thảo", nick: "", bio: "", photo: "img/VuPhuongThao1.jpg", gallery: ["img/VuPhuongThao2.jpg", "img/VuPhuongThao3.jpg", "img/VuPhuongThao4.jpg"] },
+      { name: "Nguyễn Đắc Trường", nick: "", bio: "", photo: "img/NguyenDacTruong1.jpg", gallery: ["img/NguyenDacTruong2.jpg"] },
+      { name: "Hoàng Anh Tú", nick: "", bio: "", photo: "img/HoangAnhTu1.jpg", gallery: ["img/HoangAnhTu2.jpg"] },
+      { name: "Hoàng Anh Tuấn", nick: "", bio: "", photo: "img/HoangAnhTuan1.jpg", gallery: ["img/HoangAnhTuan2.jpg"] },
+      { name: "Trịnh Uy Vũ", nick: "", bio: "", photo: "img/TrinhUyVu1.jpg", gallery: ["img/TrinhUyVu2.jpg"] },
     ];
 
     const EVENTS = [
-      // ===== Sự kiện 1 =====
       {
         title: "Khai Giảng ",
         cover: "img/khaigiang1.jpg",
         photos: ["img/khaigiang2.jpg", "img/khaigiang3.jpg", "img/khaigiang4.jpg"],
       },
-      // ===== Sự kiện 2 =====
       {
         title: "Trung Thu ",
         cover: "img/trungthu1.jpg",
         photos: ["img/trungthu2.jpg", "img/trungthu3.jpg"],
       },
-      // ===== Sự kiện 3 =====
       {
         title: "Khoảnh Khắc Đáng Yêu",
         cover: "img/dangyeu1.jpg",
         photos: ["img/dangyeu2.jpg", "img/dangyeu3.jpg"],
       },
-      // ===== Sự kiện 4 =====
       {
         title: "Kỉ yếu",
         cover: "img/kiyeu1.jpg",
@@ -3441,7 +3664,6 @@
       ...(T_INFO[n] || {}),
     }));
     const TRACKS = [
-
       {
         title: "Mình Cùng Nhau Đóng Băng",
         artist: "Thùy Chi",
@@ -3469,12 +3691,11 @@
         .toLowerCase()
         .replace(/đ/g, "d")
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[̀-ͯ]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
-    const norm = (s) => String(s).toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const norm = (s) => String(s).toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[̀-ͯ]/g, "");
     const mName = (m, i) => m.name || `Member ${pad(i + 1)}`;
-    const placeholder = (PLACEHOLDER_TEXT) => "";
 
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
@@ -3494,7 +3715,29 @@
       lenis
         ? lenis.scrollTo(sel)
         : $(sel).scrollIntoView({ behavior: "smooth" });
-    $$("[data-go]").forEach((b) => (b.onclick = () => goTo(b.dataset.go)));
+    const topnav = $("#topnav"), mbtn = $("#mbtn");
+    const closeMenu = () => {
+      if (!topnav) return;
+      topnav.classList.remove("open");
+      if (mbtn) mbtn.setAttribute("aria-expanded", "false");
+    };
+    if (mbtn && topnav) {
+      mbtn.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = topnav.classList.toggle("open");
+        mbtn.setAttribute("aria-expanded", String(isOpen));
+      };
+      document.addEventListener("pointerdown", (e) => {
+        if (topnav.classList.contains("open") && !topnav.contains(e.target)) closeMenu();
+      });
+      addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    }
+    $$("[data-go]").forEach((b) => (b.onclick = () => {
+      closeMenu();
+      goTo(b.dataset.go);
+    }));
 
     function split(el) {
       const t = el.textContent;
@@ -3532,7 +3775,7 @@
           y: Math.random() * h,
           r: Math.random() * 1.8 + 0.4,
           v: Math.random() * 0.35 + 0.05,
-          c: `rgba(224,196,140,${a})`, // tạo chuỗi màu 1 lần thay vì mỗi khung hình
+          c: `rgba(224,196,140,${a})`,
         });
       }
       cv._stop = () => { on = false; };
@@ -3555,7 +3798,6 @@
           x.fill();
         }
       }
-      // Chỉ vẽ khi canvas đang nằm trong màn hình (intro đã ẩn / #final chưa tới thì dừng hẳn)
       new IntersectionObserver((es) => {
         const v = es[0].isIntersecting;
         if (v && !on) { on = true; f(); } else if (!v) on = false;
@@ -3566,7 +3808,6 @@
     $("#hp2").innerHTML = ph("Ảnh lớp (phụ)", CLASS_PHOTO_2);
     $("#fp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
 
-    // Người làm web: sửa tên / vai trò / đường dẫn ảnh tại đây
     const WEBMAKERS = [
       { name: "Đặng Quang Minh", role: "Thiết kế & lập trình", photo: "img/nhasangtao1.jpg" },
       { name: "Hồng Gia Huy", role: "Thiết kế & lập trình", photo: "img/HongGiaHuy1.jpg" },
@@ -3607,7 +3848,7 @@
       b.dataset.id = i;
       b.style.setProperty("--w", W[i % 6] + "%");
       b.style.setProperty("--mt", MT[i % 6] + "px");
-      b.dataset.s = norm(mName(m, i) + " " + (m.nick || "") + " " + pad(i + 1) + " " + (i + 1)); // gồm biệt danh + số, không phân biệt dấu
+      b.dataset.s = norm(mName(m, i) + " " + (m.nick || "") + " " + pad(i + 1) + " " + (i + 1));
       b.innerHTML = `<div class="pf">${ph(mName(m, i), m.photo)}</div><b>${mName(m, i)}</b>`;
       b.onclick = () => (location.hash = "member-" + pad(i + 1));
       if (!RM && matchMedia("(hover:hover)").matches) {
@@ -3636,7 +3877,7 @@
       $$(".m").forEach(
         (m) => (m.style.display = m.dataset.s.includes(v) ? "" : "none"),
       );
-      clearTimeout(qrt); // refresh nặng -> gom lại, không gọi mỗi phím
+      clearTimeout(qrt);
       qrt = setTimeout(() => ScrollTrigger.refresh(), 150);
     };
 
@@ -3739,16 +3980,16 @@
 
     const view = $("#view");
     let open = false,
-      pushed = false; // true nếu trang chi tiết được mở bằng 1 bước lịch sử (từ trang chủ)
+      pushed = false;
     function show(html) {
-      gsap.killTweensOf($$(".st,.dt>*,.dt .rt>*", view)); // dọn tween của nội dung cũ
+      gsap.killTweensOf($$(".st,.dt>*,.dt .rt>*", view));
       view.innerHTML = `<button class="x">Đóng ✕</button>` + html;
       view.scrollTop = 0;
       $(".x", view).onclick = close;
       initSlider(view);
       if (!open) {
         open = true;
-        gsap.killTweensOf(view); // tránh tween đóng cũ còn chạy đè lên tween mở
+        gsap.killTweensOf(view);
         view.style.display = "block";
         lock(true);
         gsap.fromTo(
@@ -3782,7 +4023,7 @@
         duration: RM ? 0.01 : 0.7,
         ease: "power4.inOut",
         onComplete: () => {
-          if (open) return; // người dùng đã mở trang khác trong lúc đang đóng
+          if (open) return;
           view.style.display = "none";
           view.innerHTML = "";
           lock(false);
@@ -3791,7 +4032,6 @@
     }
     function close() {
       if (!location.hash) return hide();
-      // Mở thẳng từ link/QR (không có bước lịch sử của trang): đừng history.back() kẻo thoát khỏi website
       if (!pushed) {
         history.replaceState(null, "", location.pathname + location.search);
         return hide();
@@ -3799,7 +4039,6 @@
       pushed = false;
       history.back();
     }
-    // Bạn trước/sau, thầy cô trước/sau: thay thế bước lịch sử để "Đóng" luôn đóng được ngay 1 lần
     view.addEventListener("click", (e) => {
       const a = e.target.closest(".mnv a, .tn a");
       if (!a) return;
@@ -4095,20 +4334,18 @@
       if (entered) return;
       entered = true;
       const TOUCH = matchMedia("(hover: none)").matches;
-      $("#intro").dataset.out = "1"; // báo cho vòng lặp parallax tạm nghỉ trong lúc intro thoát
+      $("#intro").dataset.out = "1";
       tl.progress(1);
-      frFloat && frFloat.pause(); // dừng tween lơ lửng của khung ảnh khi đang chạy hiệu ứng thoát
-      const d1 = $("#d1"); d1 && d1._stop && d1._stop(); // dừng vẽ bụi sao
+      frFloat && frFloat.pause();
+      const d1 = $("#d1"); d1 && d1._stop && d1._stop();
       const done = () => {
         $("#intro").style.display = "none";
-        frFloat && frFloat.kill(); // intro đã ẩn: dừng tween lơ lửng vô hạn
+        frFloat && frFloat.kill();
         if (!open) lock(false);
         scrollTo(0, 0);
-        // ScrollTrigger.refresh() nặng: dời sang khung hình sau để không gây khựng ở cuối hiệu ứng
         requestAnimationFrame(() => setTimeout(() => ScrollTrigger.refresh(), 50));
       };
       if (TOUCH && !RM) {
-        // Điện thoại: trượt cả lớp intro lên bằng transform (chạy trên GPU) thay vì animate clip-path (buộc vẽ lại mỗi khung hình)
         gsap.to("#scene", { scale: 1.25, duration: 1.0, ease: "power2.in" });
         gsap.to("#intro", {
           yPercent: -100,
@@ -4134,25 +4371,28 @@
         duration: 1.1,
         ease: "power4.out",
         delay: RM ? 0 : 0.9,
+        onComplete: () => {
+          const hb = $(".hbig");
+          if (hb) hb.classList.add("glow-free");
+        },
       });
     }
     /* ===== Tải trước ảnh của các trang sau (chạy ngầm, ưu tiên thấp) ===== */
     (function preloadAll() {
       const conn = navigator.connection || {};
-      if (conn.saveData) return; // tôn trọng chế độ tiết kiệm dữ liệu
+      if (conn.saveData) return;
       const first = [
         ...INTRO_PHOTOS, CLASS_PHOTO, CLASS_PHOTO_2,
         ...MEMBERS.map((m) => m.photo), ...EVENTS.map((e) => e.cover), ...TEACHERS.map((t) => t.photo),
-      ]; // ảnh hiển thị sớm tải trước, ảnh bộ sưu tập tải sau
+      ];
       const raw = JSON.stringify([EVENTS, TEACHERS, MEMBERS]);
       const urls = [...new Set([...first, ...(raw.match(/img\/[^"]+?\.(?:jpe?g|png|webp|gif)/gi) || [])])].filter(Boolean);
       let idx = 0, active = 0;
-      const MAX = /2g/.test(conn.effectiveType || "") ? 1 : 3; // số ảnh tải song song
+      const MAX = /2g/.test(conn.effectiveType || "") ? 1 : 3;
       function next() {
         while (active < MAX && idx < urls.length) {
           const im = new Image(), u = urls[idx++];
           active++;
-          // Chỉ làm ấm cache HTTP: không giữ tham chiếu, không decode trước hàng trăm ảnh -> đỡ tốn RAM
           im.onload = im.onerror = () => { im.onload = im.onerror = null; active--; next(); };
           im.decoding = "async";
           if ("fetchPriority" in im) im.fetchPriority = "low";
@@ -4181,6 +4421,8 @@
       entered = true;
       $("#intro").style.display = "none";
       frFloat && frFloat.kill();
+      const hb = $(".hbig");
+      if (hb) hb.classList.add("glow-free");
       lock(false);
       route();
     }
@@ -4220,7 +4462,8 @@
           scrollTrigger: { trigger: h, start: "top 85%" },
         }),
       );
-      $$(".m").forEach((m) => gsap.set(m, { opacity: 0, y: 60 }));
+      /* Tối ưu hiệu ứng xuất hiện của 31 thẻ thành viên bằng GPU (scale + opacity) thay vì clip-path */
+      $$(".m").forEach((m) => gsap.set(m, { opacity: 0, y: 45 }));
       ScrollTrigger.batch(".m", {
         start: "top 92%",
         once: true,
@@ -4228,21 +4471,26 @@
           gsap.to(b, {
             opacity: 1,
             y: 0,
-            stagger: 0.07,
-            duration: 0.9,
+            stagger: 0.05,
+            duration: 0.75,
             ease: "power3.out",
+            clearProps: "transform",
           });
-          b.forEach((m) =>
-            gsap.fromTo(
-              $(".pf", m),
-              { clipPath: "inset(0 0 100% 0)" },
-              {
-                clipPath: "inset(0 0 0% 0)",
-                duration: 1.1,
-                ease: "power4.out",
-              },
-            ),
-          );
+          b.forEach((m) => {
+            const img = $(".pf img", m);
+            if (img) {
+              gsap.fromTo(
+                img,
+                { scale: 1.14 },
+                {
+                  scale: 1,
+                  duration: 0.9,
+                  ease: "power3.out",
+                  clearProps: "transform",
+                },
+              );
+            }
+          });
         },
       });
       const trk = $("#trk");
@@ -4348,7 +4596,6 @@
       const vis = new Set();
       const io = new IntersectionObserver((es) => es.forEach((e) => {
         e.isIntersecting ? vis.add(e.target) : vis.delete(e.target);
-        // animation "bob" của 31 thẻ chỉ chạy khi thẻ nằm gần màn hình
         if (e.target.classList.contains("m")) e.target.style.animationPlayState = e.isIntersecting ? "running" : "paused";
       }), { rootMargin: "120px" });
       $$(".m,#tl li,.ec").forEach((el) => io.observe(el));
@@ -4356,15 +4603,13 @@
       const orbs = $$("#depth i").map((el) => ({ el, z: +el.dataset.z, x: +el.dataset.x, y: +el.dataset.y, s: el.classList.contains("sph"), last: "" }));
       const hpc = $("#hp") && $("#hp").firstElementChild;
       const intro = $("#intro"), scene = $("#scene"), depth = $("#depth");
-      // Chiều cao ổn định (100lvh): không đổi khi thanh địa chỉ trình duyệt co/giãn lúc scroll
       const stableH = () => (depth && depth.offsetHeight) || innerHeight;
       let Hh = stableH(), Ww = innerWidth;
       addEventListener("resize", () => {
-        // Trên điện thoại, resize chỉ đổi chiều cao (thanh địa chỉ) -> bỏ qua, chỉ cập nhật khi xoay màn hình / đổi chiều rộng
         if (touch && Math.abs(innerWidth - Ww) < 2) return;
         Hh = stableH(); Ww = innerWidth;
       });
-      let ss = scrollY, frame = 0; // ss: vị trí scroll đã làm mượt cho quả cầu
+      let ss = scrollY, frame = 0, prevSy = -1, prevGx = 99, prevGy = 99;
 
       (function loop() {
         requestAnimationFrame(loop);
@@ -4372,7 +4617,6 @@
         if (touch && !hasGyro) { tx = Math.sin(t * 0.7) * 0.7; ty = Math.cos(t * 0.5) * 0.5; }
         gx += (tx - gx) * 0.06; gy += (ty - gy) * 0.06;
         const H = Hh, Wd = Ww, sy = scrollY;
-        // scrollY đọc trên main thread bị lệch nhịp so với cuộn gốc của điện thoại -> làm mượt để hết giật
         ss += (sy - ss) * 0.2;
         if (Math.abs(sy - ss) < 0.05) ss = sy;
         orbs.forEach((o) => {
@@ -4386,20 +4630,22 @@
             x = o.x * Wd + gx * o.z * 70;
           }
           const tr = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
-          if (tr !== o.last) { o.last = tr; o.el.style.transform = tr; } // không ghi style nếu không đổi
+          if (tr !== o.last) { o.last = tr; o.el.style.transform = tr; }
         });
         if (!touch || rm) return;
         if (intro && intro.style.display !== "none") {
-          // Intro còn phủ màn hình: chỉ nghiêng cảnh intro (và ngừng hẳn khi đang thoát), bỏ qua phần nghiêng 3D của nội dung phía sau
           if (!intro.dataset.out && scene) gsap.set(scene, { rotationY: gx * 16, rotationX: -gy * 12 });
           return;
         }
-        // Phần nghiêng 3D các thẻ nặng (getBoundingClientRect + nhiều style) -> chạy 1 khung / 2 để nhường main thread cho quả cầu
+        // Dừng tính toán layout 3D các thẻ khi người dùng không cuộn và máy không nghiêng
+        const moved = Math.abs(sy - prevSy) > 0.5 || Math.abs(gx - prevGx) > 0.003 || Math.abs(gy - prevGy) > 0.003;
+        if (!moved) return;
+        prevSy = sy; prevGx = gx; prevGy = gy;
+
         if (++frame & 1) return;
 
         if (hpc && sy < H * 1.5) hpc.style.transform = `perspective(700px) rotateY(${(gx * 14).toFixed(2)}deg) rotateX(${(-gy * 10).toFixed(2)}deg) scale(1.03)`;
 
-        // Đọc toàn bộ rect trước, ghi style sau -> 1 lần layout/khung hình thay vì mỗi phần tử một lần
         const rects = [];
         vis.forEach((el) => rects.push(el, el.getBoundingClientRect()));
         for (let i = 0; i < rects.length; i += 2) {
@@ -4410,8 +4656,6 @@
             const pf = el._pf || (el._pf = el.querySelector(".pf"));
             const rx = -ky * 16 + gy * 8, ry = -kx * 22 + gx * 14;
             pf.style.transform = `perspective(600px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(${(14 - Math.abs(ky) * 14).toFixed(1)}px)`;
-            pf.style.setProperty("--gx", (50 + ry * 2.2).toFixed(1) + "%");
-            pf.style.setProperty("--gy", (30 + rx * 2.2).toFixed(1) + "%");
           } else if (el.tagName === "LI") {
             const a = el.firstElementChild;
             a.style.transform = `perspective(700px) rotateX(${(ky * 24).toFixed(2)}deg) translateZ(${(-Math.abs(ky) * 40).toFixed(1)}px) translateX(${(gx * 6).toFixed(1)}px)`;
@@ -4436,7 +4680,6 @@
   </div>
 
   <script type="module">
-    // SDK Firebase khá nặng -> chỉ nạp khi người xem sắp tới phần cuối / mở lời chúc (hoặc rảnh sau khi trang tải xong)
     let FB = null;
     const loadFB = () =>
       FB || (FB = Promise.all([
@@ -4445,7 +4688,7 @@
       ]).then(([a, f]) => ({ ...a, ...f })));
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDMwrIAcbnC6sS_37UiyO0F2JB07NcVbD0", // <-- DÁN apiKey của bạn vào đây
+      apiKey: "AIzaSyDMwrIAcbnC6sS_37UiyO0F2JB07NcVbD0",
       authDomain: "nhagiaovietnam.firebaseapp.com",
       projectId: "nhagiaovietnam",
       storageBucket: "nhagiaovietnam.firebasestorage.app",
@@ -4465,32 +4708,73 @@
       if (!bag.length) bag = list.map((_, i) => i).sort(() => Math.random() - 0.5);
       return list[bag.pop()];
     }
-    // Lời chúc rơi ở phần cuối trang
-    function drop(prefill) {
-      if (!list.length || rain.children.length > 10) return;
+    let laneIdx = 0;
+    const laneTime = [];
+    function rainMetrics() {
+      const mobile = innerWidth <= 700;
+      const padX = mobile ? 8 : 16;
+      const gap = mobile ? 8 : 16;
+      const cw = mobile ? (innerWidth - padX * 2 - gap) / 2 : Math.min(255, innerWidth * 0.46);
+      const cols = mobile ? 2 : Math.max(2, Math.floor((innerWidth - padX * 2 + gap) / (cw + gap)));
+      return { mobile, padX, gap, cw, cols };
+    }
+    function drop(prefill, slotIdx = 0, totalSlots = 1) {
+      const { mobile, padX, gap, cw, cols } = rainMetrics();
+      const maxCards = mobile ? 5 : Math.min(9, cols * 2);
+      if (!list.length || rain.children.length >= maxCards) return;
+
+      const now = performance.now();
+      const minGapMs = mobile ? 3600 : 4000;
+      let col = -1, bestTime = Infinity;
+
+      if (prefill) {
+        col = slotIdx % cols;
+      } else {
+        for (let i = 0; i < cols; i++) {
+          const idx = (laneIdx + i) % cols;
+          const t = laneTime[idx] || 0;
+          if (now - t >= minGapMs) { col = idx; break; }
+          if (t < bestTime) { bestTime = t; col = idx; }
+        }
+        if (now - (laneTime[col] || 0) < minGapMs * 0.9) return;
+      }
+
+      laneIdx = (col + 1) % cols;
+      const baseDur = mobile ? 14.5 : 15;
+      const dur = baseDur + (col % 2) * 1.2 + Math.random() * 0.8;
+      const frac = prefill ? ((slotIdx + 0.15 + Math.random() * 0.25) / totalSlots) * 0.85 : 0;
+      const delay = prefill ? -(dur * frac) : 0;
+      laneTime[col] = now + delay * 1000;
+
       const w = nextWish(), c = document.createElement("div"), q = document.createElement("p"), n = document.createElement("b");
       q.textContent = "“" + w.text + "”";
       n.textContent = "— " + w.name;
       c.className = "wc";
       c.append(q, n);
-      const dur = 11 + Math.random() * 8, cw = Math.min(260, innerWidth * 0.7);
-      c.style.left = Math.random() * (innerWidth - cw) + "px";
-      c.style.setProperty("--r", (Math.random() * 10 - 5).toFixed(1) + "deg");
-      c.style.animationDuration = dur + "s";
-      if (prefill) c.style.animationDelay = "-" + (Math.random() * dur * 0.85).toFixed(1) + "s";
+
+      const zoneW = (innerWidth - padX * 2 - gap * (cols - 1)) / cols;
+      const jitter = mobile ? 0 : Math.max(0, zoneW - cw) * Math.random();
+      const left = padX + col * (zoneW + gap) + jitter;
+      c.style.left = left.toFixed(1) + "px";
+      c.style.setProperty("--r", (Math.random() * (mobile ? 3.5 : 5) - (mobile ? 1.75 : 2.5)).toFixed(1) + "deg");
+      c.style.animationDuration = dur.toFixed(2) + "s";
+      if (prefill) c.style.animationDelay = delay.toFixed(2) + "s";
       c.addEventListener("animationend", () => c.remove());
       rain.appendChild(c);
     }
     function startRain() {
       clearInterval(rainTimer);
       if (!list.length) return;
-      if (!rain.children.length) for (let i = 0; i < 5; i++) drop(true);
-      rainTimer = setInterval(() => drop(false), 1600);
+      const { mobile, cols } = rainMetrics();
+      if (!rain.children.length) {
+        const initCount = mobile ? Math.min(4, list.length) : Math.min(cols + 2, 6, list.length);
+        for (let i = 0; i < initCount; i++) drop(true, i, initCount);
+      }
+      rainTimer = setInterval(() => drop(false), mobile ? 1900 : 1700);
     }
     function stopRain() { clearInterval(rainTimer); rain.innerHTML = ""; }
     new IntersectionObserver((es) => { inView = es[0].isIntersecting; inView ? startRain() : stopRain(); }, { threshold: 0.2 }).observe(g("final"));
 
-    // Xem tất cả: hiện toàn bộ lời chúc dạng danh sách
     function openWall() {
       wall.classList.add("on"); lk(true); wall.scrollTop = 0; wlist.innerHTML = "";
       list.forEach((w) => {
@@ -4526,7 +4810,6 @@
     const idle = () => ("requestIdleCallback" in window ? requestIdleCallback(connect, { timeout: 6000 }) : setTimeout(connect, 4000));
     document.readyState === "complete" ? idle() : addEventListener("load", idle);
 
-    // ===== Form gửi (không cần mật khẩu) =====
     const modal = g("wmodal"), msg = g("wmsg"), send = g("wsend");
     g("wopen").onclick = () => { connect(); msg.textContent = ""; modal.classList.add("on"); g("wname").focus(); };
     const close = () => modal.classList.remove("on");
