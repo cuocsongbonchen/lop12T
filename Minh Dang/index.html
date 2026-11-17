@@ -3145,10 +3145,6 @@
             Những khoảnh khắc <em style="color: #e0c48c">không quên</em>
           </h2>
         </div>
-        <p>
-          Cuộn ngang để đi qua các sự kiện. Nhấn vào từng sự kiện để xem trọn
-          bộ ảnh.
-        </p>
       </div>
       <div class="trk" id="trk"></div>
     </section>
@@ -3160,8 +3156,7 @@
           <h2>Những người lái đò <em>thầm lặng</em></h2>
         </div>
         <p>
-          <span id="tc">11</span> thầy cô, mỗi người một trang riêng, một liên kết và một mã QR
-          riêng.
+          <span ></span> 
         </p>
       </div>
       <ul id="tl"></ul>
@@ -3654,7 +3649,6 @@
       $("#trk").appendChild(b);
     });
 
-    $("#tc").textContent = TEACHERS.length;
     TEACHERS.forEach((t, i) => {
       const li = document.createElement("li");
       li.innerHTML = `<a href="#${slug(t.name)}"><span class="n">${pad(i + 1)}</span><h3>${t.name}</h3><span class="pv">${ph("Ảnh", t.photo)}</span></a>`;
