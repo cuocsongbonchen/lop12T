@@ -1131,6 +1131,10 @@
         color: inherit;
       }
 
+      #tl a {
+        transition: none;
+      }
+
       #tl a:hover {
         color: inherit;
         padding-left: 0;
@@ -1503,10 +1507,17 @@
         padding-top: 10px;
       }
 
+      #c3 {
+        contain: layout style;
+      }
+
       #tl a {
         padding: 18px 0;
         gap: 14px;
         align-items: center;
+        transform-origin: center center;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
       }
 
       #tl li a,
@@ -1518,6 +1529,7 @@
         font-size: clamp(20px, 5.8vw, 28px);
         line-height: 1.2;
         flex: 1;
+        text-shadow: none;
       }
 
       #tl .n {
@@ -2813,10 +2825,14 @@
     .chh h2,
     #c1 .chh h2,
     .hbig,
-    .dt h2,
-    #tl h3 {
+    .dt h2 {
       color: #fff;
       text-shadow: 0 2px 12px rgba(0, 0, 0, .65);
+    }
+
+    #tl h3 {
+      color: #fff;
+      text-shadow: none;
     }
 
     .chh h2 em,
@@ -4509,9 +4525,11 @@
       $$("#tl li").forEach((li) =>
         gsap.from(li, {
           opacity: 0,
-          x: -40,
-          duration: 0.9,
-          scrollTrigger: { trigger: li, start: "top 90%" },
+          x: -28,
+          duration: 0.75,
+          ease: "power3.out",
+          clearProps: "transform",
+          scrollTrigger: { trigger: li, start: "top 92%", once: true },
         }),
       );
       const f = gsap.timeline({
@@ -4655,14 +4673,17 @@
           if (el.classList.contains("m")) {
             const pf = el._pf || (el._pf = el.querySelector(".pf"));
             const rx = -ky * 16 + gy * 8, ry = -kx * 22 + gx * 14;
-            pf.style.transform = `perspective(600px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(${(14 - Math.abs(ky) * 14).toFixed(1)}px)`;
+            const tr = `perspective(600px) rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) translateZ(${(14 - Math.abs(ky) * 14).toFixed(1)}px)`;
+            if (tr !== el._tr) { el._tr = tr; pf.style.transform = tr; }
           } else if (el.tagName === "LI") {
-            const a = el.firstElementChild;
-            a.style.transform = `perspective(700px) rotateX(${(ky * 24).toFixed(2)}deg) translateZ(${(-Math.abs(ky) * 40).toFixed(1)}px) translateX(${(gx * 6).toFixed(1)}px)`;
+            const a = el._a || (el._a = el.firstElementChild);
+            const tr = `perspective(800px) rotateX(${(ky * 12).toFixed(1)}deg) translate3d(${(gx * 4).toFixed(1)}px,0,0)`;
+            if (tr !== el._tr) { el._tr = tr; a.style.transform = tr; }
           } else {
             const pf = el._pf || (el._pf = el.querySelector(".pf"));
             const k = (r.left + r.width / 2 - Wd / 2) / Wd;
-            pf.style.transform = `perspective(800px) rotateY(${(-k * 34 + gx * 8).toFixed(2)}deg) rotateX(${(gy * 6).toFixed(2)}deg) translateZ(${(-Math.abs(k) * 70).toFixed(1)}px)`;
+            const tr = `perspective(800px) rotateY(${(-k * 34 + gx * 8).toFixed(1)}deg) rotateX(${(gy * 6).toFixed(1)}deg) translateZ(${(-Math.abs(k) * 70).toFixed(1)}px)`;
+            if (tr !== el._tr) { el._tr = tr; pf.style.transform = tr; }
           }
         }
       })();
