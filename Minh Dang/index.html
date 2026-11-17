@@ -8,6 +8,9 @@
   <meta name="color-scheme" content="dark" />
   <title>12T</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <link rel="icon" href="img/anh lop 1.jpg">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,800;1,500&family=Be+Vietnam+Pro:wght@300;400;600&display=swap"
@@ -2681,8 +2684,7 @@
       background: rgba(11, 22, 48, .74);
       color: #f4ecda;
       border-left-color: #f0d79a;
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
+      /* backdrop-filter: blur(4px) đã bỏ: nền đã 74% đục nên gần như không khác biệt, nhưng rất nặng khi có nhiều thẻ rơi cùng lúc */
     }
 
     #final-rain .wc b {
@@ -2788,28 +2790,6 @@
       display: none;
     }
 
-    .ftx .old-web {
-      color: var(--cream);
-      background: rgba(5, 10, 24, .5);
-    }
-
-    .sqr-final {
-      margin: 0;
-      width: min(86vw, 420px);
-      padding: 14px;
-      gap: 14px;
-      color: var(--cream);
-      background: rgba(5, 10, 24, .6);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      text-align: left;
-    }
-
-    .sqr-final .qb {
-      width: 112px;
-      height: 112px;
-    }
-
     @media print {
       body.pq {
         background: #fff !important;
@@ -2856,6 +2836,7 @@
     body.show-qr .qr {
       display: flex !important;
     }
+      .tq{font-style:italic}
   </style>
 </head>
 
@@ -3215,8 +3196,6 @@
         </div>
         <p class="fl fbadge">Chúc mừng ngày Nhà giáo Việt Nam 20/11</p>
         <p class="wl fl">WITH LOVE – CLASS 12T | GALILEO</p>
-        <!-- ĐỔI LINK WEB CŨ TẠI href BÊN DƯỚI -->
-        <a class="btn fl old-web" id="old-web" href="https://honggiahuy-minhdang.vercel.app/" target="_blank" rel="noopener">Xem lại web cũ</a>
       </div>
     </section>
     <footer class="wm" id="wm">
@@ -3234,14 +3213,20 @@
     // ===== CHẾ ĐỘ ADMIN HIỆN QR (Chỉ riêng bạn biết) =====
     (function () {
       const SECRET_KEY = "12tadmin"; // Đổi mật khẩu bí mật tại đây nếu muốn
+      // localStorage có thể bị chặn (webview, chế độ riêng tư) -> không được làm hỏng cả trang
+      const ls = {
+        get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { } },
+        del: (k) => { try { localStorage.removeItem(k); } catch (e) { } },
+      };
 
       // Cách 1: Truy cập link kèm ?qr=12tadmin
       const params = new URLSearchParams(location.search);
       if (params.get("qr") === SECRET_KEY) {
-        localStorage.setItem("is_admin_qr", "1");
+        ls.set("is_admin_qr", "1");
       }
 
-      if (localStorage.getItem("is_admin_qr") === "1") {
+      if (ls.get("is_admin_qr") === "1") {
         document.body.classList.add("show-qr");
       }
 
@@ -3256,11 +3241,12 @@
           if (tapCount >= 5) {
             tapCount = 0;
             const active = document.body.classList.toggle("show-qr");
+            dispatchEvent(new Event("qrmode"));
             if (active) {
-              localStorage.setItem("is_admin_qr", "1");
+              ls.set("is_admin_qr", "1");
               alert("Đã bật chế độ hiển thị QR!");
             } else {
-              localStorage.removeItem("is_admin_qr");
+              ls.del("is_admin_qr");
               alert("Đã ẩn toàn bộ QR!");
             }
           }
@@ -3356,73 +3342,76 @@
     const T_INFO = {
       "Cô Phạm Thu Trang": {
         subject: "Toán",
-        intro: "Giáo Viên chủ nhiệm lớp 12T",
+        intro: "Nếu lớp học là một thế giới thu nhỏ thì cô Trang Dora chính là vị thuyền trưởng luôn sẵn sàng xử lý mọi tình huống bất ngờ. Là GVCN, cô vừa quản lý nề nếp, học tập, vừa phải đối mặt với vô vàn trò nghịch ngợm của chúng em. Đặc biệt, cô còn là giáo viên Toán, người kiên nhẫn dẫn dắt chúng em khám phá thế giới của những con số và phương trình. Dù đôi lúc những bài toán khiến chúng em đau đầu, nhưng nhờ sự tận tình và nghiêm khắc của cô, chúng em hiểu rằng chỉ cần bình tĩnh và cố gắng, mọi vấn đề đều có lời giải!",
+        quote: "Đừng để tôi điên lên!!!",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T ",
+        thanks: "Điều đáng quý nhất không chỉ là kiến thức Toán học cô truyền đạt mà còn là sự quan tâm, tận tình dành cho cả lớp. Từ những lời nhắc nhở nghiêm khắc đến những lúc động viên, chia sẻ, tất cả đều khiến chúng em thêm trân trọng cô. Dù đôi khi còn nghịch ngợm và khiến cô đau đầu, chúng em luôn biết ơn vì có cô đồng hành. Nhân ngày 20/11, tập thể lớp 12T kính chúc cô luôn mạnh khỏe, hạnh phúc và tràn đầy nhiệt huyết. Chúc mọi phép tính cuộc đời cô đều có kết quả viên mãn, mọi phương trình đều có nghiệm đẹp và mong cô luôn đủ kiên nhẫn để đồng hành cùng những \"ẩn số\" mang tên học sinh chúng em!",
         photo: "img/PhamThuTrang.JPG",
         gallery: ["img/PhamThuTrang2.JPG", "img/PhamThuTrang3.png"]
       },
       "Cô Lê Thị Trang": {
         subject: "Văn",
-        intro: "Giáo Viên Dạy Văn lớp 12T",
+        intro: "Nếu Toán học cần sự chính xác thì Ngữ văn lại cần một tâm hồn biết rung động. Cô \"Trang Lela\" chính là người giúp chúng em khám phá thế giới qua từng trang sách, từng vần thơ và những câu chuyện tưởng chừng đã nằm yên trong quá khứ. Qua lời giảng của cô, những nhân vật văn học không còn là những cái tên xa lạ, những tác phẩm không còn đơn thuần là kiến thức cần ghi nhớ, mà trở thành những câu chuyện khiến chúng em suy nghĩ, đồng cảm và đôi khi còn thấy bản thân mình trong đó.",
+        quote: "Cố lên các con ơi",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô vì đã dạy chúng em cách viết một bài văn, nhưng quan trọng hơn là cách viết nên những điều tử tế, nhân văn trong cuộc sống. Dù đôi lúc chúng em vẫn phải vật lộn với những câu hỏi như \"Phân tích tâm trạng nhân vật trong đoạn trích\" hay \"Nêu cảm nhận của em về...\", nhưng nhờ cô, chúng em hiểu rằng cảm xúc chân thành luôn có giá trị hơn những câu chữ sáo rỗng. Nhân ngày 20/11, chúc cô luôn có một cuộc đời đẹp như những áng thơ, hạnh phúc như những đoạn kết viên mãn và không bao giờ phải trải qua những chương buồn quá dài. Mong rằng mỗi ngày của cô đều là một trang sách đẹp, mỗi khoảnh khắc đều là một câu chuyện đáng nhớ và tình yêu nghề sẽ luôn là nguồn cảm hứng bất tận!",
         photo: "img/LeThuTrang1.jpg",
         gallery: ["img/LeThuTrang2.jpg", "img/LeThuTrang3.jpg", "img/LeThuTrang4.jpg"],
       },
       "Cô Phạm Thị Quyên": {
         subject: "Tiếng Anh",
-        intro: "Giáo Viên Dạy Tiếng Anh lớp 12T",
+        intro: "Dear Mrs. Quyen! Nếu có một người giúp chúng em nhận ra rằng thế giới rộng lớn hơn rất nhiều so với những gì nhìn thấy qua ô cửa lớp học, thì đó chính là cô. Những từ vựng mới, cấu trúc ngữ pháp, những bài nghe đôi khi nhanh hơn cả tốc độ suy nghĩ và những lần luyện nói đầy hồi hộp đã tạo nên những giờ học thật nhiều trải nghiệm với lớp 12T chúng em.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô vì luôn kiên nhẫn với những lần phát âm chưa chuẩn, những câu trả lời còn ngập ngừng và cả những khoảnh khắc chúng em bất chợt quên sạch vốn từ dù vừa mới học hôm qua. Không chỉ dạy chúng em một ngôn ngữ mới mà còn giúp chúng em tự tin hơn, dám bước ra khỏi vùng an toàn và khám phá những điều mới mẻ của cuộc sống. On the occasion of 20/11, we would like to send you our most wonderful wishes! May you always be happy, healthy, and successful, and may your life be full of love. We hope that all good things will always come your way, all your dreams will come true, and your smile will never fade!",
         photo: "img/PhamThiQuyen1.jpg",
         gallery: ["img/PhamThiQuyen2.jpg", "img/PhamThiQuyen3.jpg"],
       },
       "Thầy Nguyễn Hoàng Long": {
         subject: "Tin Học",
-        intro: "Giáo Viên Dạy Tin Học lớp 12T",
+        intro: "Trong thời đại công nghệ phát triển không ngừng, thầy Long Tin học chính là người không chỉ giúp chúng em tiếp cận với thế giới số, những kỹ năng và kiến thức cần thiết cho tương lai mà còn là người bạn tâm giao đáng tin cậy, tâm sự và đưa ra những lời khuyên bổ ích cho chúng em. Từ những thao tác cơ bản đến những bài thực hành đòi hỏi sự tập trung, mỗi tiết học đều giúp chúng em khám phá thêm những khả năng mới.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến thầy những lời chúc tốt đẹp và chân thành nhất. Chúc thầy luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn thầy vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương thầy đã dành cho mình. Cảm ơn thầy vì đã là một phần thật đẹp trong thanh xuân của 12T.",
+        thanks: "Cảm ơn thầy vì đã kiên nhẫn hướng dẫn, giải đáp những thắc mắc và không ngừng cập nhật kiến thức để chúng em không bị bỏ lại phía sau trong thời đại công nghệ. Chúc thầy luôn chạy phiên bản hạnh phúc mới nhất, không gặp virus muộn phiền, không bị treo máy vì áp lực và mọi dự định đều được xử lý thành công!",
         photo: "img/NguyenHoangLong1.JPG",
         gallery: ["img/NguyenHoangLong2.JPG", "img/NguyenHoangLong3.JPG"],
       },
       "Cô Nguyễn Quỳnh Hương": {
         subject: "Địa Lí",
-        intro: "Giáo Viên Dạy Địa Lí lớp 12T",
+        intro: "Chỉ cần mở trang sách Địa lí, chúng em đã có thể đi qua nhiều vùng đất, khám phá những quốc gia, châu lục và những điều kỳ thú của thiên nhiên. Cô Kìn Hưn giúp chúng em nhìn thế giới rộng lớn hơn, hiểu thêm về quê hương, đất nước và những vấn đề đang diễn ra xung quanh mỗi ngày.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô vì đã đưa chúng em đi du lịch bằng tri thức, dù đôi chân vẫn đang ngồi ngay ngắn trong lớp học. Chúc cô luôn tìm được tọa độ của hạnh phúc, kinh độ của niềm vui, vĩ độ của bình an và có những chuyến hành trình cuộc đời thật rực rỡ!",
         photo: "img/NguyenQuynhHuong1.JPG",
         gallery: ["img/NguyenQuynhHuong2.JPG", "img/NguyenQuynhHuong3.JPG", "img/NguyenQuynhHuong4.JPG"],
       },
       "Cô Trương Thị Thu": {
         subject: "Lịch Sử",
-        intro: "Giáo Viên Dạy Lịch Sử lớp 12T",
+        intro: "Có những câu chuyện không thể kể bằng vài dòng ngắn ngủi, có những chiến công không thể đong đếm bằng con số và có những trang sử mà càng tìm hiểu, chúng em càng thêm tự hào. Cô Thu tiktoker chính là người đưa chúng em trở về với những dấu mốc đáng nhớ của dân tộc, giúp chúng em hiểu hơn về quá khứ và trân trọng hiện tại.",
+        quote: "Các cục zàng 12T của cô",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn \"Cô Thu dạy sử\" vì đã khiến những sự kiện lịch sử không còn là những mốc thời gian cần học thuộc mà trở thành những câu chuyện có cảm xúc, có ý nghĩa và có giá trị riêng. Chúc cô luôn có một cuộc đời bình yên, tương lai rực rỡ, không có biến cố buồn nào được ghi vào lịch sử và mỗi ngày đều là một dấu mốc đáng tự hào!",
         photo: "img/TruongThiThu1.jpg",
         gallery: ["img/TruongThiThu2.jpg", "img/TruongThiThu3.jpg", "img/TruongThiThu4.jpg"],
       },
       "Cô Nguyễn Thị Phương Thúy": {
         subject: "Vật Lý",
-        intro: "Giáo Viên Dạy Vật Lý lớp 12T",
+        intro: "Đến với Vật lí, chúng em được khám phá những quy luật vận hành của thế giới, từ những chuyển động đơn giản đến những hiện tượng phức tạp mà đôi khi chỉ nghe tên đã thấy hơi \"rung động\". Cô Thúy là người giúp chúng em hiểu rằng đằng sau những hiện tượng quen thuộc luôn có những nguyên lý thú vị đang âm thầm vận hành.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô vì đã kiên nhẫn đồng hành cùng chúng em qua những bài tập, công thức và những lần cả lớp nhìn đề mà ánh mắt như đang tìm kiếm một tín hiệu từ vũ trụ. Nhờ cô, chúng em học được cách quan sát, suy luận và tìm kiếm lời giải thay vì vội vàng bỏ cuộc. Chúc cô luôn có nguồn năng lượng tích cực vô hạn, niềm vui chuyển động theo chiều hướng đi lên, hạnh phúc không chịu bất kỳ lực cản nào và cuộc sống luôn cân bằng ở trạng thái tốt đẹp nhất!",
         photo: "img/NguyenThiPhuongThuy1.JPG",
         gallery: ["img/NguyenThiPhuongThuy2.JPG", "img/NguyenThiPhuongThuy3.JPG", "img/NguyenThiPhuongThuy4.JPG"],
       },
       "Cô Trần Thị Then": {
         subject: "Hóa Học",
-        intro: "Giáo Viên Dạy Hóa Học lớp 12T",
+        intro: "Hóa học có lẽ là môn học sở hữu những màn biến hóa thú vị nhất trong thế giới kiến thức của chúng em. Từ những nguyên tố, hóa trị đến những phương trình phản ứng, mỗi tiết học đều mang đến những điều mới mẻ. Đôi lúc chúng em phải căng não cân bằng một phương trình, học thuộc những dãy chất dài đến mức chỉ muốn xin thêm một chiếc não dự phòng, nhưng chính điều đó lại khiến hành trình học tập trở nên đáng nhớ.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô Then vì đã giúp chúng em hiểu rằng kiến thức không chỉ nằm trên trang giấy mà còn hiện diện trong cuộc sống hằng ngày. Chúc cô luôn có những phản ứng tích cực với cuộc đời, không gặp tác dụng phụ của muộn phiền, hạnh phúc luôn được kết tinh và niềm vui đạt hiệu suất 100%!",
         photo: "img/TranThiThen1.jpg",
         gallery: ["img/TranThiThen2.jpg", "img/TranThiThen3.jpg", "img/TranThiThen4.jpg"],
       },
       "Cô Tạ Như Quỳnh": {
         subject: "Thể Dục",
-        intro: "Giáo Viên Dạy Thể Dục lớp 12T",
+        intro: "Nếu những môn học khác thử thách trí não thì Giáo dục thể chất lại thử thách sức bền và khả năng vận động của chúng em. Những giờ học đầy tiếng cười, những lần chạy hết sức và cả những khoảnh khắc mệt đến mức chỉ muốn xin nghỉ giải lao thêm vài phút đã trở thành những kỷ niệm thật đặc biệt.",
         memories: "",
-        thanks: "Nhân ngày Nhà giáo Việt Nam 20/11, tập thể lớp 12T xin gửi đến cô những lời chúc tốt đẹp và chân thành nhất. Chúc cô luôn mạnh khỏe, hạnh phúc, bình an và mãi giữ trong tim ngọn lửa nhiệt huyết với nghề. Cảm ơn cô vì đã tận tâm dìu dắt, bao dung trước những lần chúng em nghịch ngợm và luôn âm thầm chắp cánh cho những ước mơ. Mai này dù mỗi người một ngả, chúng em vẫn sẽ luôn nhớ về những bài học và tình yêu thương cô đã dành cho mình. Cảm ơn cô vì đã là một phần thật đẹp trong thanh xuân của 12T",
+        thanks: "Cảm ơn cô Kang Min vì đã giúp chúng em hiểu rằng một cơ thể khỏe mạnh cũng quan trọng như một trí tuệ tốt. Chúc cô luôn dẻo dai, khỏe mạnh, năng lượng lúc nào cũng đạt 100%, mọi trận đấu đều chiến thắng và cuộc sống luôn ngập tràn những niềm vui!",
         photo: "img/TaNhuQuynh1.JPEG",
         gallery: ["img/TaNhuQuynh2.jpeg", "img/TaNhuQuynh3.JPG"],
       },
@@ -3431,6 +3420,7 @@
       name: n,
       subject: "",
       intro: "",
+      quote: "",
       memories: "",
       thanks: "",
       photo: "",
@@ -3451,7 +3441,7 @@
       },
     ];
 
-    const SECS = { "thanh-vien": "#c1", "khoanh-khac": "#ev", "thay-co": "#c3", "am-nhac": "#mu", "loi-chuc": "#final" };
+    const SECS = { "thanh-vien": "#c1", "khoanh-khac": "#ev", "thay-co": "#c3", "am-nhac": "#mu" };
     let booted = false;
     const RM = false;
     const $ = (s, r = document) => r.querySelector(s),
@@ -3459,7 +3449,7 @@
     const pad = (n) => String(n).padStart(2, "0");
     const ph = (label, src) =>
       src
-        ? `<img src="${src}" alt="${label}" loading="lazy">`
+        ? `<img src="${src}" alt="${label}" loading="lazy" decoding="async">`
         : `<div class="ph"><span>${label}</span><small>Chưa có ảnh · thêm trong dữ liệu</small></div>`;
     const slug = (s) =>
       s
@@ -3469,6 +3459,7 @@
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
+    const norm = (s) => String(s).toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const mName = (m, i) => m.name || `Member ${pad(i + 1)}`;
     const placeholder = (PLACEHOLDER_TEXT) => "";
 
@@ -3513,25 +3504,29 @@
     }
     function dust(cv, n) {
       const x = cv.getContext("2d");
-      let w, h;
+      let w = 0, h = 0, on = false, rt;
       const p = [];
       const rs = () => {
         w = cv.width = cv.offsetWidth;
         h = cv.height = cv.offsetHeight;
       };
       rs();
-      addEventListener("resize", rs);
-      for (let i = 0; i < n; i++)
+      addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(rs, 120); });
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * 0.5 + 0.2;
         p.push({
           x: Math.random() * w,
           y: Math.random() * h,
           r: Math.random() * 1.8 + 0.4,
           v: Math.random() * 0.35 + 0.05,
-          a: Math.random() * 0.5 + 0.2,
+          c: `rgba(224,196,140,${a})`, // tạo chuỗi màu 1 lần thay vì mỗi khung hình
         });
-      (function f() {
+      }
+      function f() {
+        if (!on) return;
+        requestAnimationFrame(f);
         x.clearRect(0, 0, w, h);
-        p.forEach((q) => {
+        for (const q of p) {
           if (!RM) {
             q.y -= q.v;
             q.x += Math.sin(q.y / 60) * 0.2;
@@ -3540,13 +3535,17 @@
               q.x = Math.random() * w;
             }
           }
-          x.fillStyle = `rgba(224,196,140,${q.a})`;
+          x.fillStyle = q.c;
           x.beginPath();
           x.arc(q.x, q.y, q.r, 0, 7);
           x.fill();
-        });
-        if (!RM) requestAnimationFrame(f);
-      })();
+        }
+      }
+      // Chỉ vẽ khi canvas đang nằm trong màn hình (intro đã ẩn / #final chưa tới thì dừng hẳn)
+      new IntersectionObserver((es) => {
+        const v = es[0].isIntersecting;
+        if (v && !on) { on = true; f(); } else if (!v) on = false;
+      }).observe(cv);
     }
 
     $("#hp").innerHTML = ph("Ảnh tập thể lớp 12T", CLASS_PHOTO);
@@ -3594,7 +3593,7 @@
       b.dataset.id = i;
       b.style.setProperty("--w", W[i % 6] + "%");
       b.style.setProperty("--mt", MT[i % 6] + "px");
-      b.dataset.s = mName(m, i).toLowerCase();
+      b.dataset.s = norm(mName(m, i) + " " + (m.nick || "") + " " + pad(i + 1) + " " + (i + 1)); // gồm biệt danh + số, không phân biệt dấu
       b.innerHTML = `<div class="pf">${ph(mName(m, i), m.photo)}</div><b>${mName(m, i)}</b>`;
       b.onclick = () => (location.hash = "member-" + pad(i + 1));
       if (!RM && matchMedia("(hover:hover)").matches) {
@@ -3607,21 +3606,24 @@
             rotationY: (x - 0.5) * 18,
             rotationX: -(y - 0.5) * 18,
             duration: 0.5,
+            overwrite: "auto",
           });
           pf.style.setProperty("--gx", x * 100 + "%");
           pf.style.setProperty("--gy", y * 100 + "%");
         };
         b.onpointerleave = () =>
-          gsap.to(pf, { rotationX: 0, rotationY: 0, duration: 0.7 });
+          gsap.to(pf, { rotationX: 0, rotationY: 0, duration: 0.7, overwrite: "auto" });
       }
       grid.appendChild(b);
     });
+    let qrt;
     $("#q").oninput = (e) => {
-      const v = e.target.value.trim().toLowerCase();
+      const v = norm(e.target.value.trim());
       $$(".m").forEach(
         (m) => (m.style.display = m.dataset.s.includes(v) ? "" : "none"),
       );
-      ScrollTrigger.refresh();
+      clearTimeout(qrt); // refresh nặng -> gom lại, không gọi mỗi phím
+      qrt = setTimeout(() => ScrollTrigger.refresh(), 150);
     };
 
     EVENTS.forEach((e, i) => {
@@ -3645,8 +3647,13 @@
       box.className = "qr sqr " + (s.cls || "");
       box.innerHTML = `<div class="qb"></div><div class="bs"><b>QR riêng · ${s.name}</b><span class="qh">Quét để mở thẳng phần ${s.name}.</span><button type="button" data-a="c">Sao chép liên kết</button><button type="button" data-a="d">Tải QR (PNG)</button><button type="button" data-a="p">In QR</button><span class="qm"></span></div>`;
       const qb = $(".qb", box), qm = $(".qm", box), msg = (t) => (qm.textContent = t);
-      if (window.QRCode) new QRCode(qb, { text: url, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
-      else msg("Chưa tải được thư viện QR (cần có mạng).");
+      let made = false;
+      box._mk = () => {
+        if (made) return;
+        made = true;
+        if (window.QRCode) new QRCode(qb, { text: url, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
+        else msg("Chưa tải được thư viện QR (cần có mạng).");
+      };
       const png = () => {
         const c = $("canvas", qb);
         if (!c) return "";
@@ -3680,10 +3687,12 @@
     $("#trk").appendChild(secQR({ id: "khoanh-khac", name: "Khoảnh khắc", cls: "sqr-ev" }));
     $("#c3").appendChild(secQR({ id: "thay-co", name: "Thầy cô" }));
     $("#mu").appendChild(secQR({ id: "am-nhac", name: "Âm nhạc" }));
-    $(".ftx").insertBefore(secQR({ id: "loi-chuc", name: "Lời chúc", cls: "fl sqr-final" }), $("#old-web"));
+    const mkQR = () => $$(".sqr").forEach((b) => b._mk && b._mk());
+    if (document.body.classList.contains("show-qr")) mkQR();
+    addEventListener("qrmode", mkQR);
 
     function slider(items, label) {
-      const arr = items.length ? items : ["", "", ""];
+      const arr = items && items.length ? items : ["", "", ""];
       return `<div class="sl"><div class="st">${arr.map((s, i) => `<div class="sd">${ph(label + " · ảnh " + (i + 1), s)}</div>`).join("")}</div><button class="pv2" aria-label="Ảnh trước">‹</button><button class="nx" aria-label="Ảnh sau">›</button><div class="ct"></div></div>`;
     }
     function initSlider(root) {
@@ -3700,6 +3709,7 @@
           xPercent: -100 * i,
           duration: 0.7,
           ease: "power3.out",
+          overwrite: "auto",
         });
         ct.textContent = `${i + 1} / ${n}`;
       };
@@ -3715,14 +3725,17 @@
     }
 
     const view = $("#view");
-    let open = false;
+    let open = false,
+      pushed = false; // true nếu trang chi tiết được mở bằng 1 bước lịch sử (từ trang chủ)
     function show(html) {
+      gsap.killTweensOf($$(".st,.dt>*,.dt .rt>*", view)); // dọn tween của nội dung cũ
       view.innerHTML = `<button class="x">Đóng ✕</button>` + html;
       view.scrollTop = 0;
       $(".x", view).onclick = close;
       initSlider(view);
       if (!open) {
         open = true;
+        gsap.killTweensOf(view); // tránh tween đóng cũ còn chạy đè lên tween mở
         view.style.display = "block";
         lock(true);
         gsap.fromTo(
@@ -3750,11 +3763,13 @@
     function hide() {
       if (!open) return;
       open = false;
+      gsap.killTweensOf(view);
       gsap.to(view, {
         clipPath: "inset(100% 0% 0% 0%)",
         duration: RM ? 0.01 : 0.7,
         ease: "power4.inOut",
         onComplete: () => {
+          if (open) return; // người dùng đã mở trang khác trong lúc đang đóng
           view.style.display = "none";
           view.innerHTML = "";
           lock(false);
@@ -3762,8 +3777,23 @@
       });
     }
     function close() {
-      location.hash ? history.back() : hide();
+      if (!location.hash) return hide();
+      // Mở thẳng từ link/QR (không có bước lịch sử của trang): đừng history.back() kẻo thoát khỏi website
+      if (!pushed) {
+        history.replaceState(null, "", location.pathname + location.search);
+        return hide();
+      }
+      pushed = false;
+      history.back();
     }
+    // Bạn trước/sau, thầy cô trước/sau: thay thế bước lịch sử để "Đóng" luôn đóng được ngay 1 lần
+    view.addEventListener("click", (e) => {
+      const a = e.target.closest(".mnv a, .tn a");
+      if (!a) return;
+      e.preventDefault();
+      history.replaceState(null, "", a.getAttribute("href"));
+      route();
+    });
     addEventListener("keydown", (e) => {
       if (e.key === "Escape" && open) close();
     });
@@ -3795,13 +3825,14 @@
         nx = TEACHERS[(ti + 1) % TEACHERS.length];
       show(`<div class="dt"><div class="big">${ph(t.name, t.photo)}</div><div class="rt"><p class="eb">Người lái đò ${pad(ti + 1)} / ${TEACHERS.length}${t.subject ? " · " + t.subject : ""}</p><h2>${t.name}</h2>
     <h4>Lời giới thiệu</h4><p>${t.intro || "Nội dung mẫu: thêm lời giới thiệu về thầy cô trong dữ liệu TEACHERS."}</p>
-    <h4>Những kỷ niệm</h4><p>${t.memories || "Nội dung mẫu: kỷ niệm của lớp với thầy cô sẽ hiển thị ở đây."}</p>
+    ${t.quote ? `<h4>Câu cô hay nói</h4><p class="tq">“${t.quote}”</p>` : ""}
+    ${t.memories ? `<h4>Những kỷ niệm</h4><p>${t.memories}</p>` : ""}
     <h4>Lời tri ân của tập thể 12T</h4><p>${t.thanks || "Nội dung mẫu: lời tri ân của tập thể lớp 12T gửi đến thầy cô."}</p>
     <div class="qr"><div class="qb" id="qb"></div><div class="bs"><b>QR riêng của trang này</b><button id="qc">Sao chép liên kết</button><button id="qd">Tải QR (PNG)</button><button id="qp">In QR</button><span id="qm"></span></div></div></div></div>
     <div class="gl">${slider(t.gallery, t.name)}</div>
     <div class="tn"><a href="#${slug(pv.name)}">← ${pv.name}</a><a href="#${slug(nx.name)}">${nx.name} →</a></div>`);
       const url = location.origin + location.pathname + "#" + slug(t.name);
-      if (window.QRCode)
+      if (window.QRCode && document.body.classList.contains("show-qr"))
         new QRCode($("#qb"), {
           text: url,
           width: 256,
@@ -3829,7 +3860,12 @@
         setTimeout(() => document.body.classList.remove("pr"), 500);
       };
     }
-    addEventListener("hashchange", route);
+    addEventListener("hashchange", () => {
+      const h = location.hash.slice(1);
+      if (!h || SECS[h]) pushed = false;
+      else if (!open) pushed = true;
+      route();
+    });
 
     const A = new Audio();
     A.preload = "metadata";
@@ -3898,8 +3934,12 @@
     };
     A.onplay = () => ($("#pp").textContent = "❚❚");
     A.onpause = () => ($("#pp").textContent = "▶");
+    let seeking = false;
+    $("#pg").addEventListener("pointerdown", () => (seeking = true));
+    ["pointerup", "pointercancel"].forEach((ev) => addEventListener(ev, () => (seeking = false)));
+    A.onerror = () => { if (A.getAttribute("src")) $("#msg").textContent = "Không phát được bài này (kiểm tra lại file âm thanh)."; };
     A.ontimeupdate = () => {
-      $("#pg").value = A.duration ? (A.currentTime / A.duration) * 1000 : 0;
+      if (!seeking) $("#pg").value = A.duration ? (A.currentTime / A.duration) * 1000 : 0;
       $("#tm").textContent = fmt(A.currentTime) + " / " + fmt(A.duration);
     };
     A.onloadedmetadata = A.ontimeupdate;
@@ -3929,8 +3969,14 @@
       vz = $("#vz"),
       vx = vz.getContext("2d");
     let off = 0,
-      tt = 0;
-    (function loop() {
+      tt = 0,
+      muVis = true,
+      muRun = false;
+    vx.fillStyle = "#c9a96a";
+    function vloop() {
+      if (!muVis) { muRun = false; return; }
+      muRun = true;
+      requestAnimationFrame(vloop);
       tt += 0.03;
       const pl = !A.paused && !A.ended;
       let en = 0;
@@ -3947,7 +3993,6 @@
           : 0.05;
         en += v;
         const h = Math.max(3, v * 80);
-        vx.fillStyle = "#c9a96a";
         vx.fillRect(i * 16.6 + 2, 90 - h, 10, h);
       }
       if (pl) off += 1.4 + (en / N) * 3;
@@ -3958,15 +4003,19 @@
           `translate(${x},${+n.dataset.y + (pl ? Math.sin(tt * 4 + x / 90) * 6 : 0)})`,
         );
       });
-      if (!RM || pl) requestAnimationFrame(loop);
-    })();
+    }
+    new IntersectionObserver((es) => {
+      muVis = es[0].isIntersecting;
+      if (muVis && !muRun) vloop();
+    }, { rootMargin: "100px" }).observe($("#mu"));
+    vloop();
 
     const cur_ = $("#cur");
     if (matchMedia("(hover:hover)").matches && !RM) {
       const mx = gsap.quickTo(cur_, "x", { duration: 0.3 }),
         my = gsap.quickTo(cur_, "y", { duration: 0.3 });
       addEventListener("pointermove", (e) => {
-        cur_.style.opacity = 1;
+        if (!cur_.style.opacity) cur_.style.opacity = 1;
         mx(e.clientX);
         my(e.clientY);
       });
@@ -4007,8 +4056,9 @@
         1.1,
       )
       .from("#enter", { opacity: 0, y: 20, duration: 0.8 }, 2.2);
+    let frFloat = null;
     if (!RM) {
-      gsap.to(".fr", {
+      frFloat = gsap.to(".fr", {
         y: "+=14",
         yoyo: true,
         repeat: -1,
@@ -4023,6 +4073,7 @@
           rotationY: x * 14,
           rotationX: -y * 10,
           duration: 1.2,
+          overwrite: "auto",
         });
       });
     }
@@ -4039,6 +4090,7 @@
         delay: 0.1,
         onComplete: () => {
           $("#intro").style.display = "none";
+          frFloat && frFloat.kill(); // intro đã ẩn: dừng tween lơ lửng vô hạn
           if (!open) lock(false);
           scrollTo(0, 0);
           ScrollTrigger.refresh();
@@ -4052,6 +4104,33 @@
         delay: RM ? 0 : 0.9,
       });
     }
+    /* ===== Tải trước ảnh của các trang sau (chạy ngầm, ưu tiên thấp) ===== */
+    (function preloadAll() {
+      const conn = navigator.connection || {};
+      if (conn.saveData) return; // tôn trọng chế độ tiết kiệm dữ liệu
+      const first = [
+        ...INTRO_PHOTOS, CLASS_PHOTO, CLASS_PHOTO_2,
+        ...MEMBERS.map((m) => m.photo), ...EVENTS.map((e) => e.cover), ...TEACHERS.map((t) => t.photo),
+      ]; // ảnh hiển thị sớm tải trước, ảnh bộ sưu tập tải sau
+      const raw = JSON.stringify([EVENTS, TEACHERS, MEMBERS]);
+      const urls = [...new Set([...first, ...(raw.match(/img\/[^"]+?\.(?:jpe?g|png|webp|gif)/gi) || [])])].filter(Boolean);
+      let idx = 0, active = 0;
+      const MAX = /2g/.test(conn.effectiveType || "") ? 1 : 3; // số ảnh tải song song
+      function next() {
+        while (active < MAX && idx < urls.length) {
+          const im = new Image(), u = urls[idx++];
+          active++;
+          // Chỉ làm ấm cache HTTP: không giữ tham chiếu, không decode trước hàng trăm ảnh -> đỡ tốn RAM
+          im.onload = im.onerror = () => { im.onload = im.onerror = null; active--; next(); };
+          im.decoding = "async";
+          if ("fetchPriority" in im) im.fetchPriority = "low";
+          im.src = encodeURI(u);
+        }
+      }
+      const start = () => ("requestIdleCallback" in window ? requestIdleCallback(next, { timeout: 1500 }) : setTimeout(next, 300));
+      document.readyState === "complete" ? start() : addEventListener("load", start);
+    })();
+
     $("#enter").onclick = enter;
     ["wheel", "touchmove"].forEach((ev) =>
       addEventListener(
@@ -4069,6 +4148,7 @@
     if (location.hash) {
       entered = true;
       $("#intro").style.display = "none";
+      frFloat && frFloat.kill();
       lock(false);
       route();
     }
@@ -4100,12 +4180,14 @@
           }),
         );
       });
-      gsap.from(".chh", {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: { trigger: ".chh", start: "top 85%" },
-      });
+      $$(".chh").forEach((h) =>
+        gsap.from(h, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          scrollTrigger: { trigger: h, start: "top 85%" },
+        }),
+      );
       $$(".m").forEach((m) => gsap.set(m, { opacity: 0, y: 60 }));
       ScrollTrigger.batch(".m", {
         start: "top 92%",
@@ -4191,7 +4273,7 @@
 
   </script>
 
-  <div id="wmodal" role="dialog" aria-modal="true" aria-labelledby="wt">
+  <div id="wmodal" role="dialog" aria-modal="true" aria-labelledby="wt" data-lenis-prevent>
     <div class="wbox">
       <p class="eb">Nhà giáo Việt Nam 20/11</p>
       <h3 id="wt">Gửi lời chúc</h3>
@@ -4232,19 +4314,25 @@
 
       $$(".m").forEach((m, i) => m.style.setProperty("--i", i % 7));
       const vis = new Set();
-      const io = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? vis.add(e.target) : vis.delete(e.target))), { rootMargin: "120px" });
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        e.isIntersecting ? vis.add(e.target) : vis.delete(e.target);
+        // animation "bob" của 31 thẻ chỉ chạy khi thẻ nằm gần màn hình
+        if (e.target.classList.contains("m")) e.target.style.animationPlayState = e.isIntersecting ? "running" : "paused";
+      }), { rootMargin: "120px" });
       $$(".m,#tl li,.ec").forEach((el) => io.observe(el));
 
-      const orbs = $$("#depth i").map((el) => ({ el, z: +el.dataset.z, x: +el.dataset.x, y: +el.dataset.y, s: el.classList.contains("sph") }));
+      const orbs = $$("#depth i").map((el) => ({ el, z: +el.dataset.z, x: +el.dataset.x, y: +el.dataset.y, s: el.classList.contains("sph"), last: "" }));
       const hpc = $("#hp") && $("#hp").firstElementChild;
       const intro = $("#intro"), scene = $("#scene");
+      let Hh = innerHeight, Ww = innerWidth;
+      addEventListener("resize", () => { Hh = innerHeight; Ww = innerWidth; });
 
       (function loop() {
         requestAnimationFrame(loop);
         t += 0.016;
         if (touch && !hasGyro) { tx = Math.sin(t * 0.7) * 0.7; ty = Math.cos(t * 0.5) * 0.5; }
         gx += (tx - gx) * 0.06; gy += (ty - gy) * 0.06;
-        const H = innerHeight, Wd = innerWidth, sy = scrollY;
+        const H = Hh, Wd = Ww, sy = scrollY;
         orbs.forEach((o) => {
           let x, y;
           if (o.s) {
@@ -4255,15 +4343,19 @@
             y = o.y * H + Math.sin(sy / 900 + o.z * 6) * H * 0.12 + gy * o.z * 40;
             x = o.x * Wd + gx * o.z * 70;
           }
-          o.el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+          const tr = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+          if (tr !== o.last) { o.last = tr; o.el.style.transform = tr; } // không ghi style nếu không đổi
         });
         if (!touch || rm) return;
 
-        if (hpc) hpc.style.transform = `perspective(700px) rotateY(${(gx * 14).toFixed(2)}deg) rotateX(${(-gy * 10).toFixed(2)}deg) scale(1.03)`;
+        if (hpc && sy < H * 1.5) hpc.style.transform = `perspective(700px) rotateY(${(gx * 14).toFixed(2)}deg) rotateX(${(-gy * 10).toFixed(2)}deg) scale(1.03)`;
         if (intro && intro.style.display !== "none" && scene) gsap.set(scene, { rotationY: gx * 16, rotationX: -gy * 12 });
 
-        vis.forEach((el) => {
-          const r = el.getBoundingClientRect();
+        // Đọc toàn bộ rect trước, ghi style sau -> 1 lần layout/khung hình thay vì mỗi phần tử một lần
+        const rects = [];
+        vis.forEach((el) => rects.push(el, el.getBoundingClientRect()));
+        for (let i = 0; i < rects.length; i += 2) {
+          const el = rects[i], r = rects[i + 1];
           const ky = clamp(r.top + r.height / 2 - H / 2, -H / 2, H / 2) / (H / 2);
           const kx = clamp(r.left + r.width / 2 - Wd / 2, -Wd, Wd) / (Wd / 2);
           if (el.classList.contains("m")) {
@@ -4280,7 +4372,7 @@
             const k = (r.left + r.width / 2 - Wd / 2) / Wd;
             pf.style.transform = `perspective(800px) rotateY(${(-k * 34 + gx * 8).toFixed(2)}deg) rotateX(${(gy * 6).toFixed(2)}deg) translateZ(${(-Math.abs(k) * 70).toFixed(1)}px)`;
           }
-        });
+        }
       })();
     })();
   </script>
@@ -4296,9 +4388,13 @@
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp }
-      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    // SDK Firebase khá nặng -> chỉ nạp khi người xem sắp tới phần cuối / mở lời chúc (hoặc rảnh sau khi trang tải xong)
+    let FB = null;
+    const loadFB = () =>
+      FB || (FB = Promise.all([
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
+      ]).then(([a, f]) => ({ ...a, ...f })));
 
     const firebaseConfig = {
       apiKey: "AIzaSyDMwrIAcbnC6sS_37UiyO0F2JB07NcVbD0", // <-- DÁN apiKey của bạn vào đây
@@ -4357,14 +4453,17 @@
       emptyMsg();
     }
     function closeWall() { wall.classList.remove("on"); lk(false); }
-    g("wall-open").onclick = openWall;
+    g("wall-open").onclick = () => { connect(); openWall(); };
     g("wall-close").onclick = closeWall;
 
-    if (firebaseConfig.apiKey) {
-      try {
-        db = getFirestore(initializeApp(firebaseConfig));
-        onSnapshot(
-          query(collection(db, "wishes"), orderBy("createdAt", "desc"), limit(300)),
+    let connecting = null;
+    function connect() {
+      if (connecting) return connecting;
+      if (!firebaseConfig.apiKey) { emptyMsg(); return (connecting = Promise.resolve()); }
+      return (connecting = loadFB().then((m) => {
+        db = m.getFirestore(m.initializeApp(firebaseConfig));
+        m.onSnapshot(
+          m.query(m.collection(db, "wishes"), m.orderBy("createdAt", "desc"), m.limit(300)),
           (snap) => {
             list = snap.docs.map((d) => d.data()); bag = [];
             wcount.textContent = list.length ? "(" + list.length + ")" : "";
@@ -4373,12 +4472,15 @@
           },
           () => { wempty.textContent = "Không tải được lời chúc. Kiểm tra lại quy tắc Firestore."; },
         );
-      } catch (e) { wempty.textContent = "Không kết nối được Firebase."; }
-    } else { emptyMsg(); }
+      }).catch(() => { connecting = null; wempty.textContent = "Không kết nối được Firebase."; }));
+    }
+    new IntersectionObserver((es) => { if (es[0].isIntersecting) connect(); }, { rootMargin: "100% 0px" }).observe(g("final"));
+    const idle = () => ("requestIdleCallback" in window ? requestIdleCallback(connect, { timeout: 6000 }) : setTimeout(connect, 4000));
+    document.readyState === "complete" ? idle() : addEventListener("load", idle);
 
     // ===== Form gửi (không cần mật khẩu) =====
     const modal = g("wmodal"), msg = g("wmsg"), send = g("wsend");
-    g("wopen").onclick = () => { msg.textContent = ""; modal.classList.add("on"); g("wname").focus(); };
+    g("wopen").onclick = () => { connect(); msg.textContent = ""; modal.classList.add("on"); g("wname").focus(); };
     const close = () => modal.classList.remove("on");
     g("wclose").onclick = close;
     modal.addEventListener("pointerdown", (e) => { if (e.target === modal) close(); });
@@ -4386,12 +4488,14 @@
 
     send.onclick = async () => {
       const name = g("wname").value.trim(), text = g("wtext").value.trim();
-      if (!db) { msg.textContent = "Chưa kết nối được Firebase."; return; }
       if (!name || text.length < 5) { msg.textContent = "Vui lòng nhập tên và lời chúc."; return; }
       send.disabled = true;
       msg.textContent = "Đang gửi…";
+      await connect();
+      if (!db) { msg.textContent = "Chưa kết nối được Firebase."; send.disabled = false; return; }
       try {
-        await addDoc(collection(db, "wishes"), { name, text, createdAt: serverTimestamp() });
+        const m = await loadFB();
+        await m.addDoc(m.collection(db, "wishes"), { name, text, createdAt: m.serverTimestamp() });
         g("wname").value = g("wtext").value = "";
         msg.textContent = "Đã gửi. Cảm ơn thầy cô!";
         setTimeout(close, 1200);
