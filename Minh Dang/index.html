@@ -2239,9 +2239,13 @@
     #depth {
       position: fixed;
       inset: 0;
+      height: 100vh;
+      height: 100lvh; /* cao cố định theo viewport lớn nhất -> thanh địa chỉ hiện/ẩn không làm quả cầu nhảy */
       z-index: -1;
       pointer-events: none;
       overflow: hidden;
+      contain: layout paint;
+      transform: translateZ(0);
       background: linear-gradient(160deg, #dbe6ff 0%, #efe4ff 48%, #ffe6ee 100%);
     }
 
@@ -2251,6 +2255,7 @@
       top: 0;
       border-radius: 50%;
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     #depth i.sph {
@@ -4323,9 +4328,16 @@
 
       const orbs = $$("#depth i").map((el) => ({ el, z: +el.dataset.z, x: +el.dataset.x, y: +el.dataset.y, s: el.classList.contains("sph"), last: "" }));
       const hpc = $("#hp") && $("#hp").firstElementChild;
-      const intro = $("#intro"), scene = $("#scene");
-      let Hh = innerHeight, Ww = innerWidth;
-      addEventListener("resize", () => { Hh = innerHeight; Ww = innerWidth; });
+      const intro = $("#intro"), scene = $("#scene"), depth = $("#depth");
+      // Chiều cao ổn định (100lvh): không đổi khi thanh địa chỉ trình duyệt co/giãn lúc scroll
+      const stableH = () => (depth && depth.offsetHeight) || innerHeight;
+      let Hh = stableH(), Ww = innerWidth;
+      addEventListener("resize", () => {
+        // Trên điện thoại, resize chỉ đổi chiều cao (thanh địa chỉ) -> bỏ qua, chỉ cập nhật khi xoay màn hình / đổi chiều rộng
+        if (touch && Math.abs(innerWidth - Ww) < 2) return;
+        Hh = stableH(); Ww = innerWidth;
+      });
+      let ss = scrollY, frame = 0; // ss: vị trí scroll đã làm mượt cho quả cầu
 
       (function loop() {
         requestAnimationFrame(loop);
@@ -4333,20 +4345,25 @@
         if (touch && !hasGyro) { tx = Math.sin(t * 0.7) * 0.7; ty = Math.cos(t * 0.5) * 0.5; }
         gx += (tx - gx) * 0.06; gy += (ty - gy) * 0.06;
         const H = Hh, Wd = Ww, sy = scrollY;
+        // scrollY đọc trên main thread bị lệch nhịp so với cuộn gốc của điện thoại -> làm mượt để hết giật
+        ss += (sy - ss) * 0.2;
+        if (Math.abs(sy - ss) < 0.05) ss = sy;
         orbs.forEach((o) => {
           let x, y;
           if (o.s) {
             const span = H + 240;
-            y = ((((o.y * H - sy * o.z * 0.5) % span) + span) % span) - 120;
+            y = ((((o.y * H - ss * o.z * 0.5) % span) + span) % span) - 120;
             x = o.x * Wd + gx * o.z * 60 + Math.sin(t + o.z * 9) * 10;
           } else {
-            y = o.y * H + Math.sin(sy / 900 + o.z * 6) * H * 0.12 + gy * o.z * 40;
+            y = o.y * H + Math.sin(ss / 900 + o.z * 6) * H * 0.12 + gy * o.z * 40;
             x = o.x * Wd + gx * o.z * 70;
           }
           const tr = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
           if (tr !== o.last) { o.last = tr; o.el.style.transform = tr; } // không ghi style nếu không đổi
         });
         if (!touch || rm) return;
+        // Phần nghiêng 3D các thẻ nặng (getBoundingClientRect + nhiều style) -> chạy 1 khung / 2 để nhường main thread cho quả cầu
+        if (++frame & 1) return;
 
         if (hpc && sy < H * 1.5) hpc.style.transform = `perspective(700px) rotateY(${(gx * 14).toFixed(2)}deg) rotateX(${(-gy * 10).toFixed(2)}deg) scale(1.03)`;
         if (intro && intro.style.display !== "none" && scene) gsap.set(scene, { rotationY: gx * 16, rotationX: -gy * 12 });
