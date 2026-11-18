@@ -1167,6 +1167,219 @@
         border-radius: 50%;
         animation: sp 0.8s linear infinite;
       }
+      /* ===== Lật trang mượt hơn trên điện thoại / iOS ===== */
+      .lf,
+      .lb {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+      .leaf {
+        -webkit-transform-style: preserve-3d;
+        backface-visibility: visible;
+      }
+      #sp {
+        touch-action: pan-y pinch-zoom;
+      }
+      @media (max-width: 760px) {
+        .leaf .fr {
+          transition: none;
+          box-shadow: 0 2px 5px rgba(30, 20, 10, 0.3);
+        }
+        .leaf .fr::before,
+        .leaf .pc::before {
+          display: none;
+        }
+        .leaf .ph img {
+          filter: none;
+        }
+        #sp::after {
+          display: none;
+        }
+      }
+
+      /* ===== Thanh menu (giống trang index) ===== */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(12px + env(safe-area-inset-top, 0px)) 5vw 12px;
+        color: #f4ecda;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        background: linear-gradient(to bottom, rgba(7, 14, 32, 0.72), rgba(7, 14, 32, 0));
+        pointer-events: none;
+      }
+      .nav > * {
+        pointer-events: auto;
+      }
+      .logo {
+        display: block;
+        width: 100px;
+        cursor: pointer;
+      }
+      .logo img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      #mbtn {
+        display: none;
+      }
+      .nav .links {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .nav .links a {
+        position: relative;
+        padding: 8px 2px;
+        font-size: 12.5px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        color: #fff6df;
+        text-decoration: none;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 18px rgba(240, 215, 154, 0.35);
+        transition: color 0.3s, text-shadow 0.3s, transform 0.25s;
+      }
+      .nav .links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2px;
+        height: 2px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, transparent, #ffd36b, transparent);
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .nav .links a:hover,
+      .nav .links a.on {
+        color: #ffd36b;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 22px rgba(255, 211, 107, 0.75);
+      }
+      .nav .links a:hover {
+        transform: translateY(-1px);
+      }
+      .nav .links a:hover::after,
+      .nav .links a.on::after {
+        transform: scaleX(1);
+      }
+      @media (max-width: 800px) {
+        .nav {
+          padding: calc(10px + env(safe-area-inset-top, 0px)) 5vw 10px;
+          background: rgba(14, 23, 41, 0.82);
+          -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+          border-bottom: 1px solid rgba(240, 215, 154, 0.2);
+        }
+        .logo {
+          width: 44px;
+        }
+        .logo img {
+          height: 44px;
+          object-fit: contain;
+        }
+        #mbtn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          background: rgba(240, 215, 154, 0.14);
+          border: 1px solid rgba(240, 215, 154, 0.45);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+          transition: background 0.25s, border-color 0.25s;
+        }
+        #mbtn span {
+          display: block;
+          width: 18px;
+          height: 2px;
+          border-radius: 2px;
+          background: #f0d79a;
+          transition: transform 0.3s ease, opacity 0.25s ease;
+        }
+        .nav.open #mbtn {
+          background: #f0d79a;
+          border-color: #ffe8b3;
+        }
+        .nav.open #mbtn span {
+          background: #070e20;
+        }
+        .nav.open #mbtn span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+        .nav.open #mbtn span:nth-child(2) {
+          opacity: 0;
+        }
+        .nav.open #mbtn span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+        .nav .links {
+          position: fixed;
+          top: calc(68px + env(safe-area-inset-top, 0px));
+          right: 5vw;
+          transform: translateY(-10px) scale(0.96);
+          transform-origin: top right;
+          flex-direction: column;
+          align-items: stretch;
+          flex-wrap: nowrap;
+          gap: 8px;
+          padding: 12px;
+          min-width: 210px;
+          border-radius: 18px;
+          background: rgba(11, 22, 48, 0.96);
+          -webkit-backdrop-filter: blur(18px);
+          backdrop-filter: blur(18px);
+          box-shadow: 0 20px 44px rgba(0, 0, 0, 0.55);
+          border: 1px solid rgba(240, 215, 154, 0.42);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.28s;
+        }
+        .nav.open .links {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: translateY(0) scale(1);
+        }
+        .nav .links a {
+          padding: 13px 18px;
+          border-radius: 12px;
+          font-size: 13px;
+          letter-spacing: 0.1em;
+          white-space: nowrap;
+          color: #f4ecda;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(240, 215, 154, 0.18);
+          text-shadow: none;
+        }
+        .nav .links a::after {
+          display: none;
+        }
+        .nav .links a:active,
+        .nav .links a:hover,
+        .nav .links a.on {
+          background: linear-gradient(135deg, #f0d79a 0%, #c89d54 100%);
+          color: #070e20;
+          border-color: #ffe8b3;
+          transform: none;
+          text-shadow: none;
+        }
+      }
       @keyframes sp {
         to {
           transform: rotate(360deg);
@@ -1211,6 +1424,35 @@
     </style>
   </head>
   <body>
+    <nav class="nav" id="topnav">
+      <a class="logo" href="index.html" aria-label="Về trang chủ"><img src="img/logo.png" alt="Logo 12T" /></a>
+      <button type="button" id="mbtn" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="links" id="nlinks">
+        <a href="index.html#thanh-vien">Thành viên</a>
+        <a href="index.html#khoanh-khac">Khoảnh khắc</a>
+        <a href="index.html#thay-co">Thầy cô</a>
+        <a href="index.html#am-nhac">Âm nhạc</a>
+        <a href="kyniem.html" class="on">Kỷ niệm</a>
+      </div>
+    </nav>
+    <script>
+      (function () {
+        const nav = document.getElementById("topnav"),
+          btn = document.getElementById("mbtn");
+        const close = () => {
+          nav.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+        };
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          btn.setAttribute("aria-expanded", String(nav.classList.toggle("open")));
+        });
+        document.addEventListener("pointerdown", (e) => {
+          if (nav.classList.contains("open") && !nav.contains(e.target)) close();
+        });
+        addEventListener("keydown", (e) => e.key === "Escape" && close());
+      })();
+    </script>
     <div id="depth" aria-hidden="true">
       <i class="sph" style="--s: 16px; --c: #8fa4ff" data-z=".5" data-x=".12" data-y=".2"></i>
       <i class="sph" style="--s: 26px; --c: #ff9cc2" data-z=".9" data-x=".82" data-y=".35"></i>
@@ -1868,6 +2110,7 @@
         busy = true;
         if (document.activeElement) document.activeElement.blur();
 
+        const rev = mob && dir < 0; /* lật ngược trên điện thoại */
         /* Phát âm thanh lật trang giấy */
         playFlipSound();
 
@@ -1883,13 +2126,18 @@
             sg = 1;
           }
         } else {
-          l = mkLeaf("r", pageEl(v), null);
-          pR.replaceChildren(pageEl(v2, 1));
+          /* Điện thoại: tiến = trang hiện tại lật sang trái; lùi = trang trước lật ngược từ trái về phủ lên */
+          if (dir > 0) {
+            l = mkLeaf("r", pageEl(v), null);
+            pR.replaceChildren(pageEl(v2, 1));
+          } else {
+            l = mkLeaf("r", pageEl(v2), null);
+          }
         }
 
         /* Tạo bóng đổ động dưới trang giấy khi lật */
         const dropSd = document.createElement("div");
-        dropSd.className = "drop-sd " + (dir > 0 ? "R" : "L");
+        dropSd.className = "drop-sd " + (dir > 0 || mob ? "R" : "L");
         sp.append(dropSd, l);
 
         gsap
@@ -1905,21 +2153,21 @@
           })
           .fromTo(
             l,
-            { rotationY: 0, z: 0, rotationZ: 0 },
+            { rotationY: rev ? -180 : 0, z: 0, rotationZ: 0, force3D: true },
             {
                keyframes: [
                 {
-                  rotationY: 90 * sg,
-                  z: 36,
-                  rotationZ: sg * -1.4,
-                  duration: 0.52 * D,
+                  rotationY: rev ? -90 : 90 * sg,
+                  z: mob ? 18 : 36,
+                  rotationZ: mob ? 0 : sg * -1.4,
+                  duration: (mob ? 0.38 : 0.52) * D,
                   ease: "sine.in",
                 },
                 {
-                  rotationY: 180 * sg,
+                  rotationY: rev ? 0 : 180 * sg,
                   z: 0,
                   rotationZ: 0,
-                  duration: 0.58 * D,
+                  duration: (mob ? 0.42 : 0.58) * D,
                   ease: "sine.out",
                 },
               ],
