@@ -1478,7 +1478,7 @@
     <div id="rd" hidden role="dialog" aria-modal="true" aria-label="Album">
       <div class="rd-top">
         <button id="sndBtn" type="button" title="Bật/Tắt âm thanh sách">
-          🔊 Âm thanh
+          Âm thanh
         </button>
         <button id="rx" type="button">Đóng sách ✕</button>
       </div>
@@ -2354,7 +2354,8 @@
         playBookSound(true);
         cur = { id: a.id, a, ph: new Map(), max: -1 };
         v = 0;
-        let opened = false;
+        let opened = false,
+          opening = true;
         const first = new Promise((res) => {
           unsub = onSnapshot(
             query(collection(db, "albums", a.id, "photos"), orderBy("idx")),
@@ -2364,7 +2365,10 @@
               );
               cur.max = Math.max(-1, ...cur.ph.keys());
               if (opened) {
-                if (busy || document.activeElement?.classList.contains("nt"))
+                if (
+                  (busy && !opening) ||
+                  document.activeElement?.classList.contains("nt")
+                )
                   dirty = true;
                 else paint();
               }
@@ -2400,7 +2404,9 @@
         });
         gsap.set(slot, { autoAlpha: 0 });
         document.body.style.overflow = "hidden";
-        await first;
+        /* Không chờ mạng: chỉ đợi tối đa 0,4s, ảnh tải xong sẽ tự hiện vào trang */
+        await Promise.race([first, new Promise((r) => setTimeout(r, 400))]);
+        opened = true;
         paint();
         await gsap
           .timeline()
@@ -2437,7 +2443,7 @@
           )
           .to(g, { autoAlpha: 0, duration: 0.3 * D }, ">-0.1");
         g.remove();
-        opened = true;
+        opening = false;
         busy = false;
         if (dirty) paint();
       }
