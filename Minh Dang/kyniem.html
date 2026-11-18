@@ -1,0 +1,2298 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1630" />
+    <meta name="color-scheme" content="dark" />
+    <title>Kỷ Niệm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600&family=Caveat:wght@500;700&family=Cormorant+Upright:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Spectral+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0e1729;
+        --deep: #070e20;
+        --paper: #f5ebd6;
+        --ink: #f4ecda;
+        --mut: #bcc5d9;
+        --gold: #c9a050;
+        --gold-lt: #f5de9e;
+        --gold-dk: #7e5b20;
+        --ln: rgba(244, 236, 218, 0.2);
+        --f1: "Playfair Display", Georgia, serif;
+        --f-antique: "Cormorant Upright", "Playfair Display", Georgia, serif;
+        --f-sc: "Spectral SC", "Playfair Display", serif;
+        --f2: "Be Vietnam Pro", system-ui, sans-serif;
+        --hand: "Caveat", cursive;
+        --p: 420px;
+        --bw: clamp(165px, 20vw, 235px);
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        -webkit-text-size-adjust: 100%;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font: 400 16px/1.65 var(--f2);
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+      #depth {
+        position: fixed;
+        inset: 0;
+        height: 100vh;
+        height: 100lvh;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+        contain: layout paint;
+        transform: translateZ(0);
+      }
+      #depth i.sph {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 50%;
+        width: var(--s);
+        height: var(--s);
+        background: radial-gradient(
+          circle at 30% 28%,
+          #fff 0,
+          var(--c) 38%,
+          rgba(40, 40, 110, 0.55) 100%
+        );
+        box-shadow:
+          inset -3px -5px 9px rgba(0, 0, 0, 0.18),
+          0 12px 22px rgba(60, 60, 130, 0.25);
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      .eb {
+        font: 700 11px/1 var(--f2);
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold-lt);
+      }
+      .hero {
+        min-height: 62vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 14vh 6vw 4vh;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .hero h1 {
+        font: 700 clamp(68px, 13vw, 175px)/0.95 var(--f-antique);
+        margin: 18px 0 20px;
+        overflow: hidden;
+        padding-bottom: 0.08em;
+        color: #ffd36b;
+        text-shadow:
+          0 2px 14px rgba(255, 211, 107, 0.4),
+          0 4px 20px rgba(0, 0, 0, 0.65);
+      }
+      .hero h1 span {
+        display: inline-block;
+      }
+      .hero p.sub {
+        max-width: 36ch;
+        color: var(--mut);
+        font-size: 18px;
+      }
+      .bt {
+        display: inline-block;
+        padding: 14px 30px;
+        background: rgba(184, 149, 90, 0.16);
+        color: var(--ink);
+        border: 1px solid var(--gold);
+        border-radius: 2px;
+        font: 600 12px/1 var(--f2);
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        transition:
+          transform 0.25s,
+          background 0.25s,
+          color 0.25s;
+      }
+      .bt:hover {
+        transform: translateY(-2px);
+        background: var(--gold);
+        color: var(--deep);
+      }
+      .bt.ghost {
+        background: none;
+        color: var(--ink);
+        border: 1px solid var(--ln);
+      }
+      .bt.ghost:hover {
+        border-color: var(--gold-lt);
+        color: var(--gold-lt);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .bt.dg {
+        background: #7a1f2b;
+        border-color: #9e2a39;
+        color: #f4ecda;
+      }
+      .bt.dg:hover {
+        background: #9e2a39;
+        color: #fff;
+      }
+      .hero .bt {
+        margin-top: 30px;
+        align-self: flex-start;
+      }
+      #lib {
+        padding: 6vh 6vw 16vh;
+        max-width: 1300px;
+        margin: auto;
+      }
+      #shelf {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, var(--bw));
+        gap: 95px 6vw;
+        justify-content: center;
+        perspective: 1100px;
+      }
+      #shelf > p {
+        grid-column: 1/-1;
+        text-align: center;
+        color: var(--mut);
+      }
+      .slot {
+        position: relative;
+        width: var(--bw);
+        --c: #1d4231;
+      }
+      .slot::after {
+        content: "";
+        position: absolute;
+        left: -30px;
+        right: -30px;
+        bottom: -26px;
+        height: 16px;
+        background: linear-gradient(180deg, #3c291a 0%, #24170d 65%, #140c06 100%);
+        border-top: 1px solid rgba(245, 222, 158, 0.45);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+        border-radius: 3px;
+        box-shadow: 0 16px 28px rgba(0, 0, 0, 0.78);
+        z-index: -1;
+      }
+      .bkw {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2/3;
+        perspective: 1400px;
+        cursor: pointer;
+      }
+      .bkw::before {
+        content: "";
+        position: absolute;
+        left: 4%;
+        right: -12%;
+        bottom: -14px;
+        height: 24px;
+        background: radial-gradient(
+          ellipse,
+          rgba(0, 0, 0, 0.85),
+          transparent 72%
+        );
+        filter: blur(6px);
+      }
+      .bk {
+        --t: calc(var(--bw) * 0.19);
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        transform: rotateY(-28deg) rotateX(2deg);
+        transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .bkw:hover .bk {
+        transform: rotateY(-8deg) rotateX(0deg) translateY(-14px) scale(1.02);
+      }
+      .cv {
+        position: absolute;
+        inset: 0;
+        transform: translateZ(calc(var(--t) / 2));
+      }
+      .bak {
+        position: absolute;
+        inset: 0;
+        transform: translateZ(calc(var(--t) / -2));
+        background: linear-gradient(135deg, var(--c), #0d0805);
+        border-radius: 3px 8px 8px 3px;
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+      }
+      /* Gáy sách cổ điển có gân nổi mạ vàng (Antique Spine with Raised Bands) */
+      .spn {
+        position: absolute;
+        top: 0;
+        left: calc(var(--t) / -2);
+        width: var(--t);
+        height: 100%;
+        transform: rotateY(-90deg);
+        background:
+          /* Các gờ nổi và hoa văn mạ vàng trên gáy sách */
+          linear-gradient(
+            180deg,
+            transparent 4%,
+            rgba(245, 222, 158, 0.7) 4.5%,
+            rgba(126, 91, 32, 0.85) 5.5%,
+            rgba(0, 0, 0, 0.6) 6.2%,
+            transparent 7%,
+            transparent 18%,
+            rgba(0, 0, 0, 0.5) 18.5%,
+            rgba(245, 222, 158, 0.8) 19.3%,
+            rgba(180, 136, 52, 0.9) 20.5%,
+            rgba(0, 0, 0, 0.7) 21.3%,
+            transparent 22%,
+            transparent 78%,
+            rgba(0, 0, 0, 0.5) 78.5%,
+            rgba(245, 222, 158, 0.8) 79.3%,
+            rgba(180, 136, 52, 0.9) 80.5%,
+            rgba(0, 0, 0, 0.7) 81.3%,
+            transparent 82%,
+            transparent 93%,
+            rgba(245, 222, 158, 0.7) 93.8%,
+            rgba(126, 91, 32, 0.85) 94.8%,
+            rgba(0, 0, 0, 0.6) 95.5%,
+            transparent 96%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.65) 0%,
+            rgba(255, 255, 255, 0.08) 28%,
+            rgba(255, 240, 200, 0.18) 52%,
+            rgba(0, 0, 0, 0.55) 100%
+          ),
+          var(--c);
+        border-left: 1px solid rgba(245, 222, 158, 0.35);
+        border-right: 1px solid rgba(245, 222, 158, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .spn span {
+        writing-mode: vertical-rl;
+        font: 700 12px var(--f-sc);
+        color: #f7e3a8;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        white-space: nowrap;
+        max-height: 52%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      /* Cạnh trang giấy mạ vàng cổ điển */
+      .pgs {
+        position: absolute;
+        top: 1.8%;
+        bottom: 1.8%;
+        right: calc(var(--t) / -2);
+        width: var(--t);
+        transform: rotateY(90deg);
+        background:
+          linear-gradient(180deg, rgba(0,0,0,0.25), transparent 10%, transparent 90%, rgba(0,0,0,0.25)),
+          repeating-linear-gradient(
+            90deg,
+            #e8d7b4 0 1.5px,
+            #c5ae82 1.5px 3px
+          );
+        box-shadow: inset 0 0 8px rgba(80, 50, 15, 0.45);
+      }
+
+      /* BÌA SÁCH CỔ KÍNH MẠ VÀNG (ANTIQUE ORNATE BOOK COVER) */
+      .cvr {
+        position: absolute;
+        inset: 0;
+        container-type: inline-size;
+        background:
+          /* Ánh kim patina cổ điển ở tâm bìa */
+          radial-gradient(
+            ellipse at 52% 46%,
+            rgba(235, 195, 95, 0.24) 0%,
+            rgba(180, 135, 45, 0.08) 42%,
+            rgba(0, 0, 0, 0.58) 100%
+          ),
+          /* Vân da sần nhẹ */
+          repeating-radial-gradient(
+            circle at 25% 35%,
+            rgba(255, 255, 255, 0.025) 0 1px,
+            transparent 1px 4px
+          ),
+          repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.08) 0 2px,
+            transparent 2px 5px
+          ),
+          linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--c) 95%, #d4af37) 0%,
+            var(--c) 45%,
+            color-mix(in srgb, var(--c) 50%, #050302) 100%
+          );
+        border-radius: 3px 9px 9px 3px;
+        overflow: hidden;
+        box-shadow:
+          /* Rãnh gáy sách (Book Hinge Groove) */
+          inset 11px 0 14px -4px rgba(0, 0, 0, 0.78),
+          inset 14px 0 3px -1px rgba(245, 222, 158, 0.28),
+          /* Viền nổi 3D quanh mép sách */
+          inset 0 0 0 1.5px rgba(245, 222, 158, 0.42),
+          inset 0 0 18px rgba(0, 0, 0, 0.7);
+      }
+      .cvr img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: sepia(0.32) contrast(1.06) brightness(0.86);
+      }
+      /* Lớp hoa văn SVG mạ vàng trên bìa */
+      .orn-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
+      }
+      .cvr:not(.ni) .orn-svg {
+        opacity: 0.78;
+      }
+      .cvr .ct {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        padding: 16cqw 11cqw 11cqw 14cqw;
+        color: #f4ecda;
+        background: linear-gradient(
+          transparent,
+          rgba(12, 8, 5, 0.85) 45%,
+          rgba(8, 5, 3, 0.94) 100%
+        );
+        display: flex;
+        flex-direction: column;
+        gap: 2cqw;
+        justify-content: flex-end;
+        text-align: center;
+      }
+      /* Khi dùng bìa mặc định cổ điển (không tải ảnh riêng) */
+      .cvr.ni .ct {
+        top: 0;
+        background: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 18cqw 15cqw 18cqw 17cqw;
+      }
+      .cvr .ct-orn-top,
+      .cvr .ct-orn-bot {
+        color: var(--gold-lt);
+        font-size: 5.5cqw;
+        line-height: 1;
+        letter-spacing: 0.25em;
+        opacity: 0.9;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+      }
+      .cvr h3 {
+        font: 700 11.5cqw/1.12 var(--f-antique);
+        letter-spacing: 0.03em;
+        /* Hiệu ứng chữ dập vàng kim (Embossed Gold Foil Text) */
+        background: linear-gradient(
+          180deg,
+          #fff8db 0%,
+          #f5d78c 38%,
+          #c99738 72%,
+          #f7e2a4 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.9));
+        overflow-wrap: anywhere;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        padding: 1cqw 0;
+      }
+      .cvr p {
+        font: italic 500 5.4cqw/1.38 var(--f1);
+        color: #ecdec0;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+        opacity: 0.95;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-top: 1cqw;
+      }
+      .tools {
+        position: absolute;
+        top: -14px;
+        right: -8px;
+        display: flex;
+        gap: 6px;
+        opacity: 0;
+        transition: opacity 0.25s;
+        z-index: 3;
+      }
+      .slot:hover .tools,
+      .slot:focus-within .tools {
+        opacity: 1;
+      }
+      @media (hover: none) {
+        .tools {
+          opacity: 1;
+        }
+      }
+      .tools button {
+        padding: 6px 10px;
+        font: 700 10px var(--f2);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: var(--deep);
+        color: var(--gold-lt);
+        border: 1px solid rgba(240, 215, 154, 0.45);
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .tools button:hover {
+        background: var(--gold);
+        color: var(--deep);
+      }
+      .addt .addb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2/3;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1.5px dashed rgba(240, 215, 154, 0.45);
+        border-radius: 4px 10px 10px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px;
+        text-align: center;
+        color: var(--mut);
+        transition:
+          background 0.3s,
+          border-color 0.3s,
+          transform 0.3s;
+      }
+      .addt .addb:hover {
+        background: rgba(184, 149, 90, 0.14);
+        border-color: var(--gold-lt);
+        transform: translateY(-6px);
+      }
+      .addb i {
+        font: 300 54px/1 var(--f1);
+        color: var(--gold-lt);
+        font-style: normal;
+      }
+      .addb b {
+        font: 700 12px var(--f2);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .addb span {
+        font-size: 13px;
+      }
+
+      /* ---------- TRÌNH ĐỌC SÁCH (BOOK READER) ---------- */
+      #rd {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: radial-gradient(
+          ellipse at 50% 42%,
+          #1f2a48 0%,
+          #0c1428 58%,
+          #040812 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+      }
+      #sp {
+        position: relative;
+        width: calc(var(--p) * 2);
+        height: calc(var(--p) * 1.48);
+        perspective: 2800px;
+        isolation: isolate;
+      }
+      /* Đế bìa da cứng đỡ bên dưới trang giấy */
+      #sp::before {
+        content: "";
+        position: absolute;
+        inset: -12px -16px;
+        background:
+          linear-gradient(
+            90deg,
+            #1e130c 0%,
+            #382417 47%,
+            #120b06 50%,
+            #382417 53%,
+            #1e130c 100%
+          );
+        border: 2px solid #b58d3d;
+        outline: 1px solid rgba(245, 222, 158, 0.35);
+        outline-offset: -6px;
+        border-radius: 8px;
+        box-shadow:
+          0 35px 90px rgba(0, 0, 0, 0.88),
+          0 8px 25px rgba(0, 0, 0, 0.7);
+        z-index: -2;
+      }
+      /* Xấp giấy dày hai bên mép sách */
+      #sp::after {
+        content: "";
+        position: absolute;
+        inset: -4px -7px;
+        background: repeating-linear-gradient(
+          90deg,
+          #dfd3bc 0 1px,
+          #b8a686 1px 2px
+        );
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+      #rd.m1 #sp {
+        width: var(--p);
+      }
+      .pg {
+        position: absolute;
+        top: 0;
+        width: var(--p);
+        height: 100%;
+      }
+      .pg.L {
+        left: 0;
+        border-radius: 4px 0 0 4px;
+      }
+      .pg.R {
+        left: var(--p);
+        border-radius: 0 4px 4px 0;
+      }
+      #rd.m1 .pg.L {
+        display: none;
+      }
+      #rd.m1 .pg.R {
+        left: 0;
+        border-radius: 4px;
+      }
+
+      /* Trang giấy kem hoài cổ có bóng rãnh gáy sách sâu */
+      .paper {
+        background-color: #f4ead5;
+        color: #2a2118;
+        background-image:
+          radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(135, 100, 55, 0.14) 100%
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(120, 90, 50, 0.02) 0 1px,
+            transparent 1px 3px
+          );
+      }
+      .paper.R {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(35, 20, 8, 0.34) 0%,
+            rgba(60, 40, 20, 0.12) 5%,
+            rgba(255, 252, 240, 0.35) 11%,
+            transparent 18%
+          ),
+          radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(135, 100, 55, 0.15) 100%
+          ),
+          #f4ead5;
+        box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.15);
+      }
+      .paper.L {
+        background:
+          linear-gradient(
+            270deg,
+            rgba(35, 20, 8, 0.34) 0%,
+            rgba(60, 40, 20, 0.12) 5%,
+            rgba(255, 252, 240, 0.35) 11%,
+            transparent 18%
+          ),
+          radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(135, 100, 55, 0.15) 100%
+          ),
+          #f4ead5;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.15);
+      }
+
+      /* BỐ CỤC 4 ẢNH POLAROID / TRANG (2x2 GRID) */
+      .pc {
+        position: absolute;
+        inset: 0;
+        padding: 6.5% 7.5% 8.5%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 4.5% 5%;
+      }
+      /* Hoa văn chìm góc trang giấy */
+      .pc::before {
+        content: "❦";
+        position: absolute;
+        top: 2.2%;
+        left: 50%;
+        translate: -50% 0;
+        font-size: calc(var(--p) * 0.032);
+        color: rgba(122, 95, 58, 0.35);
+        pointer-events: none;
+      }
+      .sl {
+        min-height: 0;
+        min-width: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+      }
+
+      /* KHUNG ẢNH POLAROID CÓ KHOẢNG TRỐNG GHI CHÚ BÊN DƯỚI */
+      .fr {
+        position: relative;
+        height: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        aspect-ratio: 1 / 1.28;
+        display: flex;
+        flex-direction: column;
+        background: #fcfaf5;
+        padding: 5.5% 5.5% 4%;
+        border-radius: 2px;
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+        transition:
+          transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.3s ease;
+        box-shadow:
+          0 1px 3px rgba(30, 20, 10, 0.28),
+          0 10px 20px -6px rgba(30, 20, 10, 0.38),
+          inset 0 0 0 1px rgba(180, 165, 140, 0.25);
+      }
+      .fr:not(.empty):hover {
+        transform: translate(0, -2px) rotate(0deg) scale(1.03);
+        box-shadow:
+          0 4px 8px rgba(30, 20, 10, 0.32),
+          0 16px 28px -6px rgba(30, 20, 10, 0.48);
+        z-index: 4;
+      }
+      /* Miếng băng dính giấy (Washi Tape) dán trên đầu ảnh Polaroid */
+      .fr:not(.empty)::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        width: 36%;
+        height: 13px;
+        translate: -50% 0;
+        transform: rotate(calc(var(--r) * -0.6));
+        background: rgba(235, 220, 185, 0.72);
+        border-left: 1px dashed rgba(160, 140, 105, 0.4);
+        border-right: 1px dashed rgba(160, 140, 105, 0.4);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .fr .ph {
+        flex: 0 0 68%;
+        width: 100%;
+        background: #dcd4c4;
+        overflow: hidden;
+        position: relative;
+        box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.35);
+      }
+      .ph img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: contrast(1.02) sepia(0.06);
+      }
+      /* Khoảng trống phía dưới khung Polaroid để hiển thị mô tả ảnh */
+      .nt {
+        flex: 1 1 32%;
+        width: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        padding: 5% 4% 2%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: 700 calc(var(--p) * 0.037)/1.18 var(--hand);
+        color: #2b231d;
+        outline: 0;
+        text-align: center;
+        word-break: break-word;
+        border-top: 1px solid rgba(180, 165, 140, 0.15);
+        margin-top: 3%;
+        cursor: text;
+      }
+      .nt::-webkit-scrollbar {
+        display: none;
+      }
+      .nt:empty::before {
+        content: attr(data-ph);
+        color: #a69c8a;
+        font-weight: 500;
+      }
+      .nt:focus {
+        background: rgba(201, 160, 80, 0.12);
+        border-radius: 2px;
+      }
+      .fr.empty {
+        background: rgba(255, 252, 245, 0.35);
+        box-shadow: none;
+        border: 1.5px dashed rgba(122, 102, 75, 0.45);
+        display: grid;
+        place-items: center;
+        padding: 0;
+      }
+      .add {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: #6e5c44;
+        font-size: calc(var(--p) * 0.036);
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        transition:
+          background 0.25s,
+          color 0.25s;
+        font-family: var(--hand);
+        font-weight: 700;
+      }
+      .add:hover {
+        background: rgba(184, 149, 90, 0.18);
+        color: #3d2e1b;
+      }
+      .add::first-line {
+        font-size: 1.8em;
+        line-height: 1;
+      }
+      .ac {
+        position: absolute;
+        top: 6%;
+        right: 7%;
+        display: flex;
+        gap: 5px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 3;
+      }
+      .fr:hover .ac,
+      .fr:focus-within .ac {
+        opacity: 1;
+      }
+      @media (hover: none) {
+        .ac {
+          opacity: 1;
+        }
+      }
+      .ac button {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(11, 22, 48, 0.85);
+        color: #f0d79a;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+        font-size: 13px;
+        line-height: 1;
+      }
+      .ac button:hover {
+        background: var(--gold);
+        color: var(--deep);
+      }
+      .pn {
+        position: absolute;
+        bottom: 2.5%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font: italic 600 calc(var(--p) * 0.028) var(--f-antique);
+        color: #6e5a42;
+        letter-spacing: 0.12em;
+      }
+      .ez {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 7%;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .pg.L .ez {
+        left: 0;
+      }
+      .pg.R .ez {
+        right: 0;
+      }
+      #rd.m1 .ez {
+        display: none;
+      }
+
+      /* HIỆU ỨNG LẬT TRANG 3D NÂNG CẤP (ENHANCED 3D PAGE FLIP) */
+      .leaf {
+        position: absolute;
+        top: 0;
+        width: var(--p);
+        height: 100%;
+        transform-style: preserve-3d;
+        will-change: transform;
+        z-index: 5;
+      }
+      .leaf.r {
+        left: var(--p);
+        transform-origin: 0 50%;
+      }
+      .leaf.l {
+        left: 0;
+        transform-origin: 100% 50%;
+      }
+      #rd.m1 .leaf.r {
+        left: 0;
+      }
+      .lf,
+      .lb {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        overflow: hidden;
+      }
+      .leaf.r .lf,
+      .leaf.l .lb {
+        border-radius: 0 4px 4px 0;
+      }
+      .leaf.r .lb,
+      .leaf.l .lf {
+        border-radius: 4px 0 0 4px;
+      }
+      .lb {
+        transform: rotateY(180deg);
+      }
+      /* Lớp ánh sáng & bóng đổ trên bề mặt trang đang uốn cong */
+      .sd {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(20, 12, 5, 0.55) 0%,
+          rgba(40, 25, 10, 0.18) 25%,
+          rgba(255, 252, 240, 0.28) 55%,
+          transparent 85%
+        );
+        opacity: 0;
+        pointer-events: none;
+      }
+      .leaf.l .sd {
+        transform: scaleX(-1);
+      }
+      /* Bóng đổ rơi xuống trang bên dưới khi trang sách lật qua */
+      .drop-sd {
+        position: absolute;
+        top: 0;
+        width: var(--p);
+        height: 100%;
+        pointer-events: none;
+        z-index: 4;
+        opacity: 0;
+        background: radial-gradient(
+          ellipse at 0% 50%,
+          rgba(15, 8, 2, 0.52) 0%,
+          rgba(15, 8, 2, 0.2) 45%,
+          transparent 75%
+        );
+      }
+      .drop-sd.L {
+        left: 0;
+        transform: scaleX(-1);
+      }
+      .drop-sd.R {
+        left: var(--p);
+      }
+      #rd.m1 .drop-sd.R {
+        left: 0;
+      }
+
+      .nv {
+        position: absolute;
+        top: 50%;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(11, 22, 48, 0.85);
+        color: var(--gold-lt);
+        border: 1px solid rgba(240, 215, 154, 0.45);
+        font: 28px/1 var(--f1);
+        translate: 0 -50%;
+        z-index: 6;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+        transition:
+          background 0.25s,
+          color 0.25s,
+          transform 0.2s;
+      }
+      .nv:hover:not(:disabled) {
+        background: var(--gold);
+        color: var(--deep);
+        transform: scale(1.06);
+      }
+      .nv:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+      #pv {
+        left: max(10px, 2vw);
+      }
+      #nx {
+        right: max(10px, 2vw);
+      }
+      /* Thanh công cụ góc trên bên phải khi đọc sách (Âm thanh + Đóng sách) */
+      .rd-top {
+        position: absolute;
+        top: calc(14px + env(safe-area-inset-top, 0px));
+        right: 16px;
+        z-index: 6;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      #rx,
+      #sndBtn {
+        background: rgba(7, 14, 32, 0.78);
+        color: var(--ink);
+        font: 600 11px var(--f2);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 10px 16px;
+        border: 1px solid var(--gold);
+        border-radius: 2px;
+        transition:
+          background 0.25s,
+          color 0.25s;
+      }
+      #sndBtn {
+        padding: 10px 13px;
+        letter-spacing: 0.1em;
+      }
+      #rx:hover,
+      #sndBtn:hover {
+        background: var(--gold);
+        color: var(--deep);
+      }
+      .gh {
+        position: fixed;
+        z-index: 70;
+        perspective: 2200px;
+        transform-origin: 0 0;
+      }
+      .gc {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        transform-origin: 0 50%;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+      }
+      .gf,
+      .gb {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+      }
+      .gb {
+        transform: rotateY(180deg);
+        border-radius: 4px 0 0 4px;
+        box-shadow: inset -8px 0 18px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Modals */
+      .md {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: rgba(5, 10, 24, 0.82);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        visibility: hidden;
+      }
+      .mb {
+        width: min(480px, 100%);
+        background: var(--deep);
+        color: var(--ink);
+        border: 1px solid var(--gold);
+        padding: 30px 28px;
+        border-radius: 3px;
+        display: grid;
+        gap: 16px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+      }
+      .mb label {
+        display: grid;
+        gap: 6px;
+        font: 600 11px var(--f2);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--mut);
+      }
+      .mb label i {
+        color: #ffd36b;
+        font-style: normal;
+      }
+      .mb input[type="text"],
+      .mb textarea {
+        font: 400 15px/1.5 var(--f2);
+        padding: 11px 13px;
+        border: 1px solid rgba(239, 230, 211, 0.25);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+        resize: none;
+        text-transform: none;
+        letter-spacing: 0;
+        outline: none;
+      }
+      .mb input[type="text"]:focus,
+      .mb textarea:focus {
+        border-color: var(--gold);
+      }
+      .mb input[type="file"] {
+        font: 400 13px var(--f2);
+        color: var(--mut);
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      .mb .bad {
+        border-color: #e8112d !important;
+        background: rgba(232, 17, 45, 0.12) !important;
+      }
+      .mb img {
+        width: 90px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+        border-radius: 2px;
+        border: 1px solid var(--ln);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+      .mb h2 {
+        font: 700 32px var(--f-antique);
+        color: #ffd36b;
+      }
+      #ld {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: rgba(7, 14, 32, 0.84);
+        backdrop-filter: blur(4px);
+        color: var(--gold-lt);
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 14px;
+        font: 700 22px var(--hand);
+      }
+      #ld span {
+        width: 34px;
+        height: 34px;
+        border: 3px solid rgba(240, 215, 154, 0.22);
+        border-top-color: var(--gold-lt);
+        border-radius: 50%;
+        animation: sp 0.8s linear infinite;
+      }
+      @keyframes sp {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      #ts {
+        position: fixed;
+        left: 50%;
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+        translate: -50% 0;
+        z-index: 100;
+        padding: 12px 20px;
+        background: var(--deep);
+        color: var(--gold-lt);
+        border: 1px solid var(--gold);
+        border-radius: 2px;
+        font-size: 14px;
+        max-width: 90vw;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+        visibility: hidden;
+      }
+      #ts.er {
+        background: #7a1f2b;
+        color: #fff;
+        border-color: #c8102e;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      @media (max-width: 760px) {
+        #shelf {
+          gap: 80px 8vw;
+        }
+        .nv {
+          width: 42px;
+          height: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="depth" aria-hidden="true">
+      <i class="sph" style="--s: 16px; --c: #8fa4ff" data-z=".5" data-x=".12" data-y=".2"></i>
+      <i class="sph" style="--s: 26px; --c: #ff9cc2" data-z=".9" data-x=".82" data-y=".35"></i>
+      <i class="sph" style="--s: 20px; --c: #ffd27a" data-z=".7" data-x=".5" data-y=".6"></i>
+      <i class="sph" style="--s: 40px; --c: #9fe3d6" data-z="1.5" data-x=".08" data-y=".75"></i>
+      <i class="sph" style="--s: 34px; --c: #b79cff" data-z="1.3" data-x=".9" data-y=".9"></i>
+      <i class="sph" style="--s: 46px; --c: #ffb38a" data-z="1.9" data-x=".6" data-y=".1"></i>
+    </div>
+
+    <header class="hero">
+      <p class="eb">12T – Galileo · Thư viện ảnh</p>
+      <h1 style="z-index: 10;"><span>Kỷ Niệm</span></h1>
+      <p class="sub">
+        Mỗi cuốn album giữ lại một mùa đã đi qua. Mở ra, lật từng trang và viết
+        thêm vài dòng.
+      </p>
+      <button class="bt" id="hAdd" type="button">Thêm album</button>
+    </header>
+    <main id="lib">
+      <div id="shelf"><p>Đang mở thư viện…</p></div>
+    </main>
+
+    <div id="rd" hidden role="dialog" aria-modal="true" aria-label="Album">
+      <div class="rd-top">
+        <button id="sndBtn" type="button" title="Bật/Tắt âm thanh sách">
+          🔊 Âm thanh
+        </button>
+        <button id="rx" type="button">Đóng sách ✕</button>
+      </div>
+      <button class="nv" id="pv" type="button" aria-label="Trang trước">
+        ‹
+      </button>
+      <div id="sp">
+        <div class="pg paper L" id="pL"></div>
+        <div class="pg paper R" id="pR"></div>
+      </div>
+      <button class="nv" id="nx" type="button" aria-label="Trang sau">›</button>
+    </div>
+
+    <div class="md" id="am">
+      <form class="mb" id="af" novalidate>
+        <p class="eb">Thư viện ảnh 12T</p>
+        <h2 id="at">Album mới</h2>
+        <label
+          >Tên album <i>*</i
+          ><input type="text" id="an" maxlength="60" autocomplete="off"
+        /></label>
+        <label
+          >Mô tả ngắn <i>*</i
+          ><textarea id="ad" rows="3" maxlength="140"></textarea>
+        </label>
+        <label
+          >Ảnh bìa (tùy chọn)<input type="file" id="acf" accept="image/*"
+        /></label>
+        <div
+          class="row"
+          style="justify-content: flex-start; align-items: center"
+        >
+          <img id="apv" alt="" hidden /><button
+            type="button"
+            class="bt ghost"
+            id="aclr"
+            hidden
+          >
+            Gỡ ảnh bìa
+          </button>
+        </div>
+        <div class="row">
+          <button type="button" class="bt ghost" id="ac">Hủy</button
+          ><button class="bt" type="submit">Lưu album</button>
+        </div>
+      </form>
+    </div>
+    <div class="md" id="cm">
+      <div class="mb">
+        <p id="cmt"></p>
+        <div class="row">
+          <button class="bt ghost" id="cn" type="button">Hủy</button
+          ><button class="bt dg" id="cy" type="button">Xóa</button>
+        </div>
+      </div>
+    </div>
+    <div id="ld" hidden>
+      <span></span>
+      <p id="ldt">Đang xử lý…</p>
+    </div>
+    <div id="ts" role="status"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      /* Hiệu ứng hạt cầu 3D nền đồng bộ với index.html */
+      (function () {
+        const orbs = [...document.querySelectorAll("#depth i.sph")].map(
+          (el) => ({
+            el,
+            z: +el.dataset.z,
+            x: +el.dataset.x,
+            y: +el.dataset.y,
+            last: "",
+          }),
+        );
+        let H = innerHeight,
+          W = innerWidth,
+          ss = scrollY,
+          t = 0;
+        addEventListener("resize", () => {
+          H = innerHeight;
+          W = innerWidth;
+        });
+        (function loop() {
+          requestAnimationFrame(loop);
+          t += 0.016;
+          const sy = scrollY;
+          ss += (sy - ss) * 0.2;
+          const span = H + 240;
+          orbs.forEach((o) => {
+            const y =
+              ((((o.y * H - ss * o.z * 0.5) % span) + span) % span) - 120;
+            const x = o.x * W + Math.sin(t + o.z * 9) * 14;
+            const tr = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+            if (tr !== o.last) {
+              o.last = tr;
+              o.el.style.transform = tr;
+            }
+          });
+        })();
+      })();
+    </script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        doc,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        getDocs,
+        onSnapshot,
+        query,
+        orderBy,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const app = initializeApp(
+        {
+          apiKey: "AIzaSyB7i461xD-LgUZJebajvVq7GxGcejssv5s",
+          authDomain: "project-2329692157346784773.firebaseapp.com",
+          projectId: "project-2329692157346784773",
+          storageBucket: "project-2329692157346784773.firebasestorage.app",
+          messagingSenderId: "399921039207",
+          appId: "1:399921039207:web:b39c57bae7a827b5d291c2",
+          measurementId: "G-9GK6HH2Q77",
+        },
+        "kyniem",
+      );
+      const db = getFirestore(app);
+      gsap.registerPlugin(ScrollTrigger);
+      const $ = (s, r = document) => r.querySelector(s),
+        D = matchMedia("(prefers-reduced-motion:reduce)").matches ? 0.01 : 1,
+        PER_PAGE = 4; /* 1 trang hiển thị đúng 4 ảnh Polaroid */
+
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const rd = $("#rd"),
+        sp = $("#sp"),
+        pL = $("#pL"),
+        pR = $("#pR");
+      let albums = [],
+        seen = new Set(),
+        ready = false,
+        bt = [],
+        cur = null,
+        unsub = null,
+        v = 0,
+        busy = false,
+        dirty = false,
+        P = 420,
+        mob = false,
+        shelfDirty = false,
+        tt;
+
+      /* ---------- BỘ TẠO ÂM THANH SÁCH CỔ ĐIỂN (WEB AUDIO SYNTHESIZER) ---------- */
+      let actx = null,
+        soundOn = true;
+      function getAudio() {
+        if (!soundOn) return null;
+        if (!actx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) actx = new AC();
+        }
+        if (actx && actx.state === "suspended") actx.resume();
+        return actx;
+      }
+
+      /* Âm thanh lật trang giấy cổ (Crisp Antique Paper Flip Sound) */
+      function playFlipSound() {
+        const ctx = getAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const dur = 0.34;
+        const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < data.length; i++) {
+          const p = i / data.length;
+          /* Đường bao âm thanh: sột soạt lúc nhấc mép trang và vuốt nhẹ khi hạ trang */
+          const env = Math.sin(p * Math.PI) * Math.pow(1 - p * 0.65, 1.6);
+          data[i] = (Math.random() * 2 - 1) * env;
+        }
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = "bandpass";
+        filter.frequency.setValueAtTime(1150, now);
+        filter.frequency.exponentialRampToValueAtTime(2600, now + dur * 0.45);
+        filter.frequency.exponentialRampToValueAtTime(850, now + dur);
+        filter.Q.value = 1.6;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.24, now + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.008, now + dur);
+
+        src.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        src.start(now);
+      }
+
+      /* Âm thanh mở / đóng bìa sách da dày (Antique Leather Book Open/Close Sound) */
+      function playBookSound(isOpen = true) {
+        const ctx = getAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        /* Tiếng trầm của bìa sách cứng */
+        const osc = ctx.createOscillator();
+        const tGain = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(isOpen ? 105 : 135, now);
+        osc.frequency.exponentialRampToValueAtTime(isOpen ? 46 : 36, now + 0.26);
+
+        tGain.gain.setValueAtTime(0.26, now);
+        tGain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+        osc.connect(tGain);
+        tGain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.29);
+
+        /* Tiếng sột soạt của gáy da và xấp trang giấy khi mở bìa */
+        setTimeout(() => playFlipSound(), isOpen ? 220 : 80);
+      }
+
+      $("#sndBtn").onclick = () => {
+        soundOn = !soundOn;
+        $("#sndBtn").textContent = soundOn ? "🔊 Âm thanh" : "🔇 Tắt tiếng";
+        if (soundOn) playFlipSound();
+      };
+
+      /* ---------- tiện ích UI ---------- */
+      function toast(m, er) {
+        const t = $("#ts");
+        t.textContent = m;
+        t.classList.toggle("er", !!er);
+        clearTimeout(tt);
+        gsap.killTweensOf(t);
+        gsap.fromTo(
+          t,
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.35 },
+        );
+        tt = setTimeout(
+          () => gsap.to(t, { autoAlpha: 0, duration: 0.4 }),
+          3200,
+        );
+      }
+      const loading = (on, m) => {
+        $("#ld").hidden = !on;
+        if (m) $("#ldt").textContent = m;
+      };
+      const mdo = (el, on) =>
+        on
+          ? (gsap.set(el, { autoAlpha: 1 }),
+            gsap.fromTo(
+              $(".mb", el),
+              { y: 28, autoAlpha: 0 },
+              { y: 0, autoAlpha: 1, duration: 0.45 * D, ease: "power3.out" },
+            ))
+          : gsap.to(el, { autoAlpha: 0, duration: 0.25 * D });
+      const ask = (t) =>
+        new Promise((res) => {
+          $("#cmt").textContent = t;
+          mdo($("#cm"), 1);
+          const f = (r) => {
+            mdo($("#cm"), 0);
+            res(r);
+          };
+          $("#cy").onclick = () => f(true);
+          $("#cn").onclick = () => f(false);
+        });
+      const fi = document.createElement("input");
+      fi.type = "file";
+      fi.accept = "image/*";
+      const pick = (m) =>
+        new Promise((res) => {
+          fi.multiple = !!m;
+          fi.value = "";
+          fi.onchange = () => res([...fi.files]);
+          fi.click();
+        });
+
+      /* Nén ảnh thành chuỗi Base64 (Data URL) vừa vặn để lưu trực tiếp vào Firestore */
+      async function shrink(f) {
+        const b = await createImageBitmap(f, {
+          imageOrientation: "from-image",
+        });
+        const k = Math.min(1, 850 / Math.max(b.width, b.height));
+        const c = document.createElement("canvas");
+        c.width = Math.round(b.width * k);
+        c.height = Math.round(b.height * k);
+        c.getContext("2d").drawImage(b, 0, 0, c.width, c.height);
+        let q = 0.78;
+        let dataUrl = c.toDataURL("image/jpeg", q);
+        while (dataUrl.length > 280000 && q > 0.35) {
+          q -= 0.1;
+          dataUrl = c.toDataURL("image/jpeg", q);
+        }
+        return dataUrl;
+      }
+      async function up(f) {
+        return await shrink(f);
+      }
+      const del = () => Promise.resolve();
+
+      /* ---------- THƯ VIỆN ALBUM & HOA VĂN BÌA SÁCH CỔ KÍNH ---------- */
+      /* Bảng màu da cổ điển: Xanh lục bảo cổ, Nâu gỗ gụ, Đỏ rượu vang Bordeaux, Xanh đậm hoàng gia, Nâu đồng cổ, Tím mận cổ */
+      const PAL = [
+          "#1f4432",
+          "#4a2816",
+          "#581c22",
+          "#1c2c44",
+          "#4e381c",
+          "#3a203b",
+        ],
+        col = (a) =>
+          PAL[[...a.id].reduce((s, c) => s + c.charCodeAt(0), 0) % PAL.length];
+
+      /* Hoa văn SVG mạ vàng phong cách sách cổ châu Âu (Victorian Filigree & Gold Embossing) */
+      const ORNATE_SVG = `<svg class="orn-svg" viewBox="0 0 200 300" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="gf" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff3c4"/>
+            <stop offset="28%" stop-color="#d4af37"/>
+            <stop offset="55%" stop-color="#8b6518"/>
+            <stop offset="80%" stop-color="#e8c86b"/>
+            <stop offset="100%" stop-color="#9e7622"/>
+          </linearGradient>
+          <g id="cn">
+            <path d="M 14 14 L 58 14 C 44 20 34 22 25 31 C 36 28 47 33 52 44 C 41 39 32 41 25 50 C 33 48 40 53 42 61 C 33 56 26 53 19 42 C 21 50 18 58 14 66 Z" fill="url(#gf)" opacity="0.9"/>
+            <path d="M 16 16 C 32 16 45 28 47 45" stroke="url(#gf)" stroke-width="1.1" fill="none"/>
+            <circle cx="23" cy="23" r="2.2" fill="url(#gf)"/>
+            <circle cx="36" cy="20" r="1.4" fill="url(#gf)"/>
+            <circle cx="20" cy="36" r="1.4" fill="url(#gf)"/>
+          </g>
+        </defs>
+        <!-- Khung viền kép mạ vàng & đường chấm bi cổ điển -->
+        <rect x="9" y="9" width="182" height="282" rx="3" fill="none" stroke="url(#gf)" stroke-width="1.6"/>
+        <rect x="13" y="13" width="174" height="274" rx="2" fill="none" stroke="url(#gf)" stroke-width="0.9" stroke-dasharray="2.2 3.2"/>
+        <!-- Khung bát giác kim cương bên trong như ảnh mẫu -->
+        <polygon points="48,22 152,22 178,52 178,248 152,278 48,278 22,248 22,52" fill="none" stroke="url(#gf)" stroke-width="1.2"/>
+        <polygon points="51,26 149,26 174,55 174,245 149,274 51,274 26,245 26,55" fill="none" stroke="url(#gf)" stroke-width="0.6" opacity="0.8"/>
+        <!-- 4 góc hoa văn phù điêu uốn lượn -->
+        <use href="#cn"/>
+        <use href="#cn" transform="translate(200,0) scale(-1,1)"/>
+        <use href="#cn" transform="translate(0,300) scale(1,-1)"/>
+        <use href="#cn" transform="translate(200,300) scale(-1,-1)"/>
+        <!-- Hoa văn vương miện phía trên và phía dưới tâm sách -->
+        <path d="M 68 48 Q 100 28 132 48 Q 114 40 100 54 Q 86 40 68 48 Z" fill="url(#gf)" opacity="0.85"/>
+        <path d="M 68 252 Q 100 272 132 252 Q 114 260 100 246 Q 86 260 68 252 Z" fill="url(#gf)" opacity="0.85"/>
+        <!-- Hoa thị hai bên sườn -->
+        <circle cx="22" cy="150" r="4.5" fill="none" stroke="url(#gf)" stroke-width="1.1"/>
+        <circle cx="22" cy="150" r="1.8" fill="url(#gf)"/>
+        <circle cx="178" cy="150" r="4.5" fill="none" stroke="url(#gf)" stroke-width="1.1"/>
+        <circle cx="178" cy="150" r="1.8" fill="url(#gf)"/>
+        <!-- Khung viền biển tên trung tâm (Central Cartouche) -->
+        <path d="M 38 98 Q 100 84 162 98 L 166 202 Q 100 216 34 202 Z" fill="rgba(8, 5, 3, 0.28)" stroke="url(#gf)" stroke-width="1" opacity="0.85"/>
+      </svg>`;
+
+      const coverHTML = (a) =>
+        `<div class="cvr${a.coverUrl ? "" : " ni"}" style="--c:${col(a)}">${a.coverUrl ? `<img src="${esc(a.coverUrl)}" alt="" decoding="async">` : ""}${ORNATE_SVG}<div class="ct"><span class="ct-orn-top">✦ ❦ ✦</span><h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="ct-orn-bot">~ ❖ ~</span></div></div>`;
+      const bookHTML = (a) =>
+        `<div class="slot" data-id="${a.id}" style="--c:${col(a)}"><div class="bkw"><div class="bk"><div class="cv">${coverHTML(a)}</div><div class="spn"><span>${esc(a.title)}</span></div><div class="pgs"></div><div class="bak"></div></div></div><div class="tools"><button type="button" data-a="edit">Sửa</button><button type="button" data-a="rm">Xóa</button></div></div>`;
+
+      function drawShelf() {
+        if (cur) {
+          shelfDirty = true;
+          return;
+        }
+        const sh = $("#shelf");
+        sh.innerHTML =
+          `<div class="slot addt"><button class="addb" id="addA" type="button"><i>＋</i><b>Thêm album</b><span>Một cuốn sách mới cho những ngày đáng nhớ</span></button></div>` +
+          albums.map(bookHTML).join("");
+        $("#addA").onclick = () => albumModal();
+        const fresh = [...sh.children].filter(
+          (e) => !e.dataset.id || !seen.has(e.dataset.id),
+        );
+        bt.forEach((t) => t.kill());
+        gsap.set(fresh, {
+          autoAlpha: 0,
+          y: 50,
+          transformPerspective: 800,
+          rotationX: -14,
+        });
+        bt = ScrollTrigger.batch(fresh, {
+          start: "top 94%",
+          once: true,
+          onEnter: (b) => {
+            gsap.to(b, {
+              autoAlpha: 1,
+              y: 0,
+              rotationX: 0,
+              stagger: 0.09,
+              duration: 0.9 * D,
+              ease: "power3.out",
+              clearProps: "transform",
+            });
+            b.forEach((e) => e.dataset.id && seen.add(e.dataset.id));
+          },
+        });
+        clearTimeout(drawShelf.r);
+        drawShelf.r = setTimeout(() => ScrollTrigger.refresh(), 250);
+      }
+
+      onSnapshot(
+        query(collection(db, "albums"), orderBy("createdAt", "asc")),
+        (s) => {
+          albums = s.docs.map((d) => ({ id: d.id, ...d.data() }));
+          ready = true;
+          drawShelf();
+        },
+        (e) => {
+          console.error(e);
+          ready = true;
+          drawShelf();
+          toast("Không tải được album. Kiểm tra quy tắc Firestore.", 1);
+        },
+      );
+      $("#shelf").addEventListener("click", (e) => {
+        const s = e.target.closest(".slot[data-id]");
+        if (!s) return;
+        const a = albums.find((x) => x.id === s.dataset.id),
+          b = e.target.closest("[data-a]");
+        if (b) return b.dataset.a === "edit" ? albumModal(a) : rmAlbum(a);
+        if (e.target.closest(".bkw")) openAlbum(s, a);
+      });
+      $("#hAdd").onclick = () => albumModal();
+
+      /* ---------- thêm / sửa / xóa album ---------- */
+      const an = $("#an"),
+        ad = $("#ad"),
+        acf = $("#acf"),
+        apv = $("#apv");
+      let eA = null,
+        rmCover = false;
+      function showPv(u) {
+        apv.hidden = !u;
+        if (u) apv.src = u;
+      }
+      function albumModal(a) {
+        eA = a || null;
+        rmCover = false;
+        $("#at").textContent = a ? "Sửa album" : "Album mới";
+        an.value = a?.title || "";
+        ad.value = a?.desc || "";
+        acf.value = "";
+        [an, ad].forEach((x) => x.classList.remove("bad"));
+        showPv(a?.coverUrl);
+        $("#aclr").hidden = !a?.coverUrl;
+        mdo($("#am"), 1);
+        an.focus();
+      }
+      acf.onchange = () => {
+        if (acf.files[0]) {
+          rmCover = false;
+          showPv(URL.createObjectURL(acf.files[0]));
+        }
+      };
+      $("#aclr").onclick = () => {
+        rmCover = true;
+        acf.value = "";
+        showPv("");
+        $("#aclr").hidden = true;
+      };
+      $("#ac").onclick = () => mdo($("#am"), 0);
+      $("#af").onsubmit = async (e) => {
+        e.preventDefault();
+        const t = an.value.trim(),
+          d = ad.value.trim();
+        an.classList.toggle("bad", !t);
+        ad.classList.toggle("bad", !d);
+        if (!t || !d) return toast("Album cần có tên và mô tả ngắn.", 1);
+        loading(1, "Đang lưu album…");
+        try {
+          let id = eA?.id;
+          if (eA) await updateDoc(doc(db, "albums", id), { title: t, desc: d });
+          else
+            id = (
+              await addDoc(collection(db, "albums"), {
+                title: t,
+                desc: d,
+                coverUrl: "",
+                coverPath: "",
+                createdAt: serverTimestamp(),
+              })
+            ).id;
+          const f = acf.files[0],
+            old = eA?.coverPath;
+          if (f || rmCover) {
+            let u = "",
+              p = "";
+            if (f) {
+              u = await up(f);
+            }
+            await updateDoc(doc(db, "albums", id), {
+              coverUrl: u,
+              coverPath: p,
+            });
+            if (old) await del(old);
+          }
+          mdo($("#am"), 0);
+          toast(eA ? "Đã cập nhật album." : "Đã thêm album mới.");
+        } catch (err) {
+          console.error(err);
+          toast("Không lưu được album. Kiểm tra mạng và quy tắc Firebase.", 1);
+        }
+        loading(0);
+      };
+      async function rmAlbum(a) {
+        if (
+          !(await ask(
+            `Xóa album “${a.title}” cùng toàn bộ ảnh bên trong? Việc này không thể hoàn tác.`,
+          ))
+        )
+          return;
+        loading(1, "Đang xóa album…");
+        try {
+          const s = await getDocs(collection(db, "albums", a.id, "photos"));
+          await Promise.all(
+            s.docs.map(async (d) => {
+              const p = d.data().path;
+              if (p) await del(p);
+              await deleteDoc(d.ref);
+            }),
+          );
+          if (a.coverPath) await del(a.coverPath);
+          await deleteDoc(doc(db, "albums", a.id));
+          toast("Đã xóa album.");
+        } catch (e) {
+          console.error(e);
+          toast("Không xóa được album.", 1);
+        }
+        loading(0);
+      }
+
+      /* ---------- TRANG SÁCH (4 ẢNH POLAROID / TRANG) ---------- */
+      const maxV = () => (mob ? pages() - 1 : pages() - 2);
+      const pages = () => {
+        const n = Math.ceil((cur.max + 1) / PER_PAGE) + 1;
+        return mob ? n : n + (n % 2);
+      }; /* luôn thừa 1 trang trống, tự sinh thêm khi đầy */
+
+      function pageEl(n, live) {
+        const d = document.createElement("div");
+        d.className = "pc";
+        for (let k = 0; k < PER_PAGE; k++) {
+          const i = n * PER_PAGE + k,
+            ph = cur.ph.get(i),
+            c = document.createElement("div");
+          c.className = "sl";
+          c.style.cssText = `--r:${(((i * 37) % 5) - 2) * 0.9}deg;--tx:${(((i * 53) % 5) - 2) * 1.1}%;--ty:${(((i * 29) % 5) - 2) * 1}%`;
+          c.innerHTML = ph
+            ? `<div class="fr"><div class="ph"><img alt="" src="${esc(ph.url)}" decoding="async"></div><div class="nt" ${live ? `contenteditable="plaintext-only" ` : ""}data-ph="Viết dòng kỷ niệm…" data-i="${i}">${esc(ph.note || "")}</div>${live ? `<div class="ac"><button type="button" data-a="rep" data-i="${i}" title="Thay ảnh" aria-label="Thay ảnh">↻</button><button type="button" data-a="del" data-i="${i}" title="Xóa ảnh" aria-label="Xóa ảnh">✕</button></div>` : ""}</div>`
+            : `<div class="fr empty">${live ? `<button class="add" type="button" data-a="add" data-i="${i}">＋<br>Thêm ảnh kỷ niệm</button>` : ""}</div>`;
+          d.appendChild(c);
+        }
+        d.insertAdjacentHTML(
+          "beforeend",
+          `<span class="pn">— ${n + 1} —</span>${live ? '<i class="ez"></i>' : ""}`,
+        );
+        return d;
+      }
+
+      function paint() {
+        dirty = false;
+        if (!cur) return;
+        const nv = mob ? 1 : 2;
+        v = Math.min(v, maxV());
+        v -= v % nv;
+        rd.classList.toggle("m1", nv === 1);
+        if (nv === 2) {
+          pL.replaceChildren(pageEl(v, 1));
+          pR.replaceChildren(pageEl(v + 1, 1));
+        } else {
+          pL.replaceChildren();
+          pR.replaceChildren(pageEl(v, 1));
+        }
+        $("#pv").disabled = v <= 0;
+        $("#nx").disabled = v >= maxV();
+      }
+
+      function sizeReader() {
+        mob = innerWidth < 760;
+        P = Math.floor(
+          mob
+            ? Math.min(innerWidth * 0.94, (innerHeight * 0.86) / 1.48)
+            : Math.min(innerWidth * 0.45, (innerHeight * 0.86) / 1.48),
+        );
+        rd.style.setProperty("--p", P + "px");
+      }
+
+      const mkLeaf = (side, front, back) => {
+        const l = document.createElement("div");
+        l.className = "leaf " + side;
+        const f = document.createElement("div"),
+          b = document.createElement("div"),
+          r = side === "r";
+        f.className = "lf paper " + (r ? "R" : "L");
+        b.className = "lb paper " + (r ? "L" : "R");
+        if (front) f.append(front);
+        if (back) b.append(back);
+        f.insertAdjacentHTML("beforeend", '<u class="sd"></u>');
+        b.insertAdjacentHTML("beforeend", '<u class="sd"></u>');
+        l.append(f, b);
+        return l;
+      };
+
+      function flip(dir) {
+        if (busy || !cur) return;
+        const nv = mob ? 1 : 2,
+          v2 = v + dir * nv;
+        if (v2 < 0 || v2 > maxV()) return;
+        busy = true;
+        if (document.activeElement) document.activeElement.blur();
+
+        /* Phát âm thanh lật trang giấy */
+        playFlipSound();
+
+        let l,
+          sg = -1;
+        if (nv === 2) {
+          if (dir > 0) {
+            l = mkLeaf("r", pageEl(v + 1), pageEl(v2));
+            pR.replaceChildren(pageEl(v2 + 1, 1));
+          } else {
+            l = mkLeaf("l", pageEl(v), pageEl(v2 + 1));
+            pL.replaceChildren(pageEl(v2, 1));
+            sg = 1;
+          }
+        } else {
+          l = mkLeaf("r", pageEl(v), null);
+          pR.replaceChildren(pageEl(v2, 1));
+        }
+
+        /* Tạo bóng đổ động dưới trang giấy khi lật */
+        const dropSd = document.createElement("div");
+        dropSd.className = "drop-sd " + (dir > 0 ? "R" : "L");
+        sp.append(dropSd, l);
+
+        gsap
+          .timeline({
+            onComplete() {
+              v = v2;
+              paint();
+              l.remove();
+              dropSd.remove();
+              busy = false;
+              if (dirty) paint();
+            },
+          })
+          .fromTo(
+            l,
+            { rotationY: 0, z: 0, rotationZ: 0 },
+            {
+               keyframes: [
+                {
+                  rotationY: 90 * sg,
+                  z: 36,
+                  rotationZ: sg * -1.4,
+                  duration: 0.52 * D,
+                  ease: "sine.in",
+                },
+                {
+                  rotationY: 180 * sg,
+                  z: 0,
+                  rotationZ: 0,
+                  duration: 0.58 * D,
+                  ease: "sine.out",
+                },
+              ],
+            },
+            0,
+          )
+          .fromTo(
+            l.querySelectorAll(".sd"),
+            { opacity: 0 },
+            {
+              opacity: 0.72,
+              duration: 0.55 * D,
+              yoyo: true,
+              repeat: 1,
+              ease: "sine.inOut",
+            },
+            0,
+          )
+          .fromTo(
+            dropSd,
+            { opacity: 0 },
+            {
+              opacity: 0.85,
+              duration: 0.55 * D,
+              yoyo: true,
+              repeat: 1,
+              ease: "sine.inOut",
+            },
+            0,
+          );
+      }
+
+      $("#pv").onclick = () => flip(-1);
+      $("#nx").onclick = () => flip(1);
+      let sx = null;
+      sp.addEventListener("pointerdown", (e) => (sx = e.clientX));
+      sp.addEventListener("pointerup", (e) => {
+        if (
+          sx !== null &&
+          Math.abs(e.clientX - sx) > 70 &&
+          !e.target.closest(".nt")
+        )
+          flip(e.clientX < sx ? 1 : -1);
+        sx = null;
+      });
+      addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          cur &&
+          !$("#cm").style.visibility.includes("visible") &&
+          !$("#am").style.visibility.includes("visible")
+        )
+          closeAlbum();
+        if (!cur || e.target.closest?.(".nt,input,textarea")) return;
+        if (e.key === "ArrowRight") flip(1);
+        if (e.key === "ArrowLeft") flip(-1);
+      });
+      addEventListener("resize", () => {
+        if (!cur || busy) return;
+        const m = mob;
+        sizeReader();
+        if (m !== mob) paint();
+      });
+
+      /* ---------- thao tác ảnh & ghi chú ---------- */
+      sp.addEventListener("click", async (e) => {
+        const ez = e.target.closest(".ez");
+        if (ez) return flip(ez.closest(".pg").classList.contains("L") ? -1 : 1);
+        const b = e.target.closest("[data-a]");
+        if (!b || busy) return;
+        const i = +b.dataset.i,
+          ph = cur.ph.get(i),
+          a = b.dataset.a;
+        if (a === "add") {
+          const fs = await pick(1);
+          if (fs.length) addPh(i, fs);
+        } else if (a === "rep") {
+          const f = (await pick())[0];
+          if (f) repPh(ph, f);
+        } else if (a === "del" && (await ask("Xóa ảnh này khỏi album?")))
+          delPh(ph);
+      });
+      async function addPh(i, fs) {
+        const aid = cur.id,
+          c = collection(db, "albums", aid, "photos");
+        let n = 0;
+        loading(1);
+        try {
+          for (const f of fs) {
+            while (cur.ph.has(i)) i++;
+            $("#ldt").textContent = `Đang tải ảnh ${++n}/${fs.length}…`;
+            const p = "",
+              url = await up(f);
+            await addDoc(c, {
+              url,
+              path: p,
+              note: "",
+              idx: i,
+              createdAt: serverTimestamp(),
+            });
+            cur.ph.set(i, { url, note: "" });
+            i++;
+          }
+          toast("Đã thêm ảnh.");
+        } catch (e) {
+          console.error(e);
+          toast("Không tải được ảnh lên. Kiểm tra quy tắc Firestore.", 1);
+        }
+        loading(0);
+      }
+      async function repPh(ph, f) {
+        loading(1, "Đang thay ảnh…");
+        try {
+          const p = "",
+            url = await up(f);
+          await updateDoc(doc(db, "albums", cur.id, "photos", ph.id), {
+            url,
+            path: p,
+          });
+          if (ph.path) await del(ph.path);
+          toast("Đã thay ảnh.");
+        } catch (e) {
+          console.error(e);
+          toast("Không thay được ảnh.", 1);
+        }
+        loading(0);
+      }
+      async function delPh(ph) {
+        loading(1, "Đang xóa ảnh…");
+        try {
+          await deleteDoc(doc(db, "albums", cur.id, "photos", ph.id));
+          if (ph.path) await del(ph.path);
+          toast("Đã xóa ảnh.");
+        } catch (e) {
+          console.error(e);
+          toast("Không xóa được ảnh.", 1);
+        }
+        loading(0);
+      }
+      sp.addEventListener("input", (e) => {
+        const n = e.target.closest(".nt");
+        if (n && n.textContent.length > 90) {
+          n.textContent = n.textContent.slice(0, 90);
+        }
+      });
+      sp.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.target.closest(".nt")) {
+          e.preventDefault();
+          e.target.blur();
+        }
+      });
+      sp.addEventListener("focusout", async (e) => {
+        const n = e.target.closest(".nt");
+        if (!n || !cur) return;
+        const ph = cur.ph.get(+n.dataset.i),
+          t = n.textContent.trim();
+        if (!ph || !ph.id || t === (ph.note || "")) {
+          if (dirty && !busy) paint();
+          return;
+        }
+        try {
+          await updateDoc(doc(db, "albums", cur.id, "photos", ph.id), {
+            note: t,
+          });
+        } catch (err) {
+          console.error(err);
+          toast("Không lưu được ghi chú.", 1);
+        }
+      });
+
+      /* ---------- HIỆU ỨNG MỞ / ĐÓNG SÁCH 3D & ÂM THANH ---------- */
+      function ghost(a, r) {
+        const g = document.createElement("div");
+        g.className = "gh";
+        g.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
+        g.innerHTML = `<div class="gc"><div class="gf">${coverHTML(a)}</div><div class="gb paper L"></div></div>`;
+        document.body.append(g);
+        gsap.set(g, { transformOrigin: "0 0" });
+        return [g, $(".gc", g)];
+      }
+      async function openAlbum(slot, a) {
+        if (busy || !a) return;
+        busy = true;
+        playBookSound(true);
+        cur = { id: a.id, a, ph: new Map(), max: -1 };
+        v = 0;
+        let opened = false;
+        const first = new Promise((res) => {
+          unsub = onSnapshot(
+            query(collection(db, "albums", a.id, "photos"), orderBy("idx")),
+            (s) => {
+              cur.ph = new Map(
+                s.docs.map((d) => [d.data().idx, { id: d.id, ...d.data() }]),
+              );
+              cur.max = Math.max(-1, ...cur.ph.keys());
+              if (opened) {
+                if (busy || document.activeElement?.classList.contains("nt"))
+                  dirty = true;
+                else paint();
+              }
+              res();
+            },
+            (e) => {
+              console.error(e);
+              toast("Không tải được ảnh của album.", 1);
+              res();
+            },
+          );
+        });
+        await gsap.to($(".bk", slot), {
+          rotationY: 0,
+          rotationX: 0,
+          y: -8,
+          scale: 1.04,
+          duration: 0.38 * D,
+          ease: "power2.out",
+        });
+        sizeReader();
+        rd.hidden = false;
+        gsap.set(rd, { autoAlpha: 0 });
+        gsap.set(sp, { autoAlpha: 0, scale: 0.94 });
+        const r = $(".bkw", slot).getBoundingClientRect(),
+          s = sp.getBoundingClientRect(),
+          [g, gc] = ghost(a, r);
+        slot.classList.add("sel");
+        gsap.to(".slot:not(.sel)", {
+          opacity: 0.1,
+          scale: 0.94,
+          duration: 0.6 * D,
+        });
+        gsap.set(slot, { autoAlpha: 0 });
+        document.body.style.overflow = "hidden";
+        await first;
+        paint();
+        await gsap
+          .timeline()
+          .to(rd, { autoAlpha: 1, duration: 0.55 * D }, 0)
+          .to(
+            g,
+            {
+              x: s.left + (mob ? 0 : P) - r.left,
+              y: s.top - r.top,
+              scale: P / r.width,
+              duration: 0.95 * D,
+              ease: "power3.inOut",
+            },
+            0,
+          )
+          .to(
+            gc,
+            {
+              rotationY: -180,
+              duration: 1.15 * D,
+              ease: "power2.inOut",
+            },
+            ">-0.15",
+          )
+          .to(
+            sp,
+            {
+              autoAlpha: 1,
+              scale: 1,
+              duration: 0.55 * D,
+              ease: "power2.out",
+            },
+            "<0.28",
+          )
+          .to(g, { autoAlpha: 0, duration: 0.3 * D }, ">-0.1");
+        g.remove();
+        opened = true;
+        busy = false;
+        if (dirty) paint();
+      }
+      async function closeAlbum() {
+        if (busy || !cur) return;
+        busy = true;
+        playBookSound(false);
+        if (document.activeElement) document.activeElement.blur();
+        sizeReader();
+        const a = cur.a,
+          s = sp.getBoundingClientRect(),
+          slot = $(`.slot[data-id="${a.id}"]`);
+        const r = slot
+          ? $(".bkw", slot).getBoundingClientRect()
+          : {
+              left: s.left + (mob ? 0 : P),
+              top: s.top,
+              width: P,
+              height: P * 1.48,
+            };
+        const [g, gc] = ghost(a, r);
+        gsap.set(g, {
+          x: s.left + (mob ? 0 : P) - r.left,
+          y: s.top - r.top,
+          scale: P / r.width,
+          autoAlpha: 0,
+        });
+        gsap.set(gc, { rotationY: -180 });
+        await gsap
+          .timeline()
+          .to(g, { autoAlpha: 1, duration: 0.15 * D })
+          .to(
+            gc,
+            { rotationY: 0, duration: 1.05 * D, ease: "power2.inOut" },
+            ">",
+          )
+          .to(
+            sp,
+            { autoAlpha: 0, scale: 0.95, duration: 0.35 * D },
+            "<0.5",
+          )
+          .to(
+            g,
+            {
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: 0.88 * D,
+              ease: "power3.inOut",
+            },
+            ">-0.05",
+          )
+          .to(rd, { autoAlpha: 0, duration: 0.55 * D }, "<");
+        g.remove();
+        rd.hidden = true;
+        unsub && unsub();
+        unsub = null;
+        cur = null;
+        document.body.style.overflow = "";
+        if (slot) {
+          gsap.set($(".bk", slot), { clearProps: "transform" });
+          slot.classList.remove("sel");
+          gsap.set(slot, { autoAlpha: 1 });
+        }
+        gsap.to(".slot", {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5 * D,
+          clearProps: "opacity,transform",
+        });
+        busy = false;
+        if (shelfDirty) {
+          shelfDirty = false;
+          drawShelf();
+        }
+      }
+      $("#rx").onclick = closeAlbum;
+
+      /* ---------- chuyển động mở đầu và khi cuộn ---------- */
+      gsap.from(".hero h1 span", {
+        yPercent: 110,
+        duration: 1.2 * D,
+        ease: "power4.out",
+      });
+      gsap.from([".hero .eb", ".hero .sub", ".hero .bt"], {
+        y: 24,
+        autoAlpha: 0,
+        stagger: 0.12,
+        duration: 0.9 * D,
+        delay: 0.3 * D,
+        ease: "power3.out",
+      });
+      gsap.to(".hero", {
+        yPercent: -12,
+        autoAlpha: 0.15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    </script>
+  </body>
+</html>
